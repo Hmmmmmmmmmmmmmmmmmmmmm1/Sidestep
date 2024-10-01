@@ -36,15 +36,15 @@ public class PlayerMoveScript : MonoBehaviour
     THE ACTUAL MOVE SCRIPT THAT WILL BE HERE IS NOT THAT
     I AM MAPPING IT OUT BELOW
 
-    variables
-    Getting Keys from Input Manager
-
+    Variable to Get
+    Current Movement //normal unity friction should be removed as we will determine it
+    Touching Ground
 
     Constructor
         Input 
-            Current Movement //normal unity friction should be removed as we will determine it
-            Touching Ground
             Active Effects
+            Keys
+            Player Info(RigidBody, Transform, etc)
             (if classes)
                 Class Movement Modifiers
 
@@ -88,7 +88,7 @@ public class PlayerMoveScript : MonoBehaviour
                     Launch
                     //note that things like blink would not affect velocity, so would be run differently
                 Aplly
-                    This would be the final affects so that things like direction
+                    This would be the final affects so that things like directional change can just effect the final vector
 
 
 
