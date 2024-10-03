@@ -17,18 +17,21 @@ public class PlayerMoveScript : MonoBehaviour
 
     public void Movement()
     {
-        if (Input.GetKeyDown("w"))
+        if (Input.GetKey("w"))
         {
-            rb.AddForce(trans.forward*500);
-        } else if (Input.GetKeyDown("s"))
+            rb.AddForce(Vector3.Min(trans.forward * 2, trans.forward * 20 - rb.velocity));
+        } 
+        if (Input.GetKey("s"))
         {
-            rb.AddForce(trans.forward*-500);
-        } else if (Input.GetKeyDown("a"))
+            rb.AddForce(Vector3.Max(trans.forward * -2, trans.forward * -20 - rb.velocity));
+        } 
+        if (Input.GetKey("a"))
         {
-            rb.AddForce(trans.right*-500);
-        } else if (Input.GetKeyDown("d"))
+            rb.AddForce(Vector3.Max(trans.right * -2, trans.right * -20 - rb.velocity));
+        } 
+        if (Input.GetKey("d"))
         {
-            rb.AddForce(trans.right*500);
+            rb.AddForce(Vector3.Min(trans.right * 2, trans.right * 20 - rb.velocity));
         }
     }
 
