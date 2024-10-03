@@ -39,19 +39,25 @@ public class PlayerMoveScript : MonoBehaviour
     THE ACTUAL MOVE SCRIPT THAT WILL BE HERE IS NOT THAT
     I AM MAPPING IT OUT BELOW
 
-    variables
-    Getting Keys from Input Manager
-
+    Variable to Get
+    Current Movement //normal unity friction should be removed as we will determine it
+    Touching Ground
 
     Constructor
         Input 
-            Current Movement //normal unity friction should be removed as we will determine it
-            Touching Ground
             Active Effects
+            Keys
+            Player Info(RigidBody, Transform, etc)
             (if classes)
                 Class Movement Modifiers
 
-    
+    Get Velocity
+        Checks Current Player's Velocity and returns it //Need this for Action Manager
+
+
+
+
+
     Update Velocity
         //Should be run every update
         Uses 
@@ -82,7 +88,7 @@ public class PlayerMoveScript : MonoBehaviour
                     //this one is very simple
                 Sliding
                     Check if on ground
-                    Reduce ammount removed by friction //also quite simple, but I feel like there could be a way to make this more complex and better
+                    Reduce ammount removed by friction //also quite simple, but I feel like there could be a way to make this more complex and better but Idk
             Basic Friction
                 Slow down based on speed and if air or on ground
             Abilities
@@ -91,7 +97,7 @@ public class PlayerMoveScript : MonoBehaviour
                     Launch
                     //note that things like blink would not affect velocity, so would be run differently
                 Aplly
-                    This would be the final affects so that things like direction
+                    This would be the final affects so that things like directional change can just effect the final vector
 
 
 
