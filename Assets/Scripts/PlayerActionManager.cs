@@ -25,7 +25,10 @@ public class PlayerActionManager : MonoBehaviour
 
     Constuctor
         Inputs
-    
+            Keys
+            Current Ability Cooldown Status
+            What Abilities the Player Chose
+            Current Portion of Attack//could maybe be gotten by this script
 
     Run Attacks
         Uses

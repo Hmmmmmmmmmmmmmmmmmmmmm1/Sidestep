@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour
 {
-    private ArrayList Keys = new ArrayList();
+    public KeysPressed Keys;
     public Rigidbody rb;
     public Transform trans;
+
+    public PlayerMoveScript(KeysPressed Keys )
+    {
+        this.Keys = Keys;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
