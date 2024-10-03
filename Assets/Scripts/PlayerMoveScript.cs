@@ -48,7 +48,13 @@ public class PlayerMoveScript : MonoBehaviour
             (if classes)
                 Class Movement Modifiers
 
-    
+    Get Velocity
+        Checks Current Player's Velocity and returns it //Need this for Action Manager
+
+
+
+
+
     Update Velocity
         //Should be run every update
         Uses 
@@ -79,7 +85,7 @@ public class PlayerMoveScript : MonoBehaviour
                     //this one is very simple
                 Sliding
                     Check if on ground
-                    Reduce ammount removed by friction //also quite simple, but I feel like there could be a way to make this more complex and better
+                    Reduce ammount removed by friction //also quite simple, but I feel like there could be a way to make this more complex and better but Idk
             Basic Friction
                 Slow down based on speed and if air or on ground
             Abilities

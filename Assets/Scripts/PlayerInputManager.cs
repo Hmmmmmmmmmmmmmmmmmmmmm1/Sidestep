@@ -24,12 +24,21 @@ public class PlayerInputManager : MonoBehaviour
         Transform
         Keep Track of Active Affects
 
+
+
     Update
         Take Inputs
             Keys
-        Via Keys Class
+                Via Keys Class
+                we can copy from crimeline
         Call MovementScript
-        Call AttackScript
+            Just input the things in the constructor
+            Run get Update Velocity
+            mybe we apply it here maybe we apply it 
+        Call ActionScript (I think ActionScript will handle attacks and Abilities)
+            Run the inputs
+            //going to need to update this after I map out Action Script
+        Update Active effects
 
     
     */
