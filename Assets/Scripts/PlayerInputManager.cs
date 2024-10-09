@@ -19,7 +19,8 @@ namespace Assets.Code.Fighting.CharacterControl
                         Input.GetKey(KeyCode.D), 
                         Input.GetKey(KeyCode.Q), 
                         Input.GetKey(KeyCode.E), 
-                        Input.GetKey(KeyCode.shift),
+                        Input.GetKey(KeyCode.LeftShift),
+                        Input.GetKey(KeyCode.Space),
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
             
@@ -38,7 +39,9 @@ namespace Assets.Code.Fighting.CharacterControl
                     bools[4],
                     bools[5],
                     bools[6],
-                    bools[7]
+                    bools[7],
+                    bools[8],
+                    bools[9]
                 );
             }
 
@@ -54,9 +57,10 @@ namespace Assets.Code.Fighting.CharacterControl
         public bool Q;//Movement Ability
         public bool E;//Attack Ability
         public bool SH;//shift
+        public bool SP;//space
         public bool ML;//Mouse Down (Left)
         public bool MR;//Mouse Down (Right)
-        public KeysPressed(bool W, bool S, bool A, bool D, bool Q, bool E, bool SH, bool ML, bool MR)
+        public KeysPressed(bool W, bool S, bool A, bool D, bool Q, bool E, bool SH, bool SP, bool ML, bool MR)
         {
             this.W = W;
             this.S = S;
@@ -65,6 +69,7 @@ namespace Assets.Code.Fighting.CharacterControl
             this.Q = Q;
             this.E = E;
             this.SH = SH;
+            this.SP = SP;
             this.ML = ML;
             this.MR = MR;
         }

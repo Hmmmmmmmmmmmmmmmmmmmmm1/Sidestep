@@ -9,13 +9,23 @@ namespace Assets.Code.Fighting.CharacterControl
         public Rigidbody rb;
         public Transform tra;
         public ArrayList Effects;
-        public Vector3 minVec = new Vector3(0.2,0.2,0.2);
-        public PlayerMoveScript(KeysPressed Keys, ArrayList Effects, Rigidbody rb, Transform tra, bool Grounded)
+        public Vector3 minVec = new Vector3(0.2f,0.2f,0.2f);
+        public bool Grounded;
+        public bool lGrounded;
+        public bool rGrounded;
+        public PlayerMoveScript(KeysPressed Keys, ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded)
         {
             this.Keys = Keys;
             this.Effects = Effects;
             this.rb = rb;
             this.tra = tra;
+            this.lGrounded = lGrounded;
+            this.rGrounded = rGrounded;
+        }
+
+        public void Awake()
+        {
+            Grounded = lGrounded & rGrounded;
         }
 
         public Vector3 GetVelocity()
@@ -28,11 +38,11 @@ namespace Assets.Code.Fighting.CharacterControl
 
         public Vector3 UpdateVelocity()
         {
-            Vector3 vec;
-            Vector3 friction = GetVelocity()*-0.5;
+            Vector3 vec = Vector3.zero;
+            Vector3 friction = GetVelocity()*-0.5f;
             if (Keys.SH || !Grounded)
             {
-                friction *= 0.05;
+                friction *= 0.05f;
             }
             if (Grounded && !Keys.SH)
             {
@@ -40,43 +50,78 @@ namespace Assets.Code.Fighting.CharacterControl
 
                 if (Keys.W)
                 {
-                    vec + (Vector3.forward * 3);
+                    vec += (Vector3.forward * 3f);
                     //Acces the ArrayList??
                 }
                     //do that to all of them
                 if (Keys.S)
-                    vec += (Vector3.forward * -3);
+                    vec += (Vector3.forward * -3f);
                 if (Keys.A)
-                    vec += (Vector3.right * 3);
+                    vec += (Vector3.right * -3f);
                 if (Keys.D)
-                    vec += (Vector3.right * -3);
+                    vec += (Vector3.right * 3f);
             } else if (!Keys.SH)
             {
                 if (Keys.W)
-                    vec += (Vector3.forward * 0.5);
+                    vec += (Vector3.forward * 0.5f);
                 if (Keys.S)
-                    vec +=(Vector3.forward * -0.5);
+                    vec +=(Vector3.forward * -0.5f);
                 if (Keys.A)
-                    vec +=(Vector3.right * 0.5);
+                    vec +=(Vector3.right * -0.5f);
                 if (Keys.D)
-                    vec +=(Vector3.right * -0.5);
+                    vec +=(Vector3.right * 0.5f);
             }
-            if (ForwardHeld && GetKeyDown(W))
+            if (ActiveEffects.ForwardHeld && Input.GetKeyDown("W"))
             {
-                vec += -5*MathF.Log(GetVelocity().magnitude +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
-            if (BackHeld && GetKeyDown(S))
+            if (ActiveEffects.BackHeld && Input.GetKeyDown("S"))
             {
-                vec += -5*MathF.Log(GetVelocity().magnitude +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
-            if (LeftHeld && GetKeyDown(A))
+            if (ActiveEffects.LeftHeld && Input.GetKeyDown("A"))
             {
-                vec += -5*MathF.Log(GetVelocity().magnitude +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
-            if (RightHeld && GetKeyDown(D))
+            if (ActiveEffects.RightHeld && Input.GetKeyDown("D"))
             {
-                vec += -5*MathF.Log(GetVelocity().magnitude +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
+            if (Keys.SP && Grounded)
+            {
+                vec += new Vector3(0,0.4f*GetVelocity().x,0);//or if get velcoity is less than a certain ammount, just apply a set ammount
+            }
+            if ((lGrounded || rGrounded) && !Grounded)
+            {
+                friction *= 0.75f;
+                if (!Keys.SH)
+                {
+                    if (Keys.W)
+                    {
+                        vec += Vector3.forward * 1.5f;
+                    }
+                    if (Keys.S)
+                    {
+                        vec += Vector3.forward * -1.5f;
+                    }
+                    if (Keys.A)
+                    {
+                        vec += Vector3.right * -1.5f;
+                    }
+                    if (Keys.D)
+                    {
+                        vec += Vector3.up * -1.5f;
+                    }
+                    if (Keys.SP)
+                    {
+                    vec += Vector3.up * 1.5f;
+                    }
+                }
+
+                
+            }
+            vec += friction;
+            return vec;
 
         }
 
@@ -128,6 +173,7 @@ namespace Assets.Code.Fighting.CharacterControl
                         Ammount of time Grappleing Hook has been out
                         Location of grappleing Hook
                         Current Velocity
+                            we would probably use a game object, and just pull closer to the origional point, so the game object would handle the swinging 
                     Jump
                         Basically is just normal jump if on ground
                         //we could make some stuff where going faster makes ou go higher
