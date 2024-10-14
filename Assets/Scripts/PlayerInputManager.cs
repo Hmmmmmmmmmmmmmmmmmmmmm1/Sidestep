@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Assets.Code.Fighting.CharacterControl
+namespace Assets.Scripts.CharacterControl
 {
     public class PlayerInputManager : MonoBehaviour
     {

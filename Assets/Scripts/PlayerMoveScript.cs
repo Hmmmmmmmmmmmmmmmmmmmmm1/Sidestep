@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+namespace Assets.Scripts.CharacterControl
+{
     public class PlayerMoveScript : MonoBehaviour
     {
         public KeysPressed Keys;
