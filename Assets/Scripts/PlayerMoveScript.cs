@@ -1,3 +1,5 @@
+/*
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -115,4 +117,4 @@ public class PlayerMoveScript : MonoBehaviour
             //I am pretty sure that using add force would be best here
     
     */
-}
+//}
