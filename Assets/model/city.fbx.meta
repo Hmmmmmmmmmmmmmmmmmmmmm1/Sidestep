@@ -3,7 +3,22 @@ guid: 97b411760841d48aeb91a764ff46e191
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green Glow
+    second: {fileID: 2100000, guid: d41d84e5493e3496ba6cc225bf963c8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Purple Glow
+    second: {fileID: 2100000, guid: 39d00d2a6a0bc46bca409013e6aad7b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red Glow
+    second: {fileID: 2100000, guid: 2f93ea2e0a87f4901a2cb9da27148d5c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
