@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Assets.Scripts.CharacterControl
 {
-    public class PlayerMoveScript : MonoBehaviour
+    public class PlayerMoveScript
     {
         public KeysPressed Keys;
         public Rigidbody rb;
