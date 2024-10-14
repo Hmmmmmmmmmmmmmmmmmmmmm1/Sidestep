@@ -8,6 +8,8 @@ namespace Assets.Code.Fighting.CharacterControl
         public Rigidbody rb;
         public Transform tra;
         public ArrayList Effects = new ArrayList();
+        public bool lGrounded;
+        public bool rGrounded;
 
         void Update()
         {
@@ -24,7 +26,8 @@ namespace Assets.Code.Fighting.CharacterControl
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
             
-            //AddForce(Movement()*Time.Delta)
+            PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
+            rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
         }
 
 

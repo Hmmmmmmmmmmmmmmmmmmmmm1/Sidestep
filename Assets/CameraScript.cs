@@ -32,5 +32,6 @@ public class CameraScript : MonoBehaviour
 
         //rotate player around y
         playertrans.Rotate(Vector3.up * Xmove);
+        
     }
 }

@@ -39,7 +39,7 @@ namespace Assets.Code.Fighting.CharacterControl
         public Vector3 UpdateVelocity()
         {
             Vector3 vec = Vector3.zero;
-            Vector3 friction = GetVelocity()*-0.5f;
+            Vector3 friction = GetVelocity()*-0.75f;
             if (Keys.SH || !Grounded)
             {
                 friction *= 0.05f;
@@ -50,40 +50,40 @@ namespace Assets.Code.Fighting.CharacterControl
 
                 if (Keys.W)
                 {
-                    vec += (Vector3.forward * 3f);
+                    vec += (tra.forward * 3000f);
                     //Acces the ArrayList??
                 }
                     //do that to all of them
                 if (Keys.S)
-                    vec += (Vector3.forward * -3f);
+                    vec += (tra.forward * -3000f);
                 if (Keys.A)
-                    vec += (Vector3.right * -3f);
+                    vec += (tra.right * -3000f);
                 if (Keys.D)
-                    vec += (Vector3.right * 3f);
+                    vec += (tra.right * 3000f);
             } else if (!Keys.SH)
             {
                 if (Keys.W)
-                    vec += (Vector3.forward * 0.5f);
+                    vec += (tra.forward * 0.5f);
                 if (Keys.S)
-                    vec +=(Vector3.forward * -0.5f);
+                    vec +=(tra.forward * -0.5f);
                 if (Keys.A)
-                    vec +=(Vector3.right * -0.5f);
+                    vec +=(tra.right * -0.5f);
                 if (Keys.D)
-                    vec +=(Vector3.right * 0.5f);
+                    vec +=(tra.right * 0.5f);
             }
-            if (ActiveEffects.ForwardHeld && Input.GetKeyDown("W"))
+            if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown("W"))
             {
                 vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
-            if (ActiveEffects.BackHeld && Input.GetKeyDown("S"))
+            if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown("S"))
             {
                 vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
-            if (ActiveEffects.LeftHeld && Input.GetKeyDown("A"))
+            if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown("A"))
             {
                 vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
-            if (ActiveEffects.RightHeld && Input.GetKeyDown("D"))
+            if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown("D"))
             {
                 vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
@@ -98,23 +98,23 @@ namespace Assets.Code.Fighting.CharacterControl
                 {
                     if (Keys.W)
                     {
-                        vec += Vector3.forward * 1.5f;
+                        vec += tra.forward * 1500f;
                     }
                     if (Keys.S)
                     {
-                        vec += Vector3.forward * -1.5f;
+                        vec += tra.forward * -1500f;
                     }
                     if (Keys.A)
                     {
-                        vec += Vector3.right * -1.5f;
+                        vec += tra.right * -1500f;
                     }
                     if (Keys.D)
                     {
-                        vec += Vector3.up * -1.5f;
+                        vec += tra.up * -1500f;
                     }
                     if (Keys.SP)
                     {
-                    vec += Vector3.up * 1.5f;
+                    vec += tra.up * 1500f;
                     }
                 }
 
@@ -126,11 +126,6 @@ namespace Assets.Code.Fighting.CharacterControl
         }
 
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         /*
         THE ACTUAL MOVE SCRIPT THAT WILL BE HERE IS NOT THAT
