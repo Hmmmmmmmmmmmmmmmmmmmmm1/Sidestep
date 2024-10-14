@@ -1,10 +1,6 @@
-/*
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Assets.Code.Fighting.CharacterControl
-{
     public class PlayerMoveScript : MonoBehaviour
     {
         public KeysPressed Keys;
@@ -204,4 +200,3 @@ namespace Assets.Code.Fighting.CharacterControl
         
         */
     }
-}
