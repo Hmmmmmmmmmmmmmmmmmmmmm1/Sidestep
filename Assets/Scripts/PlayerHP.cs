@@ -10,6 +10,7 @@ public class PlayerHP : MonoBehaviour
     public int hp = 100;
     private int oldHp = 0;
     public float hpChangeTick = 0;
+    public GameObject atkUp;
 
     // Start is called before the first frame update
     void Start()
@@ -80,14 +81,13 @@ public class PlayerHP : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("col");
         if(other.gameObject.tag == "damage")
         {
             DecreaseHP(20);
         }
         else if(other.gameObject.tag == "heal")
         {
-            IncreaseHP(20);
+            PlayerStatusManager.AddEffect(atkUp);
         }
     }
 }
