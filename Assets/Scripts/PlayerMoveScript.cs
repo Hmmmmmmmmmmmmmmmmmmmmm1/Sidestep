@@ -110,7 +110,7 @@ namespace Assets.Scripts.CharacterControl
                     }
                     if (Keys.D)
                     {
-                        vec += tra.up * -1500f;
+                        vec += tra.right * 1500f;
                     }
                     if (Keys.SP)
                     {
