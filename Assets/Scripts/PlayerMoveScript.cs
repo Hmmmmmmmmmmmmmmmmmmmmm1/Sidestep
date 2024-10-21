@@ -31,7 +31,7 @@ namespace Assets.Scripts.CharacterControl
         public Vector3 GetVelocity()
         {
             return rb.velocity;
-        }
+        }   
 
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
         //            vec = new Vector3(0,0,0);   for like min velocity
@@ -110,7 +110,7 @@ namespace Assets.Scripts.CharacterControl
                     }
                     if (Keys.D)
                     {
-                        vec += tra.up * -1500f;
+                        vec += tra.right * 1500f;
                     }
                     if (Keys.SP)
                     {
