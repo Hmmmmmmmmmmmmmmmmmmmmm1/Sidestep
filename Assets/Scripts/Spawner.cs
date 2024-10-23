@@ -10,8 +10,9 @@ public class Spawner : MonoBehaviour
     {
         GameObject Player = PhotonNetwork.Instantiate("Player", new Vector3(Random.Range(-6, 0), 1, 2), Quaternion.identity);
         GameObject Camera = PhotonNetwork.Instantiate("Camera", Player.transform.position, Quaternion.identity);
+        /*Camera.transform.parent = Player.transform;
         Camera.GetComponent<CameraScript>().player = Player;
-
+        */ 
     }
 
     void Update()
