@@ -12,6 +12,7 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Effects = new ArrayList();
         public bool lGrounded;
         public bool rGrounded;
+        public PlayerMoveScript move;
 
         void Update()
         {
