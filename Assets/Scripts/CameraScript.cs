@@ -31,7 +31,7 @@ public class CameraScript : MonoBehaviour
         transform.localEulerAngles = Vector3.right * VerticalRotation;
 
         //rotate player around y
-        playertrans.Rotate(Vector3.up * Xmove);
+        gameObject.transform.parent.Rotate(Vector3.up * Xmove);
         
     }
 }
