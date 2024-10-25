@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    public override void OnJoinedRoom()
+    public void OnJoinedRoom()
     {
         gameObject.SetActive(false);
     }
