@@ -17,7 +17,6 @@ public class CameraScript : MonoBehaviour
         //Lock and hide Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        gameObject.SetActive(false);
     }
 
 
@@ -34,9 +33,9 @@ public class CameraScript : MonoBehaviour
 
         //rotate player around y
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
-        if(GetComponent<PhotonView>().IsMine == true)
+        if(GetComponent<PhotonView>().IsMine == false)
         {
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
 
         
