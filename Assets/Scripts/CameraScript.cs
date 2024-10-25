@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.Networking;
 
-public class CameraScript : MonoBehaviour
+public class CameraScript : MonoBehaviourPunCallbacks
 {
 
     public float mouseSensitivity;
@@ -37,11 +37,13 @@ public class CameraScript : MonoBehaviour
         transform.localEulerAngles = Vector3.right * VerticalRotation;
 
         //rotate player around y
-        gameObject.transform.parent.Rotate(Vector3.up * Xmove);
+        
         if(GetComponent<PhotonView>().IsMine == true)
         {
             gameObject.SetActive(true);
         }
+
+        gameObject.transform.parent.Rotate(Vector3.up * Xmove);
 
         
     }
