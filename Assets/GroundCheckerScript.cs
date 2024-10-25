@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class GroundCheckerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public bool lGrounded;
+    public bool rGrounded;
     void Update()
     {
-        
+        lGrounded = false;
+        rGrounded = false;
     }
 }
