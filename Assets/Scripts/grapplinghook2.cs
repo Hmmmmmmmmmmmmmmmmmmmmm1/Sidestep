@@ -12,7 +12,7 @@ public class grapplinghook2 : MonoBehaviour
     private SpringJoint joint;
 
     [Header("Grappling")]
-    private float maxDistance = 300f;
+    private float maxDistance = 1000f;
 
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.Mouse1;
@@ -40,8 +40,11 @@ public class grapplinghook2 : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2) && grappling){
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            joint.spring = 7.5f;
+            //gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,gameObject.GetComponent<Rigidbody>().velocity.y,0);
+            /*
+            joint.spring = 4.5f;
+            joint.damper = 10f;
+            */
         }
     }
 
@@ -70,8 +73,8 @@ public class grapplinghook2 : MonoBehaviour
             //joint.minDistance = distanceFromPoint * 0.25f;
 
             //Adjust these values to fit your game.
-            joint.spring = 0.5f;
-            joint.damper = 7f;
+            joint.spring = 2.5f;
+            joint.damper = 5.5f;
             joint.massScale = 4.5f;
 
             lr.positionCount = 2;
