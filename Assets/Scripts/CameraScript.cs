@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviourPunCallbacks
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    public void OnJoinedRoom()
+    public override void OnJoinedRoom()
     {
         gameObject.SetActive(false);
     }
@@ -43,7 +43,7 @@ public class CameraScript : MonoBehaviourPunCallbacks
             gameObject.SetActive(true);
         }
 
-        //gameObject.transform.parent.Rotate(Vector3.up * Xmove);
+        gameObject.transform.parent.Rotate(Vector3.up * Xmove);
 
         
     }
