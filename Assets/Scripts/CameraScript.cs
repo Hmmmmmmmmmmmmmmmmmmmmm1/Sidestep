@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.Networking;
 
 public class CameraScript : MonoBehaviour
 {
@@ -31,6 +33,11 @@ public class CameraScript : MonoBehaviour
 
         //rotate player around y
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
+        if(GetComponent<PhotonView>().IsMine == true)
+        {
+            gameObject.SetActive(false);
+        }
+
         
     }
 }
