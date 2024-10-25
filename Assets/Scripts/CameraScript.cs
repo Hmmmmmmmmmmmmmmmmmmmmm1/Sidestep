@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    public GameObject player;
-    public float mouseSensitivity = 2f;
+
+    public float mouseSensitivity;
     private float VerticalRotation = 0f;
     private Transform playertrans;
 
     void Start()
     {
         //get transform
-        playertrans = player.GetComponent<Transform>();
         //Lock and hide Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
