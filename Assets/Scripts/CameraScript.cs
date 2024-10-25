@@ -43,7 +43,7 @@ public class CameraScript : MonoBehaviourPunCallbacks
             gameObject.SetActive(true);
         }
 
-        gameObject.transform.parent.Rotate(Vector3.up * Xmove);
+        //gameObject.transform.parent.Rotate(Vector3.up * Xmove);
 
         
     }
