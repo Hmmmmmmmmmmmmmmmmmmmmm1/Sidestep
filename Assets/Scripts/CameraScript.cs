@@ -40,7 +40,8 @@ public class CameraScript : MonoBehaviourPunCallbacks
         
         if(GetComponent<PhotonView>().IsMine == true)
         {
-            gameObject.SetActive(true);
+            gameObject.transform.parent = Player.transform;
+            //gameObject.SetActive(true);
         }
 
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
