@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeftGroundCheckerScript : GroundCheckerScript
+public class RightGroundCheckerScript : RightGroundCheckerScript
 {
     public void OnTriggerEnter(Collider collider)
     {
-        lGrounded = true;
+        rGrounded = true;
     }
 }
