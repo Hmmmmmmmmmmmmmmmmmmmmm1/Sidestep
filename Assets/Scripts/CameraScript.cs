@@ -18,6 +18,11 @@ public class CameraScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    public override void OnJoinedRoom()
+    {
+        gameObject.SetActive(false);
+    }
+
 
 
     void Update()
@@ -33,9 +38,9 @@ public class CameraScript : MonoBehaviour
 
         //rotate player around y
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
-        if(GetComponent<PhotonView>().IsMine == false)
+        if(GetComponent<PhotonView>().IsMine == true)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
 
         
