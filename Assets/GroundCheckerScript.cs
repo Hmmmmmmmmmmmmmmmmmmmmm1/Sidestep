@@ -6,9 +6,5 @@ public class GroundCheckerScript : MonoBehaviour
 {
     public bool lGrounded;
     public bool rGrounded;
-    void Update()
-    {
-        lGrounded = false;
-        rGrounded = false;
-    }
+    
 }

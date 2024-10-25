@@ -8,4 +8,8 @@ public class RightGroundCheckerScript : GroundCheckerScript
     {
         rGrounded = true;
     }
+    public void OnTriggerLeave(Collider collider)
+    {
+        rGrounded = false;
+    }
 }
