@@ -10,7 +10,7 @@ public class GroundCheckerScript : MonoBehaviour
     
     void Update()
     {
-        if(!transform.parent.gameObject.GetComponent<PhotonView>().IsMine)
+        if(!GetComponent<PhotonView>().IsMine)
         {
             Destroy(this.gameObject);
         }
