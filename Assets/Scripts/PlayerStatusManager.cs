@@ -7,8 +7,7 @@ using UnityEngine;
 public class PlayerStatusManager : MonoBehaviour
 {
 
-    public ArrayList effects = new ArrayList();
-
+    public static List<GameObject> statusEffects = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,23 +20,33 @@ public class PlayerStatusManager : MonoBehaviour
 
     }
 
-    public void AddEffect(GameObject newEffect)
+    static public void AddEffect(GameObject newEffect)
     {
         GameObject effect = Instantiate(newEffect, GameObject.Find("Canvas").transform);
-        effects.Add(effect);
-        effect.GetComponent<RectTransform>().position = new Vector3(1316 - effects.Count * 108, 720 -36 * (effects.Count % 2) - 72, 0);
+        for(int i = 0; i <= statusEffects.Count; i++)
+        {
+            if(i == statusEffects.Count)
+            {
+                statusEffects.Add(effect);
+                break;
+            }
+            if(statusEffects.ElementAtOrDefault(i) == null)
+            {
+                statusEffects.Insert(i, effect);
+                break;
+            }
+            Debug.Log(statusEffects.ElementAtOrDefault(i) == null);
+        }
+        effect.GetComponent<RectTransform>().position = new Vector3(1316 - statusEffects.Count * 108, 720 -36 * (statusEffects.Count % 2) - 72, 0);
     }
 
-    public void RemoveEffect(GameObject effectToRemove)
+    static public void RemoveEffect(GameObject effect)
     {
-        effects.Remove(effectToRemove);
-        effects.TrimToSize();
-
-        int i = 0;
-        foreach(GameObject effect in effects)
+        Debug.Log(statusEffects.Remove(effect));
+        statusEffects.TrimExcess();
+        for(int i = 0; i < statusEffects.Count; i++)
         {
-            effect.GetComponent<RectTransform>().position = new Vector3(1316 - (i + 1) * 108, 720 -36 * ((i + 1) % 2) - 72, 0);
-            i++;
+            statusEffects[i].GetComponent<RectTransform>().position = new Vector3(1316 - (i + 1) * 108, 720 -36 * ((i + 1) % 2) - 72, 0);
         }
     }
 }
