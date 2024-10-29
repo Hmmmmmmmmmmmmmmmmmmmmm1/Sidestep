@@ -14,7 +14,7 @@ public class PlayerActionManager : MonoBehaviour
     float basicAttackCd = 0;
     void Start()
     {
-        input = GameObject.Find("Player").GetComponent<PlayerInputManager>();
+        input = GetComponent<PlayerInputManager>();
     }
 
     // Update is called once per frame
