@@ -9,7 +9,7 @@ public class CameraScript : MonoBehaviourPunCallbacks
 
     public float mouseSensitivity;
     private float VerticalRotation = 0f;
-    private Transform playertrans;
+    public GameObject Player;
 
     void Start()
     {

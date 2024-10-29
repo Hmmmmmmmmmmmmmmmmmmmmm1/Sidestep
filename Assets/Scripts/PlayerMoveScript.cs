@@ -89,7 +89,7 @@ namespace Assets.Scripts.CharacterControl
             }
             if (Keys.SP && Grounded)
             {
-                vec += new Vector3(0,0.4f*GetVelocity().x,0);//or if get velcoity is less than a certain ammount, just apply a set ammount
+                vec += new Vector3(0,400f*GetVelocity().x,0);//or if get velcoity is less than a certain ammount, just apply a set ammount
             }
             if ((lGrounded || rGrounded) && !Grounded)
             {

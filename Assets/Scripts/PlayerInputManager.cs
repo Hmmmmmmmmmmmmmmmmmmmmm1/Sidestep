@@ -16,6 +16,8 @@ namespace Assets.Scripts.CharacterControl
 
         void Update()
         {
+            lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
+            rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
             KeysPressed keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 

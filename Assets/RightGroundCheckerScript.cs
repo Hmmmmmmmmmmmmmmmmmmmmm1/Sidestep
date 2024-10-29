@@ -8,7 +8,7 @@ public class RightGroundCheckerScript : GroundCheckerScript
     {
         rGrounded = true;
     }
-    public void OnTriggerLeave(Collider collider)
+    public void OnTriggerExit(Collider collider)
     {
         rGrounded = false;
     }
