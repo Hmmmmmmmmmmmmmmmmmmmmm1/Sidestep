@@ -11,13 +11,11 @@ public class PlayerHP : MonoBehaviour
     private int oldHp = 0;
     public float hpChangeTick = 0;
     public GameObject atkUp;
-    public PlayerStatusManager playerStatusManager;
 
     // Start is called before the first frame update
     void Start()
     {
         hpBar = GameObject.Find("PlayerHPBar");
-        playerStatusManager = GameObject.Find("Player").GetComponent<PlayerStatusManager>();
     }
 
     // Update is called once per frame
@@ -89,7 +87,7 @@ public class PlayerHP : MonoBehaviour
         }
         else if(other.gameObject.tag == "heal")
         {
-            playerStatusManager.AddEffect(atkUp);
+            PlayerStatusManager.AddEffect(atkUp);
         }
     }
 }

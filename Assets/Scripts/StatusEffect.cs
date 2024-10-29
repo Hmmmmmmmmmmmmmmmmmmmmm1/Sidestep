@@ -10,12 +10,11 @@ public class StatusEffect : MonoBehaviour
     public TextMeshProUGUI text;
     public string effect;
     public float duration;
-    public PlayerStatusManager playerStatusManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        playerStatusManager = GameObject.Find("Player").GetComponent<PlayerStatusManager>();
+
     }
 
     // Update is called once per frame
@@ -31,7 +30,7 @@ public class StatusEffect : MonoBehaviour
         if(duration <= 0)
         {
             Destroy(gameObject);
-            playerStatusManager.RemoveEffect(gameObject);
+            PlayerStatusManager.RemoveEffect(gameObject);
         }
     }
 }
