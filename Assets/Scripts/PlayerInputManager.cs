@@ -16,9 +16,12 @@ namespace Assets.Scripts.CharacterControl
 
         void Update()
         {
-            lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
-            rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
-            KeysPressed keys = 
+            
+            if(GetComponent<PhotonView>().IsMine == true)
+            {
+                lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
+                rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
+                KeysPressed keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 
                         Input.GetKey(KeyCode.S), 
@@ -31,9 +34,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
             
-            PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
-            if(GetComponent<PhotonView>().IsMine == true)
-            {
+                PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }
         }
