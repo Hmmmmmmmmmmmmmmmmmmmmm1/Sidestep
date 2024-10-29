@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 296296924525269716}
   - component: {fileID: 4164102215724870342}
   - component: {fileID: 4723292887122866956}
-  - component: {fileID: 6401851597237715183}
+  - component: {fileID: 1804860094773417505}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -607,7 +607,7 @@ MonoBehaviour:
   tra: {fileID: 7618334235654252660}
   lGrounded: 1
   rGrounded: 1
---- !u!114 &6401851597237715183
+--- !u!114 &1804860094773417505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -622,4 +622,8 @@ MonoBehaviour:
   lr: {fileID: 2585049827911799040}
   gunTip: {fileID: 3255150240414973373}
   cam: {fileID: 5555971607151678895}
+  maxDistance: 1000
   grappleKey: 324
+  spring: 2.5
+  damper: 5.5
+  massScale: 4.5

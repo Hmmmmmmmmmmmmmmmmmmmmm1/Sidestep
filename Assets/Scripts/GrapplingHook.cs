@@ -1,138 +1,102 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.CharacterControl;
-using ExitGames.Client.Photon.StructWrapping;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
-    public Material blue;
-    public Material red;
-
-   [Header("References")]
-    public Transform cam;
-    public Transform gunTip;
-    public LayerMask whatIsGrappleable;
+    [Header("References")]
     public LineRenderer lr;
+    private Vector3 grapplePoint;
+    public Transform gunTip;
+    public Camera cam;
+    private SpringJoint joint;
 
     [Header("Grappling")]
-    public float maxGrappleDistance;
-    public float grappleDelayTime;
-    public float overshootYAxis;
-
-    private Vector3 grapplePoint;
-
-     private SpringJoint joint;
-
-    [Header("Cooldown")]
-    public float grapplingCd;
-    private float grapplingCdTimer;
+    public float maxDistance = 1000f;
 
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.Mouse1;
 
-    private bool grappling;
-    float distance = 0;
+    [Header("Grapple Physics")]
+    public float spring = 2.5f;
+    public float damper = 5.5f;
+    public float massScale = 4.5f;
 
-    private void Start()
+    private bool grappling = false;
+
+    void Awake()
     {
-        lr.enabled = false;
+
     }
 
-    private void Update()
+
+    void Update()
     {
-        lr.SetPosition(0,gunTip.position);
-        if (Input.GetKeyDown(grappleKey)){
-            StartGrapple();
-            lr.enabled = true;
-            lr.SetPosition(1, grapplePoint);
-            lr.GetComponent<LineRenderer>().material = blue;
-            distance = (float)Math.Sqrt(Math.Pow((grapplePoint.x - gunTip.position.x),2) + Math.Pow((grapplePoint.y - gunTip.position.y),2) + Math.Pow((grapplePoint.z - gunTip.position.z),2));
-        } 
-        if (Input.GetKeyUp(grappleKey)){
-            lr.enabled = false;
-        }
-
-        if (grapplingCdTimer > 0){
-            grapplingCdTimer -= Time.deltaTime;
-        }
-        
-        if ((float)Math.Sqrt(Math.Pow((grapplePoint.x - gunTip.position.x),2) + Math.Pow((grapplePoint.y - gunTip.position.y),2) + Math.Pow((grapplePoint.z - gunTip.position.z),2)) - 2 > distance && grappling && distance != 0){
-            lr.GetComponent<LineRenderer>().material = red;
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-
-        Debug.Log((float)Math.Sqrt(Math.Pow((grapplePoint.x - gunTip.position.x),2) + Math.Pow((grapplePoint.y - gunTip.position.y),2) + Math.Pow((grapplePoint.z - gunTip.position.z),2)) + "   " + distance);
-    }
-
-    private void StartGrapple()
-    {
-        if (grapplingCdTimer > 0) return;
-
-        grappling = true;
-
-        //pm.freeze = true;
-
-        RaycastHit hit;
-        if(Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+        if (Input.GetKeyDown(grappleKey))
         {
-            Debug.Log("cow" + hit.transform.gameObject.name);
+            StartGrapple();
+            grappling = true;
+        }
+
+        else if (Input.GetKeyUp(grappleKey))
+        {
+            StopGrapple();
+            grappling = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse2) && grappling){
+            //gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,gameObject.GetComponent<Rigidbody>().velocity.y,0);
+            /*
+            joint.spring = 4.5f;
+            joint.damper = 10f;
+            */
+        }
+    }
+
+
+    //Called after Update
+
+    void LateUpdate()
+    {
+        DrawRope();
+    }
+
+    void StartGrapple()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
+        {
             grapplePoint = hit.point;
             joint = gameObject.AddComponent<SpringJoint>();
-
             joint.autoConfigureConnectedAnchor = false;
-
             joint.connectedAnchor = grapplePoint;
 
-            Invoke(nameof(ExecuteGrapple), grappleDelayTime);
+            float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint);
+
+            //The distance grapple will try to keep from grapple point.
+            joint.maxDistance = distanceFromPoint * 0.08f;
+            //joint.minDistance = distanceFromPoint * 0.25f;
+
+            //Adjust these values to fit your game.
+            joint.spring = spring;
+            joint.damper = damper;
+            joint.massScale = massScale;
+
+            lr.positionCount = 2;
         }
-        else
-        {
-            grapplePoint = cam.position + cam.forward * maxGrappleDistance;
-
-            Invoke(nameof(StopGrapple), grappleDelayTime);
-        }
     }
 
-    private void ExecuteGrapple()
+    void DrawRope()
     {
-        //pm.freeze = false;
+        if (!joint) return;
 
-        Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
-
-        float grapplePointRelativeYPos = grapplePoint.y - lowestPoint.y;
-        float highestPointOnArc = grapplePointRelativeYPos + overshootYAxis;
-
-        if (grapplePointRelativeYPos < 0) highestPointOnArc = overshootYAxis;
-
-        Vector3 spot = new Vector3(grapplePoint.x,grapplePoint.y + 5,grapplePoint.z);
-        //transform.position = Vector3.MoveTowards(transform.position,spot, 100);
-        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        //pm.JumpToPosition(grapplePoint, highestPointOnArc);
-
-        Invoke(nameof(StopGrapple), 1f);
+        lr.SetPosition(0, gunTip.position);
+        lr.SetPosition(1, grapplePoint);
     }
 
-    public void StopGrapple()
+    void StopGrapple()
     {
-        //pm.freeze = false;
-
-        grappling = false;
-
-        grapplingCdTimer = grapplingCd;
-
-        //lr.enabled = false;
-    }
-
-    public bool IsGrappling()
-    {
-        return grappling;
-    }
-
-    public Vector3 GetGrapplePoint()
-    {
-        return grapplePoint;
+        lr.positionCount = 0;
+        Destroy(joint);
     }
 }
