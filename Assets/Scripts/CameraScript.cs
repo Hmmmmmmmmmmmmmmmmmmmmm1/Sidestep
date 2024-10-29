@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.Networking;
 
-public class CameraScript : MonoBehaviourPunCallbacks
+public class CameraScript : MonoBehaviour
 {
 
     public float mouseSensitivity;
@@ -18,12 +17,6 @@ public class CameraScript : MonoBehaviourPunCallbacks
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    public override void OnJoinedRoom()
-    {
-        gameObject.SetActive(false);
-    }
-
-
 
     void Update()
     {
@@ -38,10 +31,9 @@ public class CameraScript : MonoBehaviourPunCallbacks
 
         //rotate player around y
         
-        if(GetComponent<PhotonView>().IsMine == true)
+        if(!GetComponent<PhotonView>().IsMine)
         {
-            gameObject.transform.parent = Player.transform;
-            //gameObject.SetActive(true);
+            Destroy(this.gameObject);
         }
 
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
