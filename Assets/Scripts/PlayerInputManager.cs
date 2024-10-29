@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 namespace Assets.Scripts.CharacterControl
+
 {
     public class PlayerInputManager : MonoBehaviour
     {
@@ -10,7 +12,7 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Effects = new ArrayList();
         public bool lGrounded;
         public bool rGrounded;
-        public KeysPressed keys;
+        public PlayerMoveScript move;
 
         void Update()
         {
@@ -28,7 +30,10 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(1));
             
             PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
-            rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
+            if(GetComponent<PhotonView>().IsMine == true)
+            {
+                rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
+            }
         }
 
 
