@@ -10,10 +10,11 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Effects = new ArrayList();
         public bool lGrounded;
         public bool rGrounded;
+        public KeysPressed keys;
 
         void Update()
         {
-            KeysPressed keys = 
+            keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 
                         Input.GetKey(KeyCode.S), 
