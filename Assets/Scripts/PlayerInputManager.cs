@@ -16,7 +16,7 @@ namespace Assets.Scripts.CharacterControl
 
         void Update()
         {
-            KeysPressed keys = 
+            keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 
                         Input.GetKey(KeyCode.S), 
