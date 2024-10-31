@@ -69,19 +69,19 @@ namespace Assets.Scripts.CharacterControl
             }
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown("W"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown("S"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown("A"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown("D"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
             }
             if (Keys.SP && Grounded)
             {
