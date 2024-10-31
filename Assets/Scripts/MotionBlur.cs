@@ -39,11 +39,11 @@ public class MotionBlut : MonoBehaviour
 
         if(targetFov > currentFov + 1)
         {
-            GetComponent<Camera>().fieldOfView = Mathf.Min(135, currentFov + 360 * Time.deltaTime);
+            GetComponent<Camera>().fieldOfView = Mathf.Min(135, targetFov);
         }
         else if(targetFov < currentFov - 1)
         {
-            GetComponent<Camera>().fieldOfView = Mathf.Max(90, currentFov - 360 * Time.deltaTime);
+            GetComponent<Camera>().fieldOfView = Mathf.Max(90, targetFov);
         }
     }
 
