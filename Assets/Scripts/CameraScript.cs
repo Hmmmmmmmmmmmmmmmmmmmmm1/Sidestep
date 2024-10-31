@@ -8,7 +8,6 @@ public class CameraScript : MonoBehaviour
 
     public float mouseSensitivity;
     private float VerticalRotation = 0f;
-    public GameObject Player;
 
     void Start()
     {
