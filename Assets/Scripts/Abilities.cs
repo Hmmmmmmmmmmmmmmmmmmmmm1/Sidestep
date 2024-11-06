@@ -24,11 +24,16 @@ public class Abilities : MonoBehaviour
     public String ability;
     public enum MovementAbility {DirectionChange, Blink, Launch, LegoBuildMode, Heal}
     public MovementAbility Skill1;
+    public KeyCode Skill1Trigger;
 
     public enum BattleAbility {Lifesteal, Immobilize, FireAspectII, Knockback, doxx}
     public BattleAbility Skill2;
+    public KeyCode Skill2Trigger;
 
     private bool activated;
+
+    private float Skill1Timer = 1000;
+    private float Skill2Timer = 1000;
 
     // Start is called before the first frame update
     void Start()
@@ -39,34 +44,37 @@ public class Abilities : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up));
-        if (Input.GetKeyDown(KeyCode.Alpha7)){
+        Skill1Timer += Time.deltaTime;
+        Skill2Timer += Time.deltaTime;
+        //Lunch Mode
+        if (Skill1 == MovementAbility.Launch){
+            if (Input.GetKeyDown(Skill1Trigger)){
 
             int lookingDown;
-            bool grounded = Physics.Raycast(transform.position, Vector3.down, 2);
-            grounded = true;
-            if (Skill1 == MovementAbility.Launch && grounded){
+            if (Skill1Timer >= 5){
                 if ((Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up)){
-                    Debug.Log("up");
                     lookingDown = 1;
                 }
                 else{
-                    Debug.Log("dn");
                     lookingDown = -1;
                 }
-                //gameObject.GetComponent<Rigidbody>().velocity += new Vector3(0,600,0) + transform.forward * 400;
-                gameObject.GetComponent<Rigidbody>().velocity += Vector3.up * lookingDown * 600 + transform.forward * 200;
+                gameObject.GetComponent<Rigidbody>().velocity += Vector3.up * lookingDown * 1000 + transform.forward * 50;
 
-                gameObject.GetComponent<Rigidbody>().drag = 9;
+                gameObject.GetComponent<Rigidbody>().drag = 5;
                 activated = true;
+                Skill1Timer = 0;
             }
 
-        }
-        if(activated && gameObject.GetComponent<Rigidbody>().velocity.magnitude <= 20 && Skill1 == MovementAbility.Launch){
-            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,-30,0);
-            
-            gameObject.GetComponent<Rigidbody>().drag = 0;
-            activated = false;
+            }
+            if(gameObject.GetComponent<Rigidbody>().velocity.y >= 20 && Skill1 == MovementAbility.Launch){
+                gameObject.GetComponent<Rigidbody>().velocity += new Vector3(0,-3,0);
+            }
+
+            if (gameObject.GetComponent<Rigidbody>().velocity.y <= 10 && activated){
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,gameObject.GetComponent<Rigidbody>().velocity.y,0);
+                gameObject.GetComponent<Rigidbody>().drag = 0;
+                activated = false;
+            }
         }
     }
 }

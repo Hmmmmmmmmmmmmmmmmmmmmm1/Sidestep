@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 4164102215724870342}
   - component: {fileID: 4723292887122866956}
   - component: {fileID: 1804860094773417505}
+  - component: {fileID: 5941488789304846804}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -460,7 +461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8870983826097865563}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.4176152, z: -0, w: 0.908624}
+  m_LocalRotation: {x: 0, y: -0.41761342, z: 0, w: 0.9086249}
   m_LocalPosition: {x: 0.24, y: 2.28, z: -2.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -627,3 +628,20 @@ MonoBehaviour:
   spring: 2.5
   damper: 5.5
   massScale: 4.5
+--- !u!114 &5941488789304846804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870983826097865563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5932adbcc890466a8ac9889c3df4e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: orange
+  Skill1: 2
+  Skill1Trigger: 99
+  Skill2: 1
+  Skill2Trigger: 120
