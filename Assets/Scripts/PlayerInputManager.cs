@@ -14,10 +14,13 @@ namespace Assets.Scripts.CharacterControl
         public bool rGrounded;
         public PlayerMoveScript move;
         public bool Grounded;
+        public bool pluh;
 
-        void FixedUpdate()
+        void Update()
         {
+            
             Grounded = lGrounded && rGrounded;
+            pluh = Effects.Contains(ActiveEffects.ForwardHeld);
             //if(GetComponent<PhotonView>().IsMine == true)
             //{
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
@@ -35,8 +38,8 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
             
-                PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
-                rb.AddForce(move.UpdateVelocity());
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded);
+                rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             //}
         }
 
