@@ -1,4 +1,3 @@
-/*
 
 using System.Collections;
 using System.Collections.Generic;
@@ -8,10 +7,6 @@ namespace Assets.Scripts.CharacterControl
 public class PlayerActionManager : MonoBehaviour
 {
     public PlayerInputManager input;
-
-    float moveAbilityCd = 0;
-    float attackAbilityCd = 0;
-    float basicAttackCd = 0;
     void Start()
     {
         input = GetComponent<PlayerInputManager>();
@@ -20,32 +15,10 @@ public class PlayerActionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateCooldowns();
-        UpdateAbilityStart();
+
     }
-
-    void UpdateCooldowns()
-    {
-        moveAbilityCd = Mathf.Max(0, moveAbilityCd - Time.deltaTime);
-        attackAbilityCd = Mathf.Max(0, attackAbilityCd - Time.deltaTime);
-        basicAttackCd = Mathf.Max(0, basicAttackCd - Time.deltaTime);
-    }
-    
-    void UpdateAbilityStart()
-    {
-        if(moveAbilityCd == 0 && input.keys.Q)
-        {
-
-        }
-        if(attackAbilityCd == 0 && input.keys.Q)
-        {
-
-        }
-        if(basicAttackCd == 0 && input.keys.ML)
-        {
-
-        }
-    }
+}
+}
 
     /*
     MAPPING OUT THE ACTION MANAGER
