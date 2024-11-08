@@ -23,6 +23,11 @@ namespace Assets.Scripts.CharacterControl
             this.rGrounded = rGrounded;
         }
 
+        public void Awake()
+        {
+            Grounded = lGrounded & rGrounded;
+        }
+
         public Vector3 GetVelocity()
         {
             return rb.velocity;
@@ -33,9 +38,8 @@ namespace Assets.Scripts.CharacterControl
 
         public Vector3 UpdateVelocity()
         {
-            Grounded = lGrounded & rGrounded;
             Vector3 vec = Vector3.zero;
-            Vector3 friction = GetVelocity()*-0.90f;
+            Vector3 friction = GetVelocity()*-0.75f;
             if (Keys.SH || !Grounded)
             {
                 friction *= 0.05f;
@@ -46,16 +50,16 @@ namespace Assets.Scripts.CharacterControl
 
                 if (Keys.W)
                 {
-                    vec += (tra.forward * 30f);
+                    vec += (tra.forward * 3000f);
                     //Acces the ArrayList??
                 }
                     //do that to all of them
                 if (Keys.S)
-                    vec += (tra.forward * -30f);
+                    vec += (tra.forward * -3000f);
                 if (Keys.A)
-                    vec += (tra.right * -30f);
+                    vec += (tra.right * -3000f);
                 if (Keys.D)
-                    vec += (tra.right * 30f);
+                    vec += (tra.right * 3000f);
             } else if (!Keys.SH)
             {
                 if (Keys.W)
@@ -69,23 +73,23 @@ namespace Assets.Scripts.CharacterControl
             }
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown("W"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown("S"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown("A"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown("D"))
             {
-                vec.x += -5*Mathf.Log(GetVelocity().x +1)+3;
+                vec.x += -5*Mathf.Log(GetVelocity().x +1)+30;
             }
             if (Keys.SP && Grounded)
             {
-                vec += new Vector3(0,Mathf.Max(8f*GetVelocity().magnitude, 40),0);//or if get velcoity is less than a certain ammount, just apply a set ammount
+                vec += new Vector3(0,0.4f*GetVelocity().x,0);//or if get velcoity is less than a certain ammount, just apply a set ammount
             }
             if ((lGrounded || rGrounded) && !Grounded)
             {
@@ -94,23 +98,23 @@ namespace Assets.Scripts.CharacterControl
                 {
                     if (Keys.W)
                     {
-                        vec += tra.forward * 15f;
+                        vec += tra.forward * 1500f;
                     }
                     if (Keys.S)
                     {
-                        vec += tra.forward * -15f;
+                        vec += tra.forward * -1500f;
                     }
                     if (Keys.A)
                     {
-                        vec += tra.right * -15f;
+                        vec += tra.right * -1500f;
                     }
                     if (Keys.D)
                     {
-                        vec += tra.right * 15f;
+                        vec += tra.right * 1500f;
                     }
                     if (Keys.SP)
                     {
-                    vec += tra.up * 15f;
+                    vec += tra.up * 1500f;
                     }
                 }
 

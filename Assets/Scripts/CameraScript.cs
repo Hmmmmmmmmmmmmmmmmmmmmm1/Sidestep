@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class CameraScript : MonoBehaviour
 {
-
-    public float mouseSensitivity;
+    public GameObject player;
+    public float mouseSensitivity = 2f;
     private float VerticalRotation = 0f;
+    private Transform playertrans;
 
     void Start()
     {
         //get transform
+        playertrans = player.GetComponent<Transform>();
         //Lock and hide Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Player = GameObject.Find("Player");
     }
+
 
     void Update()
     {
@@ -30,14 +31,7 @@ public class CameraScript : MonoBehaviour
         transform.localEulerAngles = Vector3.right * VerticalRotation;
 
         //rotate player around y
-        
-        //if(!GetComponent<PhotonView>().IsMine)
-        //{
-        //    Destroy(this.gameObject);
-        //}
-
-        gameObject.transform.parent.Rotate(Vector3.up * Xmove);
-
+        playertrans.Rotate(Vector3.up * Xmove);
         
     }
 }
