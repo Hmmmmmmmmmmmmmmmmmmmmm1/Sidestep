@@ -15,7 +15,6 @@ public class CameraScript : MonoBehaviour
         //Lock and hide Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //Player = GameObject.Find("Player");
     }
 
     void Update()
