@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerStatusManager : MonoBehaviour
 {
 
-    public static List<GameObject> statusEffects = new List<GameObject>();
+    public ArrayList effects = new ArrayList();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,33 +21,23 @@ public class PlayerStatusManager : MonoBehaviour
 
     }
 
-    static public void AddEffect(GameObject newEffect)
+    public void AddEffect(GameObject newEffect)
     {
         GameObject effect = Instantiate(newEffect, GameObject.Find("Canvas").transform);
-        for(int i = 0; i <= statusEffects.Count; i++)
-        {
-            if(i == statusEffects.Count)
-            {
-                statusEffects.Add(effect);
-                break;
-            }
-            if(statusEffects.ElementAtOrDefault(i) == null)
-            {
-                statusEffects.Insert(i, effect);
-                break;
-            }
-            Debug.Log(statusEffects.ElementAtOrDefault(i) == null);
-        }
-        effect.GetComponent<RectTransform>().position = new Vector3(1316 - statusEffects.Count * 108, 720 -36 * (statusEffects.Count % 2) - 72, 0);
+        effects.Add(effect);
+        effect.GetComponent<RectTransform>().position = new Vector3(1316 - effects.Count * 108, 720 -36 * (effects.Count % 2) - 72, 0);
     }
 
-    static public void RemoveEffect(GameObject effect)
+    public void RemoveEffect(GameObject effectToRemove)
     {
-        Debug.Log(statusEffects.Remove(effect));
-        statusEffects.TrimExcess();
-        for(int i = 0; i < statusEffects.Count; i++)
+        effects.Remove(effectToRemove);
+        effects.TrimToSize();
+
+        int i = 0;
+        foreach(GameObject effect in effects)
         {
-            statusEffects[i].GetComponent<RectTransform>().position = new Vector3(1316 - (i + 1) * 108, 720 -36 * ((i + 1) % 2) - 72, 0);
+            effect.GetComponent<RectTransform>().position = new Vector3(1316 - (i + 1) * 108, 720 -36 * ((i + 1) % 2) - 72, 0);
+            i++;
         }
     }
 }
