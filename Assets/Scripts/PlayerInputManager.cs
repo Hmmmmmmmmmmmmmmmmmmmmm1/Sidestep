@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 namespace Assets.Scripts.CharacterControl
+
 {
     public class PlayerInputManager : MonoBehaviour
     {
@@ -10,10 +12,17 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Effects = new ArrayList();
         public bool lGrounded;
         public bool rGrounded;
+        public PlayerMoveScript move;
+        public bool Grounded;
 
-        void Update()
+        void FixedUpdate()
         {
-            KeysPressed keys = 
+            Grounded = lGrounded && rGrounded;
+            //if(GetComponent<PhotonView>().IsMine == true)
+            //{
+                lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
+                rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
+                KeysPressed keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 
                         Input.GetKey(KeyCode.S), 
@@ -26,8 +35,9 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
             
-            PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
-            rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
+                PlayerMoveScript move = new PlayerMoveScript(keys, Effects, rb, tra, lGrounded, rGrounded);
+                rb.AddForce(move.UpdateVelocity());
+            //}
         }
 
 
