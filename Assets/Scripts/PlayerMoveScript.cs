@@ -42,27 +42,26 @@ namespace Assets.Scripts.CharacterControl
         {
             Grounded = lGrounded & rGrounded;
             Vector3 vec = Vector3.zero;
-            Vector3 friction = GetVelocity()*-0.90f;
+            Vector3 friction = GetVelocity()*-0.95f;
             if (Keys.SH || !Grounded)
             {
                 friction *= 0.05f;
             }
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
-                vec.x += (-5*Mathf.Log(GetVelocity().magnitude +1)+3000)*4000000;
-                Debug.Log("pluh");
+                return (tra.forward)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*4000;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
-                vec.x += (-5*Mathf.Log(GetVelocity().magnitude +1)+30)*40;
+                return (tra.forward)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*-4000;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
             {
-                vec.x += (-5*Mathf.Log(GetVelocity().magnitude +1)+30)*40;
+                return (tra.right)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*-4000;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
             {
-                vec.x += (-5*Mathf.Log(GetVelocity().magnitude +1)+30)*40;
+                return (tra.right)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*4000;
             }
             if (Grounded && !Keys.SH)
             {
@@ -70,7 +69,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (Keys.W)
                 {
-                    vec += (tra.forward * 30f*40);
+                    vec += (tra.forward * 30f*18);
                     if (!Effects.Contains(ActiveEffects.ForwardHeld))
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
@@ -82,36 +81,36 @@ namespace Assets.Scripts.CharacterControl
                     //do that to all of them
                 if (Keys.S)
                 {
-                    vec += (tra.forward * -30f*40);
+                    vec += (tra.forward * -30f*18);
                     if (!Effects.Contains(ActiveEffects.BackHeld))
                     {
                         Effects.Add(ActiveEffects.BackHeld);
                     }
-                } else
+                } else if (Input.GetKeyUp(KeyCode.S))
                 {
-                    Effects.Remove(ActiveEffects.BackHeld);
+                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.BackHeld));
                 }
                 if (Keys.A)
                 {
-                    vec += (tra.right * -30f*40);
+                    vec += (tra.right * -30f*18);
                     if (!Effects.Contains(ActiveEffects.LeftHeld))
                     {
                         Effects.Add(ActiveEffects.LeftHeld);
                     }
-                } else
+                } else if (Input.GetKeyUp(KeyCode.A))
                 {
-                    Effects.Remove(ActiveEffects.LeftHeld);
+                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.LeftHeld));
                 }
                 if (Keys.D)
                 {
-                    vec += (tra.right * 30f*40);
+                    vec += (tra.right * 30f*18);
                     if (!Effects.Contains(ActiveEffects.RightHeld))
                     {
                         Effects.Add(ActiveEffects.RightHeld);
                     }
-                } else
+                } else if (Input.GetKeyUp(KeyCode.D))
                 {
-                    Effects.Remove(ActiveEffects.RightHeld);
+                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.RightHeld));
                 }
             } else if (!Keys.SH)
             {
