@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Abilities : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Abilities : MonoBehaviour
 
     //direction change
     //blink
-    //launch
+    //launch                :)
     //temp sturctures
     //healing
 
@@ -31,8 +32,15 @@ public class Abilities : MonoBehaviour
 
     private bool activated;
 
-    private float Skill1Timer = 1000;
-    private float Skill2Timer = 1000;
+    public Text Skill1Text;
+    public Text Skill2Text;
+    private float Skill1Cooldown = 0;
+    private float Skill2Cooldown = 0;
+
+    //Lunch
+
+    //Lego
+    private int legoesPerAbility = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -43,14 +51,14 @@ public class Abilities : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Skill1Timer += Time.deltaTime;
-        Skill2Timer += Time.deltaTime;
+        Cooldown();
+
         //Lunch Mode
         if (Skill1 == MovementAbility.Launch){
             if (Input.GetKeyDown(Skill1Trigger)){
 
             int lookingDown;
-            if (Skill1Timer >= 5){
+            if (Skill1Cooldown < 0){
                 if ((Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up)){
                     lookingDown = 1;
                 }
@@ -61,7 +69,7 @@ public class Abilities : MonoBehaviour
 
                 gameObject.GetComponent<Rigidbody>().drag = 5;
                 activated = true;
-                Skill1Timer = 0;
+                Skill1Cooldown = 5;
             }
 
             }
@@ -70,10 +78,30 @@ public class Abilities : MonoBehaviour
             }
 
             if (gameObject.GetComponent<Rigidbody>().velocity.y <= 10 && activated){
-                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,gameObject.GetComponent<Rigidbody>().velocity.y,0);
+                //gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,gameObject.GetComponent<Rigidbody>().velocity.y,0);
                 gameObject.GetComponent<Rigidbody>().drag = 0;
                 activated = false;
             }
         }
+        if (Skill1 == MovementAbility.LegoBuildMode){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 0){
+                GameObject legos = GameObject.Find("Wall");
+                Instantiate(legos, transform.position + transform.forward * 10 + Vector3.up * 2, legos.transform.rotation);
+                legoesPerAbility++;
+                if(legoesPerAbility == 5){
+                    legoesPerAbility = 0;
+                    Skill1Cooldown = 10;
+                }
+            }
+        }
+
+    }
+
+    public void Cooldown(){
+        Skill1Cooldown -= Time.deltaTime;
+        Skill2Cooldown -= Time.deltaTime;
+
+        Skill1Text.text = Skill1Cooldown.ToString().Substring(0,1);
+        Skill2Text.text = Skill2Cooldown.ToString().Substring(0,1);
     }
 }

@@ -6,7 +6,7 @@ public class GrapplingHook : MonoBehaviour
 {
     [Header("References")]
     public LineRenderer lr;
-    private Vector3 grapplePoint;
+    public Vector3 grapplePoint;
     public Transform gunTip;
     public Camera cam;
     private SpringJoint joint;
@@ -18,8 +18,8 @@ public class GrapplingHook : MonoBehaviour
     public KeyCode grappleKey = KeyCode.Mouse1;
 
     [Header("Grapple Physics")]
-    public float spring = 2.5f;
-    public float damper = 5.5f;
+    public float spring = 0f;
+    public float damper = 10f;
     public float massScale = 4.5f;
 
     private bool grappling = false;
