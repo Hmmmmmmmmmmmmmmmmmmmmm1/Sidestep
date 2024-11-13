@@ -42,26 +42,21 @@ namespace Assets.Scripts.CharacterControl
         {
             Grounded = lGrounded & rGrounded;
             Vector3 vec = Vector3.zero;
-            Vector3 friction = GetVelocity()*-0.95f;
-            if (Keys.SH || !Grounded)
-            {
-                friction *= 0.05f;
-            }
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
-                return (tra.forward)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*4000;
+                return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
-                return (tra.forward)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*-4000;
+                return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
             {
-                return (tra.right)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*-4000;
+                return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
             {
-                return (tra.right)*(-5*Mathf.Log(GetVelocity().magnitude +1)+30)*4000;
+                return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
             if (Grounded && !Keys.SH)
             {
@@ -69,7 +64,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (Keys.W)
                 {
-                    vec += (tra.forward * 30f*18);
+                    vec += (tra.forward * 300f);
                     if (!Effects.Contains(ActiveEffects.ForwardHeld))
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
@@ -126,11 +121,10 @@ namespace Assets.Scripts.CharacterControl
             
             if (Keys.SP && Grounded)
             {
-                vec += new Vector3(0,Mathf.Max(8f*GetVelocity().magnitude*40, 40*40),0);//or if get velcoity is less than a certain ammount, just apply a set ammount
+                vec += new Vector3(0,Mathf.Max(8f*GetVelocity().magnitude*40, 40*40),0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
             if ((lGrounded || rGrounded) && !Grounded)
             {
-                friction *= 0.75f;
                 if (!Keys.SH)
                 {
                     if (Keys.W)
@@ -156,6 +150,14 @@ namespace Assets.Scripts.CharacterControl
                 }
 
                 
+            }
+            Vector3 friction;
+            if (Keys.SH || !Grounded)
+            {
+                friction = Vector3.zero;
+            } else 
+            {
+                friction = rb.velocity*-0.95f;
             }
             vec += friction;
             return vec;
