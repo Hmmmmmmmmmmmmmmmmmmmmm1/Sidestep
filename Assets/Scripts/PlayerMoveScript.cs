@@ -41,27 +41,31 @@ namespace Assets.Scripts.CharacterControl
         public Vector3 UpdateVelocity()
         {
             Grounded = lGrounded & rGrounded;
+
             Vector3 vec = Vector3.zero;
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
+                rb.drag = 0.1f;
                 return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
+                rb.drag = 0.1f;
                 return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
             {
+                rb.drag = 0.1f;
                 return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
             {
+                rb.drag = 0.1f;
                 return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
             if (Grounded && !Keys.SH)
             {
-                
-
+                rb.drag = 1f;
                 if (Keys.W)
                 {
                     vec += (tra.forward * 300f);
@@ -121,12 +125,13 @@ namespace Assets.Scripts.CharacterControl
             
             if (Keys.SP && Grounded)
             {
-                vec += new Vector3(0,Mathf.Max(8f*GetVelocity().magnitude*40, 40*40),0);//or if get velocity is less than a certain ammount, just apply a set ammount
+                vec += new Vector3(0,Mathf.Max(GetVelocity().magnitude*900f, 9000),0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
             if ((lGrounded || rGrounded) && !Grounded)
             {
                 if (!Keys.SH)
                 {
+                    rb.drag =0.75f;
                     if (Keys.W)
                     {
                         vec += tra.forward * 15f*40;
@@ -151,15 +156,18 @@ namespace Assets.Scripts.CharacterControl
 
                 
             }
-            Vector3 friction;
+            
+            //Vector3 friction;
             if (Keys.SH || !Grounded)
             {
-                friction = Vector3.zero;
-            } else 
-            {
-                friction = rb.velocity*-0.95f;
+                rb.drag = 0f;
             }
-            vec += friction;
+            //    friction = Vector3.zero;
+            //} else 
+            //{
+            //    friction = rb.velocity*-0.95f;
+            //}
+            //vec += friction;
             return vec;
 
         }
