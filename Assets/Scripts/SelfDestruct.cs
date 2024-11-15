@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SelfDestruct : MonoBehaviour
@@ -7,20 +8,21 @@ public class SelfDestruct : MonoBehaviour
     private float timer;
     private bool startTime = false;
 
-    public Color black;
-    public Color yellow;
+    public Material black;
+    //public Color yellow;
+
     // Start is called before the first frame update
     void Awake()
     {
         startTime = true;
-        //Material black = gameObject.GetComponent<MeshRenderer>().material.size
+        black = gameObject.GetComponent<MeshRenderer>().materials[0];
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(gameObject.GetComponent<MeshRenderer>().material.color);
+        Debug.Log(gameObject.GetComponent<MeshRenderer>().materials[0]);
         if (startTime){
             timer += Time.deltaTime;
         }
@@ -28,7 +30,7 @@ public class SelfDestruct : MonoBehaviour
             Destroy(gameObject);
         }
         if (Mathf.Round(timer) % 2 == 0){
-            gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<Renderer>().material.color.r,gameObject.GetComponent<Renderer>().material.color.g,gameObject.GetComponent<Renderer>().material.color.b,0f);
+            gameObject.GetComponent<MeshRenderer>().material.color = new Color(black.color.r,black.color.g,black.color.b,0.5f);
         }
         else{
             //gameObject.GetComponent<MeshRenderer>().enabled = true;
