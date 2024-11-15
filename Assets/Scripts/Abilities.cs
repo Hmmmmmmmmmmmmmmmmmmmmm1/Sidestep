@@ -41,6 +41,7 @@ public class Abilities : MonoBehaviour
 
     //Lego
     private int legoesPerAbility = 0;
+    public GameObject legos;
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +86,6 @@ public class Abilities : MonoBehaviour
         }
         if (Skill1 == MovementAbility.LegoBuildMode){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 0){
-                GameObject legos = GameObject.Find("Wall");
                 Instantiate(legos, transform.position + transform.forward * 10 + Vector3.up * 2, legos.transform.rotation);
                 legoesPerAbility++;
                 if(legoesPerAbility == 5){
