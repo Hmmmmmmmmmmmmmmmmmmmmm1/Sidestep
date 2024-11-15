@@ -39,7 +39,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(1));
             
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded);
-                rb.velocity = (move.UpdateVelocity());
+                rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             //}
         }
 

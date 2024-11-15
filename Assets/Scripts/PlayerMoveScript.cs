@@ -40,14 +40,13 @@ namespace Assets.Scripts.CharacterControl
 
         public Vector3 UpdateVelocity()
         {
-            float speed = rb.velocity.magnitude;
             Grounded = lGrounded & rGrounded;
-            Vector3 vec = rb.velocity;//current speed
+            Vector3 vec = Vector3.zero;
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
                 return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
-            if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))//return dashes if case
+            if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
                 return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
@@ -61,22 +60,23 @@ namespace Assets.Scripts.CharacterControl
             }
             if (Grounded && !Keys.SH)
             {
-                //\frac{\left(\log\left(x\right)+10\right)}{-0.95x}
+                
 
                 if (Keys.W)
                 {
-                    vec = (tra.forward)*(Mathf.Log(speed)+10)/((-0.95f*speed)+0.001f);
+                    vec += (tra.forward * 300f);
                     if (!Effects.Contains(ActiveEffects.ForwardHeld))
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
                     }
                 } else if (Input.GetKeyUp(KeyCode.W))
                 {
-                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.ForwardHeld));//set to walking
+                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.ForwardHeld));
                 }
+                    //do that to all of them
                 if (Keys.S)
                 {
-                    vec = -(tra.forward)*(Mathf.Log(speed)+10)/(-0.95f*speed);
+                    vec += (tra.forward * -30f*18);
                     if (!Effects.Contains(ActiveEffects.BackHeld))
                     {
                         Effects.Add(ActiveEffects.BackHeld);
@@ -87,7 +87,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.A)
                 {
-                    vec += -(tra.right)*(Mathf.Log(speed)+10)/(-0.95f*speed);
+                    vec += (tra.right * -30f*18);
                     if (!Effects.Contains(ActiveEffects.LeftHeld))
                     {
                         Effects.Add(ActiveEffects.LeftHeld);
@@ -98,7 +98,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.D)
                 {
-                    vec += (tra.right)*(Mathf.Log(speed)+10)/(-0.95f*speed);
+                    vec += (tra.right * 30f*18);
                     if (!Effects.Contains(ActiveEffects.RightHeld))
                     {
                         Effects.Add(ActiveEffects.RightHeld);
@@ -110,7 +110,7 @@ namespace Assets.Scripts.CharacterControl
             } else if (!Keys.SH)
             {
                 if (Keys.W)
-                    vec += (tra.forward * 0.5f*40);//remove
+                    vec += (tra.forward * 0.5f*40);
                 if (Keys.S)
                     vec +=(tra.forward * -0.5f*40);
                 if (Keys.A)
@@ -121,7 +121,7 @@ namespace Assets.Scripts.CharacterControl
             
             if (Keys.SP && Grounded)
             {
-                vec.y = Mathf.Max(8f*GetVelocity().magnitude*40);//or if get velocity is less than a certain ammount, just apply a set ammount //jump sets y
+                vec += new Vector3(0,Mathf.Max(8f*GetVelocity().magnitude*40, 40*40),0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
             if ((lGrounded || rGrounded) && !Grounded)
             {
@@ -151,16 +151,16 @@ namespace Assets.Scripts.CharacterControl
 
                 
             }
-            float friction;
+            Vector3 friction;
             if (Keys.SH || !Grounded)
             {
-                friction = 1f;//friction will affect it all
+                friction = Vector3.zero;
             } else 
             {
-                friction = -0.95f;
+                friction = rb.velocity*-0.95f;
             }
-            vec *= friction;
-            return vec;//it gets set
+            vec += friction;
+            return vec;
 
         }
 
