@@ -85,7 +85,7 @@ public class PlayerHP : MonoBehaviour
     {
         if(other.gameObject.tag == "damage")
         {
-            DecreaseHP(20);
+            DecreaseHP(10);
         }
         else if(other.gameObject.tag == "heal")
         {
