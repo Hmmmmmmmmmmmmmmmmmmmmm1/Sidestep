@@ -30,10 +30,10 @@ public class CameraScript : MonoBehaviour
 
         //rotate player around y
         
-        if(!GetComponent<PhotonView>().IsMine)
-        {
-            Destroy(this.gameObject);
-        }
+        //if(!GetComponent<PhotonView>().IsMine)
+        //{
+        //    Destroy(this.gameObject);
+        //}
 
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
 
