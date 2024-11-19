@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lucian's Scene.unity
     guid: cfcdc2c114b364cf2901d045ed1881bf
+  - enabled: 1
+    path: Assets/Scenes/Abilities Scene.unity
+    guid: d9c5a46a434d44d1f8820d655456c7b5
   m_configObjects: {}

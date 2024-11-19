@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c510b952a89423baf4bc6a70cc24d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8870983826097865563}
   mouseSensitivity: 2
 --- !u!114 &3885109084327467905
 MonoBehaviour:
@@ -734,7 +733,7 @@ GameObject:
   - component: {fileID: 6956919285323263029}
   m_Layer: 0
   m_Name: Brian
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -912,6 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lr: {fileID: 2585049827911799040}
+  grapplePoint: {x: 0, y: 0, z: 0}
   gunTip: {fileID: 3255150240414973373}
   cam: {fileID: 5555971607151678895}
   maxDistance: 1000
@@ -951,6 +951,8 @@ MonoBehaviour:
   Skill1Trigger: 99
   Skill2: 0
   Skill2Trigger: 120
+  Skill1Text: {fileID: 0}
+  Skill2Text: {fileID: 0}
 --- !u!1001 &2284019118982092326
 PrefabInstance:
   m_ObjectHideFlags: 0
