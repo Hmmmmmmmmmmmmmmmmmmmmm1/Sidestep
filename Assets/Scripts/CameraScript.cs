@@ -32,7 +32,7 @@ public class CameraScript : MonoBehaviour
         
         //if(!GetComponent<PhotonView>().IsMine)
         //{
-        //    Destroy(this.gameObject);
+          //  Destroy(this.gameObject);
         //}
 
         gameObject.transform.parent.Rotate(Vector3.up * Xmove);
