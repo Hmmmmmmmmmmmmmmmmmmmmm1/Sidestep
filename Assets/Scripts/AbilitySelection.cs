@@ -44,6 +44,7 @@ public class AbilitySelection : MonoBehaviour
             Skill1 = "used-bandaid";
         }
         greg.text = Skill1;
+        Abilities.Skill1 = Skill1;
     }
 
     public void geagled(int fortnite){
@@ -57,10 +58,10 @@ public class AbilitySelection : MonoBehaviour
             Skill2 = "DUMBocrat";
         }
         rodrick.text = Skill2;
+        Abilities.Skill2 = Skill2;
     }
 
     public void sendScore(){
         SceneManager.LoadScene(3);
-        GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Abilities>().getAbilities(Skill1,Skill2);
     }
 }

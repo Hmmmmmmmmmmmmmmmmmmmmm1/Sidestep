@@ -68,7 +68,7 @@ namespace Assets.Scripts.CharacterControl
                 rb.drag = 1f;
                 if (Keys.W)
                 {
-                    vec += (tra.forward * 300f);
+                    vec += (tra.forward * 540f * 3);
                     if (!Effects.Contains(ActiveEffects.ForwardHeld))
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
@@ -80,7 +80,7 @@ namespace Assets.Scripts.CharacterControl
                     //do that to all of them
                 if (Keys.S)
                 {
-                    vec += (tra.forward * -30f*18);
+                    vec += (tra.forward * -30f*18 * 3);
                     if (!Effects.Contains(ActiveEffects.BackHeld))
                     {
                         Effects.Add(ActiveEffects.BackHeld);
@@ -91,7 +91,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.A)
                 {
-                    vec += (tra.right * -30f*18);
+                    vec += (tra.right * -30f*18 * 3);
                     if (!Effects.Contains(ActiveEffects.LeftHeld))
                     {
                         Effects.Add(ActiveEffects.LeftHeld);
@@ -102,7 +102,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.D)
                 {
-                    vec += (tra.right * 30f*18);
+                    vec += (tra.right * 30f*18 * 3);
                     if (!Effects.Contains(ActiveEffects.RightHeld))
                     {
                         Effects.Add(ActiveEffects.RightHeld);

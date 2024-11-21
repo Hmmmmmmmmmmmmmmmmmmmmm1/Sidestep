@@ -23,11 +23,11 @@ public class Abilities : MonoBehaviour
     //knockback
 
     public enum MovementAbility {DirectionChange, Blink, Launch, LegoBuildMode, Heal}
-    public String Skill1;
+    public static String Skill1;
     public KeyCode Skill1Trigger;
 
     public enum BattleAbility {Lifesteal, Immobilize, FireAspectII, Knockback, doxx}
-    public String Skill2;
+    public static String Skill2;
     public KeyCode Skill2Trigger;
 
     private bool activated;
@@ -59,14 +59,14 @@ public class Abilities : MonoBehaviour
             if (Input.GetKeyDown(Skill1Trigger)){
 
             int lookingDown;
-            if (Skill1Cooldown < 0){
+            if (Skill1Cooldown < 1){
                 if ((Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up)){
                     lookingDown = 1;
                 }
                 else{
                     lookingDown = -1;
                 }
-                gameObject.GetComponent<Rigidbody>().velocity += Vector3.up * lookingDown * 1000 + transform.forward * 50;
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.up * lookingDown * 100 + transform.forward * 20;
 
                 gameObject.GetComponent<Rigidbody>().drag = 5;
                 activated = true;
@@ -85,7 +85,7 @@ public class Abilities : MonoBehaviour
             }
         }
         if (Skill1 == "Duplo mode"){
-            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 0){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
                 Instantiate(legos, transform.position + transform.forward * 10 + Vector3.up * 2, legos.transform.rotation);
                 legoesPerAbility++;
                 if(legoesPerAbility == 5){
@@ -93,6 +93,10 @@ public class Abilities : MonoBehaviour
                     Skill1Cooldown = 10;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P)){
+            Debug.Log(Skill1);
         }
 
     }
@@ -103,10 +107,17 @@ public class Abilities : MonoBehaviour
 
         Skill1Text.text = Skill1Cooldown.ToString().Substring(0,1);
         Skill2Text.text = Skill2Cooldown.ToString().Substring(0,1);
+
+        if(Skill1Text.text.Equals("0")){
+            Skill1Text.text = "-";
+        }
+        if(Skill2Text.text.Equals("0")){
+            Skill2Text.text = "-";
+        }
     }
 
-    public void getAbilities(String Skill1, String Skill2){
-        this.Skill1 = Skill1;
-        this.Skill2 = Skill2;
+    public void getAbilities(String squelch, String squinch){
+        Skill1 = squelch;
+        Skill2 = squinch;
     }
 }
