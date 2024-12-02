@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1293325734021969598, guid: c8c726bff6b894c009361cf552942e2f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1804860094773417505, guid: c8c726bff6b894c009361cf552942e2f, type: 3}
       propertyPath: spring
       value: 1

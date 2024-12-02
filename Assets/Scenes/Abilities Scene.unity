@@ -219,7 +219,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Lego Build
       m_Image: {fileID: 0}
-    - m_Text: Immobilize
+    - m_Text: Blink
       m_Image: {fileID: 0}
     - m_Text: Direction Change
       m_Image: {fileID: 0}
@@ -1944,7 +1944,7 @@ GameObject:
   - component: {fileID: 1525353202}
   - component: {fileID: 1525353201}
   m_Layer: 5
-  m_Name: hehe BUTTon
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2183,7 +2183,7 @@ GameObject:
   - component: {fileID: 1633785235}
   - component: {fileID: 1633785234}
   m_Layer: 0
-  m_Name: bricks
+  m_Name: Skill Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2201,9 +2201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350f20f0c58e74be1b2f2e7c55534d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greg: {fileID: 1797049369}
-  rodrick: {fileID: 2018285609}
-  frank: Ryan's Scene
+  Skill1Text: {fileID: 1797049369}
+  Skill2Text: {fileID: 2018285609}
 --- !u!4 &1633785235
 Transform:
   m_ObjectHideFlags: 0
@@ -2590,7 +2589,7 @@ GameObject:
   - component: {fileID: 1797049370}
   - component: {fileID: 1797049369}
   m_Layer: 5
-  m_Name: greg
+  m_Name: Skill1Reader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2629,7 +2628,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Heffley
+  m_Text: Greg
 --- !u!222 &1797049370
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2970,7 +2969,7 @@ GameObject:
   - component: {fileID: 2018285610}
   - component: {fileID: 2018285609}
   m_Layer: 5
-  m_Name: rodricl
+  m_Name: Skill2Reader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3009,7 +3008,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Heffley
+  m_Text: Rodrick
 --- !u!222 &2018285610
 CanvasRenderer:
   m_ObjectHideFlags: 0

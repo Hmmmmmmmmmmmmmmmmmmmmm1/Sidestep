@@ -44,7 +44,7 @@ public class PlayerHP : MonoBehaviour
         else if(hpChangeTick > 0 && hpChangeTick <= 1)
         {
             hpChangeTick -= Time.deltaTime;
-            if(hp > oldHp)
+            if(hp >= oldHp)
             {
                 hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2((hp * 4) - ((hp * 4) - (oldHp * 4)) * hpChangeTick, 15);
             }
@@ -82,6 +82,7 @@ public class PlayerHP : MonoBehaviour
             hpChangeBar.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
         }
         hp += hpChangeAmount;
+        //hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp * 4, 15);
         hpChangeBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp * 4, 15);
         hpChangeBar.GetComponent<Image>().color = Color.white;
         hpChangeTick = 2f;

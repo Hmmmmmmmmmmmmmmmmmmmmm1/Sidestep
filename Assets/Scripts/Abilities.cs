@@ -23,11 +23,11 @@ public class Abilities : MonoBehaviour
     //knockback
 
     public enum MovementAbility {DirectionChange, Blink, Launch, LegoBuildMode, Heal}
-    public static String Skill1;
+    public static int Skill1;
     public KeyCode Skill1Trigger;
 
     public enum BattleAbility {Lifesteal, Immobilize, FireAspectII, Knockback, doxx}
-    public static String Skill2;
+    public static int Skill2;
     public KeyCode Skill2Trigger;
 
     private bool activated;
@@ -55,7 +55,7 @@ public class Abilities : MonoBehaviour
         Cooldown();
 
         //Lunch Mode
-        if (Skill1 == "Lynch"){
+        if (Skill1 == 1){
             if (Input.GetKeyDown(Skill1Trigger)){
 
             int lookingDown;
@@ -84,7 +84,8 @@ public class Abilities : MonoBehaviour
                 activated = false;
             }
         }
-        if (Skill1 == "Duplo mode"){
+        //Legos Mode
+        if (Skill1 == 2){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
                 Instantiate(legos, transform.position + transform.forward * 10 + Vector3.up * 2, legos.transform.rotation);
                 legoesPerAbility++;
@@ -92,6 +93,30 @@ public class Abilities : MonoBehaviour
                     legoesPerAbility = 0;
                     Skill1Cooldown = 10;
                 }
+            }
+        }
+        //Lightspeed Mode
+        if (Skill1 == 3){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+
+                transform.position += GameObject.Find("Main Camera").transform.forward * 100f;
+                if (1  == 0 + 21){
+                    transform.position += GameObject.Find("Main Camera").transform.forward * -100f;
+                }
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                //Debug.Log(Vector3.Distance(transform.forward * 100f, transform.position) + " " +Physics.Raycast(ray, out hit)+Vector3.Distance(hit.point, transform.position));
+
+                /*if (Physics.Raycast(ray, out hit) == true && Vector3.Distance(transform.forward * 100f, transform.position) < Vector3.Distance(hit.point, transform.position))
+                {
+                    Debug.Log("AHHHH!HHHHHHHĦ ");
+                    transform.position = hit.point;
+                }*/
+
+                Physics.Raycast(ray, out hit);
+
+                Debug.Log(ray.GetPoint(100));
+                Skill1Cooldown = 3;
             }
         }
 
@@ -114,10 +139,5 @@ public class Abilities : MonoBehaviour
         if(Skill2Text.text.Equals("0")){
             Skill2Text.text = "-";
         }
-    }
-
-    public void getAbilities(String squelch, String squinch){
-        Skill1 = squelch;
-        Skill2 = squinch;
     }
 }
