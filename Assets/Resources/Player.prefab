@@ -179,6 +179,7 @@ MonoBehaviour:
   tra: {fileID: 5619584711632361254}
   lGrounded: 1
   rGrounded: 1
+  attack: {fileID: 0}
   Grounded: 0
   pluh: 0
 --- !u!114 &6232714364407001865
