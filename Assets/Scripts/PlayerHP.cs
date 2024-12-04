@@ -13,6 +13,8 @@ public class PlayerHP : MonoBehaviour
     public GameObject atkUp;
     public PlayerStatusManager playerStatusManager;
 
+    public Text HpNum;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class PlayerHP : MonoBehaviour
     void Update()
     {
         UpdateHPChange();
+        hp = Mathf.Min(hp,100);
+        HpNum.text = hp.ToString();
     }
 
     void UpdateHPChange()
@@ -61,6 +65,7 @@ public class PlayerHP : MonoBehaviour
         {
             oldHp = hp;
             hpChangeBar = Instantiate(hpBar, hpBar.transform.position, hpBar.transform.rotation, GameObject.Find("UI Frame").transform);
+            hpChangeBar.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
         }
         hp -= hpChangeAmount;
         hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp * 4, 15);
@@ -74,6 +79,7 @@ public class PlayerHP : MonoBehaviour
         {
             oldHp = hp;
             hpChangeBar = Instantiate(hpBar, hpBar.transform.position, hpBar.transform.rotation, GameObject.Find("UI Frame").transform);
+            hpChangeBar.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
         }
         hp += hpChangeAmount;
         hpChangeBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp * 4, 15);
@@ -89,7 +95,8 @@ public class PlayerHP : MonoBehaviour
         }
         else if(other.gameObject.tag == "heal")
         {
-            playerStatusManager.AddEffect(atkUp);
+            IncreaseHP(20);
+            //playerStatusManager.AddEffect(atkUp);
         }
     }
 }

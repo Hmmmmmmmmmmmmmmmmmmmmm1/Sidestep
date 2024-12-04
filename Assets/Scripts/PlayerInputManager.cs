@@ -13,6 +13,7 @@ namespace Assets.Scripts.CharacterControl
         public bool lGrounded;
         public bool rGrounded;
         public PlayerMoveScript move;
+        public PlayerAttackScript attack;
         public bool Grounded;
         public bool pluh;
 
