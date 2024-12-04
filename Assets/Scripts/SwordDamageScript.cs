@@ -7,21 +7,17 @@ namespace Assets.Scripts.CharacterControl
 {
 public class SwordDamageScript : MonoBehaviour
 {
-    public int damage;
+    public float damage;
 
-    
     private void OnTriggerEnter(Collider other)
     {
         Vector3 velocity = gameObject.transform.parent.GetComponent<PlayerInputManager>().move.GetVelocity();
         if (GetComponent<Collider>().GetComponent<PlayerHP>() != null)
         {
-            GetComponent<Collider>().GetComponent<PlayerHP>().DecreaseHP((int)(velocity.magnitude *2f));
+            GetComponent<Collider>().GetComponent<PlayerHP>().DecreaseHP((int)(velocity.magnitude *damage));
         }
 
     }
-
-
-    
 }
 
 }
