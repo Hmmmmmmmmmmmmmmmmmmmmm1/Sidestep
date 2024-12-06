@@ -22,7 +22,7 @@ namespace Assets.Scripts.CharacterControl
             
             Grounded = lGrounded && rGrounded;
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
-            if(GetComponent<PhotonView>().IsMine == true)
+            //if(GetComponent<PhotonView>().IsMine == true)
             {
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
                 rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
