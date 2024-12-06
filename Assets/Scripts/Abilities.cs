@@ -120,6 +120,14 @@ public class Abilities : MonoBehaviour
                 Skill1Cooldown = 3;
             }
         }
+        //Ligma Mode
+        if (Skill1 == 5){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                gameObject.GetComponent<PlayerHP>().IncreaseHP(20);
+                Skill1Cooldown = 0;
+            }
+        }
+
 
         if (Input.GetKeyDown(KeyCode.P)){
             Debug.Log(Skill1);
