@@ -14,6 +14,7 @@ namespace Assets.Scripts.CharacterControl
         public bool Grounded;
         public bool lGrounded;
         public bool rGrounded;
+        public float Class;
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded)
         {
             this.Keys = Keys;
@@ -45,27 +46,27 @@ namespace Assets.Scripts.CharacterControl
             Vector3 vec = Vector3.zero;
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
-                rb.drag = 0.1f;
+                rb.drag = 0.1f * Class;
                 return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
-                rb.drag = 0.1f;
+                rb.drag = 0.1f * Class;
                 return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
             {
-                rb.drag = 0.1f;
+                rb.drag = 0.1f * Class;
                 return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
             {
-                rb.drag = 0.1f;
+                rb.drag = 0.1f * Class;
                 return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
             }
             if (Grounded && !Keys.SH)
             {
-                rb.drag = 1f;
+                rb.drag = 1f *Class;
                 if (Keys.W)
                 {
                     vec += (tra.forward * 3000f);
@@ -131,7 +132,7 @@ namespace Assets.Scripts.CharacterControl
             {
                 if (!Keys.SH)
                 {
-                    rb.drag =0.75f;
+                    rb.drag =0.75f * Class;
                     if (Keys.W)
                     {
                         vec += tra.forward * 15f*40;
@@ -187,7 +188,7 @@ namespace Assets.Scripts.CharacterControl
                 Active Effects
                 Keys
                 Player Info(RigidBody, Transform, etc)
-                (if classes)
+                (if Classes)
                     Class Movement Modifiers
 
         Get Velocity

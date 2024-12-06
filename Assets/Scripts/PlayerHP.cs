@@ -12,7 +12,6 @@ public class PlayerHP : MonoBehaviour
     public float hpChangeTick = 0;
     public GameObject atkUp;
     public PlayerStatusManager playerStatusManager;
-
     public Text HpNum;
 
     // Start is called before the first frame update

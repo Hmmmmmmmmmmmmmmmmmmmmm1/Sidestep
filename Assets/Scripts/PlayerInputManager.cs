@@ -22,8 +22,8 @@ namespace Assets.Scripts.CharacterControl
             
             Grounded = lGrounded && rGrounded;
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
-            //if(GetComponent<PhotonView>().IsMine == true)
-            //{
+            if(GetComponent<PhotonView>().IsMine == true)
+            {
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
                 rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
                 KeysPressed keys = 
@@ -41,7 +41,7 @@ namespace Assets.Scripts.CharacterControl
             
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded);
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
-            //}
+            }
         }
 
 
