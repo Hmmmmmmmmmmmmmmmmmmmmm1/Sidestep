@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class Abilities : MonoBehaviour
     //Movement
 
     //direction change
-    //blink
+    //blink                 :)
     //launch                :)
     //temp sturctures       :)
     //healing
@@ -43,10 +44,16 @@ public class Abilities : MonoBehaviour
     private int legoesPerAbility = 0;
     private GameObject legos;
 
+    //lightspeed
+    private Vector3 boxSize;
+    private Ray ray;
+    private float grub = 20;
+
     // Start is called before the first frame update
     void Start()
     {
         legos = Resources.Load<GameObject>("Wall");
+        boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
     }
 
     // Update is called once per frame
@@ -98,24 +105,18 @@ public class Abilities : MonoBehaviour
         //Lightspeed Mode
         if (Skill1 == 3){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                transform.position += GameObject.Find("Main Camera").transform.forward * 100f;
-                if (1  == 0 + 21){
-                    transform.position += GameObject.Find("Main Camera").transform.forward * -100f;
+                //Debug.DrawLine(ray.origin,ray.GetPoint(grub),Color.cyan,100f);
+                Collider[] gems = Physics.OverlapBox(ray.GetPoint(grub), boxSize, Quaternion.identity);
+                //Debug.Log(gems.Length);
+                while(gems.Length > 0){
+                    grub -= 1;
+                    gems = Physics.OverlapBox(ray.GetPoint(grub), boxSize, Quaternion.identity);
+                    //Debug.Log(gems.Length);
                 }
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                //Debug.Log(Vector3.Distance(transform.forward * 100f, transform.position) + " " +Physics.Raycast(ray, out hit)+Vector3.Distance(hit.point, transform.position));
-
-                /*if (Physics.Raycast(ray, out hit) == true && Vector3.Distance(transform.forward * 100f, transform.position) < Vector3.Distance(hit.point, transform.position))
-                {
-                    Debug.Log("AHHHH!HHHHHHHĦ ");
-                    transform.position = hit.point;
-                }*/
-
-                Physics.Raycast(ray, out hit);
-
-                Debug.Log(ray.GetPoint(100));
+                gameObject.transform.position = ray.GetPoint(grub);
+                grub = 20;
                 Skill1Cooldown = 3;
             }
         }
