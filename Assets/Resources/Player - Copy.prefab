@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 89268987429800015}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 4723292887122866956}
   - component: {fileID: 7255945751102041670}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player - Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,9 +397,11 @@ MonoBehaviour:
   tra: {fileID: 7618334235654252660}
   lGrounded: 1
   rGrounded: 1
-  attack: {fileID: 0}
   Grounded: 0
   pluh: 0
+  SwordHolder: {fileID: 89268987429800015}
+  swung: 0
+  waiter: 0
 --- !u!114 &7255945751102041670
 MonoBehaviour:
   m_ObjectHideFlags: 0

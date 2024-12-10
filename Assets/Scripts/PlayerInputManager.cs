@@ -16,6 +16,9 @@ namespace Assets.Scripts.CharacterControl
         public PlayerAttackScript attack;
         public bool Grounded;
         public bool pluh;
+        public GameObject SwordHolder;
+        public bool swung;
+        public bool waiter;
 
         void Update()
         {
@@ -38,8 +41,9 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.Space),
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
-            
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform, ref swung, ref waiter*/);
+                attack.Begin();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             //}
         }
