@@ -19,11 +19,28 @@ namespace Assets.Scripts.CharacterControl
         public float Class;
 
 
-        public void Start()
+        
+        public void CheckClass()
         {
             classism = ClassObject.GetComponent<Classism>();
+            if(classism.tank == true || classism.wizard == true)
+            {
+                Class = 1.25f;
+                Debug.Log("tank or wizard");
+            }
+            if(classism.assassin == true)
+            {
+                Class = 0.1f;
+                Debug.Log("Assassin");
+            }
+            else
+            {
+                Class = 1f;
+                Debug.Log("else hopefully fighter");
+            }
+
         }
-        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded)
+        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject)
         {
             this.Keys = Keys;
             this.Effects = Effects;
@@ -31,6 +48,7 @@ namespace Assets.Scripts.CharacterControl
             this.tra = tra;
             this.lGrounded = lGrounded;
             this.rGrounded = rGrounded;
+            this.ClassObject = ClassObject;
         }
 
         public Vector3 GetVelocity()
@@ -77,7 +95,7 @@ namespace Assets.Scripts.CharacterControl
                 rb.drag = 1f *Class;
                 if (Keys.W)
                 {
-                    vec += (tra.forward * 3000f);
+                    vec += (tra.forward * 300f);
                     if (!Effects.Contains(ActiveEffects.ForwardHeld))
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
@@ -89,7 +107,7 @@ namespace Assets.Scripts.CharacterControl
                     //do that to all of them
                 if (Keys.S)
                 {
-                    vec += (tra.forward * -3000f);
+                    vec += (tra.forward * -300f);
                     if (!Effects.Contains(ActiveEffects.BackHeld))
                     {
                         Effects.Add(ActiveEffects.BackHeld);
@@ -100,7 +118,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.A)
                 {
-                    vec += (tra.right * -3000f);
+                    vec += (tra.right * -300f);
                     if (!Effects.Contains(ActiveEffects.LeftHeld))
                     {
                         Effects.Add(ActiveEffects.LeftHeld);
@@ -111,7 +129,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.D)
                 {
-                    vec += (tra.right * 3000f);
+                    vec += (tra.right * 300f);
                     if (!Effects.Contains(ActiveEffects.RightHeld))
                     {
                         Effects.Add(ActiveEffects.RightHeld);
@@ -179,13 +197,6 @@ namespace Assets.Scripts.CharacterControl
             //vec += friction;
             return vec;
 
-        }
-        public void CheckClass()
-        {
-            if(classism.tank == true)
-            {
-                Class = 0.75f;
-            }
         }
 
 
