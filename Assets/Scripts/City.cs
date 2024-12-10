@@ -40,6 +40,8 @@ public class City : MonoBehaviour
             }
         }
         GameObject.Find("Ground").GetComponent<MeshCollider>().convex = false;
+        GameObject.Find("Stairway").GetComponent<MeshCollider>().convex = false;
+        GameObject.Find("Rail Lights").GetComponent<MeshCollider>().convex = false;
     }
     // Update is called once per frame
     void Update()

@@ -729,8 +729,8 @@ GameObject:
   - component: {fileID: 4164102215724870342}
   - component: {fileID: 4723292887122866956}
   - component: {fileID: 1804860094773417505}
-  - component: {fileID: 1805951582616518881}
   - component: {fileID: 6956919285323263029}
+  - component: {fileID: 5357656386117701244}
   m_Layer: 0
   m_Name: Brian
   m_TagString: Player
@@ -920,23 +920,6 @@ MonoBehaviour:
   spring: 1
   damper: 5.5
   massScale: 4.5
---- !u!114 &1805951582616518881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8870983826097865563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b8388370a0b4ac7a4ab39596ee5454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  hpChangeTick: 0
-  atkUp: {fileID: 0}
-  playerStatusManager: {fileID: 0}
-  HpNum: {fileID: 0}
 --- !u!114 &6956919285323263029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,6 +936,21 @@ MonoBehaviour:
   Skill2Trigger: 120
   Skill1Text: {fileID: 0}
   Skill2Text: {fileID: 0}
+--- !u!114 &5357656386117701244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870983826097865563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab69afd3dcf33466ba26b4409256c3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  hpNum: {fileID: 0}
+  hpChangeTick: 0
 --- !u!1001 &2284019118982092326
 PrefabInstance:
   m_ObjectHideFlags: 0
