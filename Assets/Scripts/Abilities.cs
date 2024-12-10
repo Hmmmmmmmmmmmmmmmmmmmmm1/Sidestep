@@ -49,6 +49,10 @@ public class Abilities : MonoBehaviour
     private Ray ray;
     private float grub = 20;
 
+    //Lymphoma
+    private float timer;
+    private float healInterval = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -120,12 +124,24 @@ public class Abilities : MonoBehaviour
                 Skill1Cooldown = 3;
             }
         }
-        //Ligma Mode
+        //Lymphoma Mode
         if (Skill1 == 5){
-            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
-                gameObject.GetComponent<PlayerHP>().IncreaseHP(20);
-                Skill1Cooldown = 0;
+            if (timer > 0){
+                if (healInterval > 0){
+                    healInterval -= Time.deltaTime;
+                }
+                if (healInterval <= 0){
+                    gameObject.GetComponent<PlayerHP2>().changeHealth(1);
+                    healInterval = 0.65f;
+                }
             }
+            timer -= Time.deltaTime;
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                    timer = 7.5f;
+                    if (gameObject.GetComponent<PlayerHP2>().hp < 100){
+                        Skill1Cooldown = 9;
+                    }
+                }
         }
 
 

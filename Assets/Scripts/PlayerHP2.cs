@@ -7,21 +7,32 @@ public class PlayerHP2 : MonoBehaviour
 {
     public Slider slider;
     public Text hpNum;
-    private int progress = 100;
+    public int hp = 100;
+
+    private int oldHp = 0;
+    public float hpChangeTick = 0;
 
     void Start(){
-        UpdateSlider(progress);
-        hpNum.text = progress + "";
+        changeHealth(0);
+        hpNum.text = hp + "";
     }
-    void Update(){
-        if (Input.GetKeyDown(KeyCode.Q)){
-            UpdateSlider(-20);
-        }
+    public void changeHealth(int change){
+        hp += change;
+        hp = Mathf.Min(hp,100);
+        slider.value = hp;
+        hpNum.text = hp + "";
     }
 
-    public void UpdateSlider(int chage){
-        progress += chage;
-        slider.value = progress;
-        hpNum.text = progress + "";
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "damage")
+        {
+            changeHealth(-10);
+        }
+        else if(other.gameObject.tag == "heal")
+        {
+            changeHealth(20);
+            //playerStatusManager.AddEffect(atkUp);
+        }
     }
 }
