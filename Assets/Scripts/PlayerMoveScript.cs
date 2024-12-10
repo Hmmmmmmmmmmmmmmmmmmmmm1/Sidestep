@@ -14,7 +14,15 @@ namespace Assets.Scripts.CharacterControl
         public bool Grounded;
         public bool lGrounded;
         public bool rGrounded;
+        public GameObject ClassObject;
+        private Classism classism;
         public float Class;
+
+
+        public void Start()
+        {
+            classism = ClassObject.GetComponent<Classism>();
+        }
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded)
         {
             this.Keys = Keys;
@@ -171,6 +179,13 @@ namespace Assets.Scripts.CharacterControl
             //vec += friction;
             return vec;
 
+        }
+        public void CheckClass()
+        {
+            if(classism.tank == true)
+            {
+                Class = 0.75f;
+            }
         }
 
 
