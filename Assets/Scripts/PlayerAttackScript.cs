@@ -18,38 +18,38 @@ namespace Assets.Scripts.CharacterControl
         //waiter for swung
         public bool waiter;
         private Vector3 pos;
+        private bool t;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder/*, ref bool swung, ref bool waiter*/)
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, ref bool waiter)
         {
             this.Keys = Keys;
 //            this.move = move;
             this.SwordHolder = SwordHolder;
             this.pos = SwordHolder.localPosition;
-//            this.swung = swung;
-//            this.waiter = waiter;
+            this.swung = swung;
+            this.waiter = waiter;
         }
 
-        public void Begin()
+        public bool Begin()
         {
-            
             if ((Keys.ML) && (!waiter))
             {
-                Debug.Log("pluh");
                 swung = true;
                 waiter = true;
-                Debug.Log("Pos before multiplication: " + pos);
                 pos = pos * -1;
-                Debug.Log("Pos after multiplication: " + pos);
                 Swing();
                 Task.Delay(400).ContinueWith(t=> SetFalse());
+                Debug.Log(swung);
             } else if (swung)
             {
-               Swing();
+                Swing();
             } 
+            return swung;
         }
 
         public void SetFalse()
         {
+            Debug.Log("HIIIIIII");
             waiter = false;
             swung = false;
             side *= -1;
