@@ -130,7 +130,7 @@ public class Abilities : MonoBehaviour
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
                 //gameObject.GetComponent<Rigidbody>().velocity *= -1;
                 gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1);
-                Skill1Cooldown = 0f;
+                Skill1Cooldown = 3;
             }
         }
         //Lymphoma Mode
