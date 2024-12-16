@@ -30,11 +30,12 @@ namespace Assets.Scripts.CharacterControl
             this.waiter = waiter;
         }
 
-        public bool Begin()
+        public (bool, bool) Begin()
         {
-            //Debug.Log(Keys.ML);
+            Debug.Log("Before If statement" + Keys.ML);
             if ((Keys.ML) && (!waiter))
             {
+                Debug.Log("First if Runs");
                 swung = true;
                 waiter = true;
                 pos = pos * -1;
@@ -44,9 +45,11 @@ namespace Assets.Scripts.CharacterControl
             } else if (swung)
             {
                 Swing();
+                Debug.Log("Swung is Running");
             } 
-            
-            return swung;
+            Debug.Log("Swung overall" + swung);
+            Debug.Log("After If statement" + Keys.ML);
+            return (swung, waiter);
         }
 
         public void SetFalse()
@@ -59,8 +62,7 @@ namespace Assets.Scripts.CharacterControl
 
         public void Swing()
         {   
-            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 0.2f);
-            Debug.Log(swung);
+            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 1f);
         }
 //        public float side = 1f;
 //        //mouse input
