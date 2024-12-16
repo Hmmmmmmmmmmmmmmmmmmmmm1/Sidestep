@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Classism : MonoBehaviour
 {
+    //note look into setting all variables as static
     public bool tank = false;
     public bool fighter = true;
     public bool assassin = false;

@@ -15,6 +15,7 @@ namespace Assets.Scripts.CharacterControl
         public PlayerMoveScript move;
         public PlayerAttackScript attack;
         public bool Grounded;
+        public GameObject ClassObject;
         public bool pluh;
 
         void Update()
@@ -39,7 +40,8 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
             
-                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded);
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject);
+                move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }
         }
