@@ -34,6 +34,7 @@ public class GrapplingHook : MonoBehaviour
     {
         if (Input.GetKeyDown(grappleKey))
         {
+            gameObject.GetComponent<Rigidbody>().velocity /= 2;
             StartGrapple();
             grappling = true;
         }

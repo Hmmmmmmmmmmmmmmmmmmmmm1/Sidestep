@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +11,10 @@ public class Abilities : MonoBehaviour
     //Movement
 
     //direction change
-    //blink
+    //blink                 :)
     //launch                :)
-    //temp sturctures
-    //healing
+    //temp sturctures       :)
+    //healing               :)
 
     //Battle
 
@@ -23,11 +24,11 @@ public class Abilities : MonoBehaviour
     //knockback
 
     public enum MovementAbility {DirectionChange, Blink, Launch, LegoBuildMode, Heal}
-    public MovementAbility Skill1;
+    public static int Skill1;
     public KeyCode Skill1Trigger;
 
     public enum BattleAbility {Lifesteal, Immobilize, FireAspectII, Knockback, doxx}
-    public BattleAbility Skill2;
+    public static int Skill2;
     public KeyCode Skill2Trigger;
 
     private bool activated;
@@ -41,12 +42,22 @@ public class Abilities : MonoBehaviour
 
     //Lego
     private int legoesPerAbility = 0;
-    public GameObject legos;
+    private GameObject legos;
+
+    //lightspeed
+    private Vector3 boxSize;
+    private Ray ray;
+    private float grub = 20;
+
+    //Lymphoma
+    private float timer;
+    private float healInterval = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-    
+        legos = Resources.Load<GameObject>("Wall");
+        boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
     }
 
     // Update is called once per frame
@@ -55,18 +66,18 @@ public class Abilities : MonoBehaviour
         Cooldown();
 
         //Lunch Mode
-        if (Skill1 == MovementAbility.Launch){
+        if (Skill1 == 1){
             if (Input.GetKeyDown(Skill1Trigger)){
 
             int lookingDown;
-            if (Skill1Cooldown < 0){
+            if (Skill1Cooldown < 1){
                 if ((Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up)){
                     lookingDown = 1;
                 }
                 else{
                     lookingDown = -1;
                 }
-                gameObject.GetComponent<Rigidbody>().velocity += Vector3.up * lookingDown * 1000 + transform.forward * 50;
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.up * lookingDown * 100 + transform.forward * 20;
 
                 gameObject.GetComponent<Rigidbody>().drag = 5;
                 activated = true;
@@ -74,7 +85,7 @@ public class Abilities : MonoBehaviour
             }
 
             }
-            if(gameObject.GetComponent<Rigidbody>().velocity.y >= 20 && Skill1 == MovementAbility.Launch){
+            if(gameObject.GetComponent<Rigidbody>().velocity.y >= 20){
                 gameObject.GetComponent<Rigidbody>().velocity += new Vector3(0,-3,0);
             }
 
@@ -84,15 +95,67 @@ public class Abilities : MonoBehaviour
                 activated = false;
             }
         }
-        if (Skill1 == MovementAbility.LegoBuildMode){
-            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 0){
-                Instantiate(legos, transform.position + transform.forward * 10 + Vector3.up * 2, legos.transform.rotation);
+        //Legos Mode
+        if (Skill1 == 2){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Instantiate(legos, ray.GetPoint(10), legos.transform.rotation);
                 legoesPerAbility++;
                 if(legoesPerAbility == 5){
                     legoesPerAbility = 0;
                     Skill1Cooldown = 10;
                 }
             }
+        }
+        //Lightspeed Mode
+        if (Skill1 == 3){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                //Debug.DrawLine(ray.origin,ray.GetPoint(grub),Color.cyan,100f);
+                Collider[] gems = Physics.OverlapBox(ray.GetPoint(grub), boxSize, Quaternion.identity);
+                //Debug.Log(gems.Length);
+                while(gems.Length > 0){
+                    grub -= 1;
+                    gems = Physics.OverlapBox(ray.GetPoint(grub), boxSize, Quaternion.identity);
+                    //Debug.Log(gems.Length);
+                }
+                gameObject.transform.position = ray.GetPoint(grub);
+                grub = 20;
+                Skill1Cooldown = 3;
+            }
+        }
+        //Lapse in Judgement Mode
+        if (Skill1 == 4){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                //gameObject.GetComponent<Rigidbody>().velocity *= -1;
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1);
+                Skill1Cooldown = 3;
+            }
+        }
+        //Lymphoma Mode
+        if (Skill1 == 5){
+            if (timer > 0){
+                if (healInterval > 0){
+                    healInterval -= Time.deltaTime;
+                }
+                if (healInterval <= 0){
+                    gameObject.GetComponent<PlayerHP2>().changeHealth(1);
+                    healInterval = 0.65f;
+                }
+            }
+            timer -= Time.deltaTime;
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                timer = 7.5f;
+                if (gameObject.GetComponent<PlayerHP2>().hp < 100){
+                    Skill1Cooldown = 9;
+                }
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.P)){
+            Debug.Log(Skill1);
         }
 
     }
@@ -103,5 +166,12 @@ public class Abilities : MonoBehaviour
 
         Skill1Text.text = Skill1Cooldown.ToString().Substring(0,1);
         Skill2Text.text = Skill2Cooldown.ToString().Substring(0,1);
+
+        if(Skill1Text.text.Equals("0")){
+            Skill1Text.text = "-";
+        }
+        if(Skill2Text.text.Equals("0")){
+            Skill2Text.text = "-";
+        }
     }
 }

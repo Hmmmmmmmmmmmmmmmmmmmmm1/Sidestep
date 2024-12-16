@@ -15,6 +15,7 @@ namespace Assets.Scripts.CharacterControl
         public PlayerMoveScript move;
         public PlayerAttackScript attack;
         public bool Grounded;
+        public GameObject ClassObject;
         public bool pluh;
         public GameObject SwordHolder;
         public bool swung;
@@ -26,7 +27,7 @@ namespace Assets.Scripts.CharacterControl
             Grounded = lGrounded && rGrounded;
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
             //if(GetComponent<PhotonView>().IsMine == true)
-            //{
+            {
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
                 rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
                 KeysPressed keys = 
@@ -41,12 +42,13 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.Space),
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
-                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded);
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject);
                 Debug.Log(keys.ML);
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, ref waiter);
                 swung = attack.Begin();
+                move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
-            //}
+            }
         }
 
 
