@@ -32,6 +32,7 @@ namespace Assets.Scripts.CharacterControl
 
         public bool Begin()
         {
+            //Debug.Log(Keys.ML);
             if ((Keys.ML) && (!waiter))
             {
                 swung = true;
@@ -39,11 +40,12 @@ namespace Assets.Scripts.CharacterControl
                 pos = pos * -1;
                 Swing();
                 Task.Delay(400).ContinueWith(t=> SetFalse());
-                Debug.Log(swung);
+                
             } else if (swung)
             {
                 Swing();
             } 
+            
             return swung;
         }
 
@@ -58,6 +60,7 @@ namespace Assets.Scripts.CharacterControl
         public void Swing()
         {   
             SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 0.2f);
+            Debug.Log(swung);
         }
 //        public float side = 1f;
 //        //mouse input
