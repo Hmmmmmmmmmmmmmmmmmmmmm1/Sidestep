@@ -70,7 +70,11 @@ namespace Assets.Scripts.CharacterControl
 
                 if (Keys.W)
                 {
+<<<<<<< Updated upstream
                     vec += (tra.forward * 30f*40);
+=======
+                    vec += (tra.forward * 3000f);
+>>>>>>> Stashed changes
                     if (!Effects.Contains(ActiveEffects.ForwardHeld))
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
@@ -82,7 +86,11 @@ namespace Assets.Scripts.CharacterControl
                     //do that to all of them
                 if (Keys.S)
                 {
+<<<<<<< Updated upstream
                     vec += (tra.forward * -30f*40);
+=======
+                    vec += (tra.forward * -3000f);
+>>>>>>> Stashed changes
                     if (!Effects.Contains(ActiveEffects.BackHeld))
                     {
                         Effects.Add(ActiveEffects.BackHeld);
@@ -93,7 +101,11 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.A)
                 {
+<<<<<<< Updated upstream
                     vec += (tra.right * -30f*40);
+=======
+                    vec += (tra.right * -3000f);
+>>>>>>> Stashed changes
                     if (!Effects.Contains(ActiveEffects.LeftHeld))
                     {
                         Effects.Add(ActiveEffects.LeftHeld);
@@ -104,7 +116,11 @@ namespace Assets.Scripts.CharacterControl
                 }
                 if (Keys.D)
                 {
+<<<<<<< Updated upstream
                     vec += (tra.right * 30f*40);
+=======
+                    vec += (tra.right * 3000f);
+>>>>>>> Stashed changes
                     if (!Effects.Contains(ActiveEffects.RightHeld))
                     {
                         Effects.Add(ActiveEffects.RightHeld);
