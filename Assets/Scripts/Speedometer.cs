@@ -24,7 +24,9 @@ public class Speedometer : MonoBehaviour
         //needle.transform.rotation = new Quaternion(0,0,90 - 0,0);
         if (grum <= 1){
             needle.transform.eulerAngles = new Vector3(0,0,90 - (180 *grum));
-            currentSpeed = int.Parse(player.GetComponent<Rigidbody>().velocity.magnitude.ToString().Substring(0,player.GetComponent<Rigidbody>().velocity.magnitude.ToString().IndexOf(".")));
+            if(player.GetComponent<Rigidbody>().velocity.magnitude.ToString().Length > 1){
+                currentSpeed = int.Parse(player.GetComponent<Rigidbody>().velocity.magnitude.ToString().Substring(0,player.GetComponent<Rigidbody>().velocity.magnitude.ToString().IndexOf(".")));
+            }
             while (currentSpeed % 10 != 0 && currentSpeed != 0){
                 currentSpeed --;
             }

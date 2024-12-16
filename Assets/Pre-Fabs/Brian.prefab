@@ -896,9 +896,12 @@ MonoBehaviour:
   tra: {fileID: 7618334235654252660}
   lGrounded: 1
   rGrounded: 1
-  attack: {fileID: 0}
   Grounded: 0
+  ClassObject: {fileID: 0}
   pluh: 0
+  SwordHolder: {fileID: 0}
+  swung: 0
+  waiter: 0
 --- !u!114 &1804860094773417505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,6 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   hpNum: {fileID: 0}
+  hp: 100
   hpChangeTick: 0
 --- !u!1001 &2284019118982092326
 PrefabInstance:
