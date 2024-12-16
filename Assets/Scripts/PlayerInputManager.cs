@@ -46,28 +46,12 @@ namespace Assets.Scripts.CharacterControl
                 Debug.Log(keys.ML);
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, ref waiter);
                 swung = attack.Begin();
-                move.CheckClass();
+                //move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }
         }
 
 
-        private KeysPressed KeysPressedfromBoolArray(bool[] bools)
-            {
-                return new KeysPressed
-                (
-                    bools[0],
-                    bools[1],
-                    bools[2],
-                    bools[3],
-                    bools[4],
-                    bools[5],
-                    bools[6],
-                    bools[7],
-                    bools[8],
-                    bools[9]
-                );
-            }
 
     }
 
