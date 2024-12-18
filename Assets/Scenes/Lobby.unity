@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1927348319}
+      - m_Target: {fileID: 269571863}
         m_TargetAssemblyTypeName: Classism, Assembly-CSharp
         m_MethodName: SetClassFighter
         m_Mode: 1
@@ -1100,6 +1100,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222708252}
   m_CullTransparentMesh: 1
+--- !u!1 &269571862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269571864}
+  - component: {fileID: 269571863}
+  m_Layer: 0
+  m_Name: Classes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &269571863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269571862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cc134a9be814dbe9c7b0ada3939fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tank: 0
+  fighter: 1
+  assassin: 0
+  wizard: 0
+  check: 0
+--- !u!4 &269571864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269571862}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &312036288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,7 +1620,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1927348319}
+      - m_Target: {fileID: 269571863}
         m_TargetAssemblyTypeName: Classism, Assembly-CSharp
         m_MethodName: SetClassWizard
         m_Mode: 1
@@ -2444,6 +2493,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884735769040894569, guid: 822021b58d63b4383a3658f8ddae578f, type: 3}
+      propertyPath: ClassObject
+      value: 
+      objectReference: {fileID: 269571862}
     - target: {fileID: 1213309871202278391, guid: 822021b58d63b4383a3658f8ddae578f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3042,7 +3095,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1927348319}
+      - m_Target: {fileID: 269571863}
         m_TargetAssemblyTypeName: Classism, Assembly-CSharp
         m_MethodName: SetClassAssassin
         m_Mode: 1
@@ -3175,7 +3228,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1927348319}
+      - m_Target: {fileID: 269571863}
         m_TargetAssemblyTypeName: Classism, Assembly-CSharp
         m_MethodName: SetClassTank
         m_Mode: 1
@@ -3561,61 +3614,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926307440}
   m_CullTransparentMesh: 1
---- !u!114 &1927348319 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9041939081704830555, guid: 822021b58d63b4383a3658f8ddae578f, type: 3}
-  m_PrefabInstance: {fileID: 1264268035}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67cc134a9be814dbe9c7b0ada3939fa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1944461355
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1944461357}
-  - component: {fileID: 1944461356}
-  m_Layer: 0
-  m_Name: ConnectToServer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1944461356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944461355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0730a184b1d47f098e30c0b1a39018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1944461357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944461355}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 496.23883, y: 330.2789, z: -15.755845}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2071040789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3793,6 +3791,6 @@ SceneRoots:
   - {fileID: 2141198809}
   - {fileID: 1859128620}
   - {fileID: 491487965}
-  - {fileID: 1944461357}
   - {fileID: 1036554862}
+  - {fileID: 269571864}
   - {fileID: 1264268035}

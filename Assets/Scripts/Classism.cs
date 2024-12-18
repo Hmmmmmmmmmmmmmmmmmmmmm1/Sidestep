@@ -5,10 +5,16 @@ using UnityEngine;
 public class Classism : MonoBehaviour
 {
     //note look into setting all variables as static
+    //use find to set class object in player input script
     public bool tank = false;
     public bool fighter = true;
     public bool assassin = false;
     public bool wizard = false;
+
+    public void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     public void SetClassTank()
     {
         tank = true;
