@@ -18,8 +18,8 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         public bool pluh;
         public GameObject SwordHolder;
-        public bool swung;
-        public bool waiter;
+        public static bool swung;
+        public static bool waiter;
 
         void Update()
         {
@@ -44,8 +44,8 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject);
                 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, ref waiter);
-                (swung, waiter) = attack.Begin();
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, waiter);
+                /*(swung, waiter) = */attack.Begin();
                 //move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }

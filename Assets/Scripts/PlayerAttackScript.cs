@@ -20,7 +20,7 @@ namespace Assets.Scripts.CharacterControl
         private Vector3 pos;
         private bool t;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, ref bool waiter)
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, bool waiter)
         {
             this.Keys = Keys;
 //            this.move = move;
@@ -30,7 +30,7 @@ namespace Assets.Scripts.CharacterControl
             this.waiter = waiter;
         }
 
-        public (bool, bool) Begin()
+        public void/*(bool, bool)*/ Begin()
         {
             Debug.Log("Before If statement" + Keys.ML);
             if ((Keys.ML) && (!waiter))
@@ -49,7 +49,7 @@ namespace Assets.Scripts.CharacterControl
             } 
             Debug.Log("Swung overall" + swung);
             Debug.Log("After If statement" + Keys.ML);
-            return (swung, waiter);
+//            return (swung, waiter);
         }
 
         public void SetFalse()
