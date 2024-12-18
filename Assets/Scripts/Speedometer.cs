@@ -30,10 +30,12 @@ public class Speedometer : MonoBehaviour
             while (currentSpeed % 10 != 0 && currentSpeed != 0){
                 currentSpeed --;
             }
-            speed.text = currentSpeed + " mph";
+            speed.color = Color.white;
+            speed.text = currentSpeed +"" /*+ " mph"*/;
         }
         if (grum > 1){
             needle.transform.eulerAngles = new Vector3(0,0,-90);
+            speed.color = Color.red;
             speed.text = "Too FAST!";
         }
     }
