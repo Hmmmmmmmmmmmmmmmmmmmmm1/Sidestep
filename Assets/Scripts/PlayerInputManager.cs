@@ -17,6 +17,9 @@ namespace Assets.Scripts.CharacterControl
         public bool Grounded;
         public GameObject ClassObject;
         public bool pluh;
+        public GameObject SwordHolder;
+        public bool swung;
+        public bool waiter;
 
         void Update()
         {
@@ -39,30 +42,16 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.Space),
                         Input.GetMouseButtonDown(0), 
                         Input.GetMouseButtonDown(1));
-            
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject);
-                move.CheckClass();
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, ref waiter);
+                swung = attack.Begin();
+                Debug.Log(keys.ML);
+                //move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }
         }
 
 
-        private KeysPressed KeysPressedfromBoolArray(bool[] bools)
-            {
-                return new KeysPressed
-                (
-                    bools[0],
-                    bools[1],
-                    bools[2],
-                    bools[3],
-                    bools[4],
-                    bools[5],
-                    bools[6],
-                    bools[7],
-                    bools[8],
-                    bools[9]
-                );
-            }
 
     }
 

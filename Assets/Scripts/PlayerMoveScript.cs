@@ -19,7 +19,7 @@ namespace Assets.Scripts.CharacterControl
         public float Class;
 
 
-        
+        /*
         public void CheckClass()
         {
             classism = ClassObject.GetComponent<Classism>();
@@ -40,6 +40,7 @@ namespace Assets.Scripts.CharacterControl
             }
 
         }
+        */
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject)
         {
             this.Keys = Keys;

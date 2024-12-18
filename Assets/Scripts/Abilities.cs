@@ -14,7 +14,7 @@ public class Abilities : MonoBehaviour
     //blink                 :)
     //launch                :)
     //temp sturctures       :)
-    //healing
+    //healing               :)
 
     //Battle
 
@@ -98,7 +98,8 @@ public class Abilities : MonoBehaviour
         //Legos Mode
         if (Skill1 == 2){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
-                Instantiate(legos, transform.position + transform.forward * 10 + Vector3.up * 2, legos.transform.rotation);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Instantiate(legos, ray.GetPoint(10), legos.transform.rotation);
                 legoesPerAbility++;
                 if(legoesPerAbility == 5){
                     legoesPerAbility = 0;
@@ -124,6 +125,14 @@ public class Abilities : MonoBehaviour
                 Skill1Cooldown = 3;
             }
         }
+        //Lapse in Judgement Mode
+        if (Skill1 == 4){
+            if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
+                //gameObject.GetComponent<Rigidbody>().velocity *= -1;
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1);
+                Skill1Cooldown = 3;
+            }
+        }
         //Lymphoma Mode
         if (Skill1 == 5){
             if (timer > 0){
@@ -137,11 +146,11 @@ public class Abilities : MonoBehaviour
             }
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
-                    timer = 7.5f;
-                    if (gameObject.GetComponent<PlayerHP2>().hp < 100){
-                        Skill1Cooldown = 9;
-                    }
+                timer = 7.5f;
+                if (gameObject.GetComponent<PlayerHP2>().hp < 100){
+                    Skill1Cooldown = 9;
                 }
+            }
         }
 
 
