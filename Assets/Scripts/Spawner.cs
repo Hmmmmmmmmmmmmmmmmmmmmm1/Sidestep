@@ -15,9 +15,4 @@ public class Spawner : MonoBehaviour
         //Camera.GetComponent<CameraScript>().player = Player;
         
     }
-
-    void Update()
-    {
-        
-    }
 }
