@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77be7029c036a4feeac863ebff8a5c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1316934689}
   needle: {fileID: 194270711}
   speed: {fileID: 1939786918}
 --- !u!1 &245102945
@@ -1033,6 +1033,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1316934689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8870983826097865563, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
+  m_PrefabInstance: {fileID: 2081423047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1439478394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,6 +1791,10 @@ PrefabInstance:
       propertyPath: Skill2Text
       value: 
       objectReference: {fileID: 1657747351}
+    - target: {fileID: 6095218716462183771, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7200904037037588082, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
       propertyPath: hpNum
       value: 
@@ -1838,7 +1847,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orion
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7255945751102041670, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

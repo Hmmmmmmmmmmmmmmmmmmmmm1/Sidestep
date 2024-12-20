@@ -284,7 +284,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2556835535018600360}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -963,11 +963,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lr: {fileID: 5629252410017520392}
   grapplePoint: {x: 0, y: 0, z: 0}
-  gunTip: {fileID: 7618334235654252660}
+  gunTip: {fileID: 2669745070231341581}
   cam: {fileID: 5555971607151678895}
   maxDistance: 1000
   grappleKey: 324
-  spring: 1.5
+  spring: 1.25
   damper: 5.5
   massScale: 4.5
 --- !u!114 &7200904037037588082

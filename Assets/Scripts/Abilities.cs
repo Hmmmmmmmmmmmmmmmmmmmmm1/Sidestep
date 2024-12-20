@@ -47,11 +47,13 @@ public class Abilities : MonoBehaviour
     //lightspeed
     private Vector3 boxSize;
     private Ray ray;
-    private float grub = 20;
+    private float blinkDistance = 20;
 
     //Lymphoma
     private float timer;
     private float healInterval = 0f;
+
+    private float speedMultiplier;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,7 @@ public class Abilities : MonoBehaviour
     void Update()
     {
         Cooldown();
+        SpeedCheck();
 
         //Lunch Mode
         if (Skill1 == 1){
@@ -77,7 +80,7 @@ public class Abilities : MonoBehaviour
                 else{
                     lookingDown = -1;
                 }
-                gameObject.GetComponent<Rigidbody>().velocity = Vector3.up * lookingDown * 100 + transform.forward * 20;
+                gameObject.GetComponent<Rigidbody>().velocity = (Vector3.up * lookingDown * 100 + transform.forward * 20) * speedMultiplier;
 
                 gameObject.GetComponent<Rigidbody>().drag = 5;
                 activated = true;
@@ -99,7 +102,9 @@ public class Abilities : MonoBehaviour
         if (Skill1 == 2){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Instantiate(legos, ray.GetPoint(10), legos.transform.rotation);
+                GameObject lego = Instantiate(legos, ray.GetPoint(20 * speedMultiplier), legos.transform.rotation);
+                lego.GetComponent<SelfDestruct>().expire = (int)(lego.GetComponent<SelfDestruct>().expire * speedMultiplier);
+                lego.transform.localScale *= (int)Math.Pow(speedMultiplier,2);
                 legoesPerAbility++;
                 if(legoesPerAbility == 5){
                     legoesPerAbility = 0;
@@ -113,15 +118,15 @@ public class Abilities : MonoBehaviour
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 //Debug.DrawLine(ray.origin,ray.GetPoint(grub),Color.cyan,100f);
-                Collider[] gems = Physics.OverlapBox(ray.GetPoint(grub), boxSize, Quaternion.identity);
+                Collider[] gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
                 //Debug.Log(gems.Length);
                 while(gems.Length > 0){
-                    grub -= 1;
-                    gems = Physics.OverlapBox(ray.GetPoint(grub), boxSize, Quaternion.identity);
+                    blinkDistance -= 1;
+                    gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
                     //Debug.Log(gems.Length);
                 }
-                gameObject.transform.position = ray.GetPoint(grub);
-                grub = 20;
+                gameObject.transform.position = ray.GetPoint(blinkDistance);
+                blinkDistance = 20 * speedMultiplier;
                 Skill1Cooldown = 3;
             }
         }
@@ -129,7 +134,7 @@ public class Abilities : MonoBehaviour
         if (Skill1 == 4){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
                 //gameObject.GetComponent<Rigidbody>().velocity *= -1;
-                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1);
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1) * speedMultiplier/2;
                 Skill1Cooldown = 3;
             }
         }
@@ -146,7 +151,7 @@ public class Abilities : MonoBehaviour
             }
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
-                timer = 7.5f;
+                timer = 7.5f * speedMultiplier;
                 if (gameObject.GetComponent<PlayerHP2>().hp < 100){
                     Skill1Cooldown = 9;
                 }
@@ -173,5 +178,8 @@ public class Abilities : MonoBehaviour
         if(Skill2Text.text.Equals("0")){
             Skill2Text.text = "-";
         }
+    }
+    public void SpeedCheck(){
+        speedMultiplier = (float)(Math.Pow(Speedometer.currentSpeed + 1,1/7f));
     }
 }
