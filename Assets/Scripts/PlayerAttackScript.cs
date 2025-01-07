@@ -32,23 +32,20 @@ namespace Assets.Scripts.CharacterControl
 
         public void/*(bool, bool)*/ Begin()
         {
-            Debug.Log("Before If statement" + Keys.ML);
+            
             if ((Keys.ML) && (!waiter))
             {
-                Debug.Log("First if Runs");
                 swung = true;
                 waiter = true;
                 pos = pos * -1;
                 Swing();
                 Task.Delay(400).ContinueWith(t=> SetFalse());
-                
             } else if (swung)
             {
                 Swing();
-                Debug.Log("Swung is Running");
             } 
-            Debug.Log("Swung overall" + swung);
-            Debug.Log("After If statement" + Keys.ML);
+            
+            
 //            return (swung, waiter);
         }
 
@@ -63,6 +60,7 @@ namespace Assets.Scripts.CharacterControl
         public void Swing()
         {   
             SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 1f);
+            Debug.Log("swung");
         }
 //        public float side = 1f;
 //        //mouse input

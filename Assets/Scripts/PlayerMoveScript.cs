@@ -68,7 +68,7 @@ namespace Assets.Scripts.CharacterControl
         public Vector3 UpdateVelocity()
         {
             Grounded = lGrounded & rGrounded;
-
+            
             Vector3 vec = Vector3.zero;
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
