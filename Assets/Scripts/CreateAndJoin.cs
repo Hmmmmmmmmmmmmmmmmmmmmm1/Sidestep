@@ -10,6 +10,9 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
 {
     public TMP_InputField input_Create;
     public TMP_InputField input_Join;
+    public bool Lucian = true;
+    public bool Casey = false;
+    public bool Ryan = false;
 
     //not sure which we want
     /*
@@ -21,7 +24,7 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(input_Create.text, new RoomOptions () {MaxPlayers = 4, IsVisible = true}, TypedLobby.Default, null);
+        PhotonNetwork.CreateRoom(input_Create.text, new RoomOptions() { MaxPlayers = 4, IsVisible = true }, TypedLobby.Default, null);
     }
 
     public void JoinRoom()
@@ -35,8 +38,37 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        //add choice for which scene to go to here
-        PhotonNetwork.LoadLevel("Lucian's Scene");
+        if (Casey == true)
+        {
+            PhotonNetwork.LoadLevel("Casey's Scene");
+        }
+        if (Ryan == true)
+        {
+            PhotonNetwork.LoadLevel("Ryan's Scene");
+        }
+        if (Lucian == true)
+        {
+            PhotonNetwork.LoadLevel("Lucian's Scene");
+        }
     }
+    public void setLucian()
+    {
+        Lucian = true;
+        Ryan = false;
+        Casey = false;
+    }
+    public void setCasey()
+    {
+        Lucian = false;
+        Ryan = false;
+        Casey = true;
+    }
+    public void setRyan()
+    {
+        Lucian = false;
+        Ryan = true;
+        Casey = false;
+    }
+
 
 }

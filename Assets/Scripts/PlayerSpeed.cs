@@ -6,10 +6,11 @@ using System;
 
 public class PlayerSpeed : MonoBehaviour
 {
-    public GameObject speed;
+    public GameObject Speed;
     // Update is called once per frame
     void Update()
     {
-        speed.GetComponent<TextMeshProUGUI>().text = (Mathf.Round(GetComponent<Rigidbody>().velocity.magnitude * 100)/100).ToString();
+        Speed = GameObject.Find("PlayerSpeed");
+        Speed.GetComponent<TextMeshProUGUI>().text = (Mathf.Round(GetComponent<Rigidbody>().velocity.magnitude * 100)/100).ToString();
     }
 }

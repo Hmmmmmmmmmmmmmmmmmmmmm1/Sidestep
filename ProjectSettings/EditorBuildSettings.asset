@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ryan's Scene.unity
     guid: e00c32361db554368abdfd751d223530
+  - enabled: 1
+    path: Assets/Scenes/Casey's Scene.unity
+    guid: a4051a7dec232497d89a95803832a507
   m_configObjects: {}
