@@ -19,28 +19,28 @@ namespace Assets.Scripts.CharacterControl
         public float Class;
 
 
-        /*
+        
         public void CheckClass()
         {
             classism = ClassObject.GetComponent<Classism>();
             if(classism.tank == true || classism.wizard == true)
             {
-                Class = 1.25f;
+                Class = 1000000f;
                 Debug.Log("tank or wizard");
             }
             if(classism.assassin == true)
             {
-                Class = 0.1f;
+                Class = 0.000000001f;
                 Debug.Log("Assassin");
             }
-            else
+            if (classism.fighter == true)
             {
                 Class = 1f;
                 Debug.Log("else hopefully fighter");
             }
 
         }
-        */
+        
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject)
         {
             this.Keys = Keys;
@@ -69,7 +69,7 @@ namespace Assets.Scripts.CharacterControl
         public Vector3 UpdateVelocity()
         {
             Grounded = lGrounded & rGrounded;
-
+            
             Vector3 vec = Vector3.zero;
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {

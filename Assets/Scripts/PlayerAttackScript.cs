@@ -20,7 +20,7 @@ namespace Assets.Scripts.CharacterControl
         private Vector3 pos;
         private bool t;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, ref bool waiter)
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, bool waiter)
         {
             this.Keys = Keys;
 //            this.move = move;
@@ -30,9 +30,9 @@ namespace Assets.Scripts.CharacterControl
             this.waiter = waiter;
         }
 
-        public bool Begin()
+        public void/*(bool, bool)*/ Begin()
         {
-            //Debug.Log(Keys.ML);
+            
             if ((Keys.ML) && (!waiter))
             {
                 swung = true;
@@ -40,13 +40,13 @@ namespace Assets.Scripts.CharacterControl
                 pos = pos * -1;
                 Swing();
                 Task.Delay(400).ContinueWith(t=> SetFalse());
-                
             } else if (swung)
             {
                 Swing();
             } 
             
-            return swung;
+            
+//            return (swung, waiter);
         }
 
         public void SetFalse()
@@ -59,8 +59,8 @@ namespace Assets.Scripts.CharacterControl
 
         public void Swing()
         {   
-            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 0.2f);
-            Debug.Log(swung);
+            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 1f);
+            Debug.Log("swung");
         }
 //        public float side = 1f;
 //        //mouse input
