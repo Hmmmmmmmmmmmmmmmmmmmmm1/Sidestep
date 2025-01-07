@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrapplingHook : MonoBehaviour
 {
@@ -12,15 +13,19 @@ public class GrapplingHook : MonoBehaviour
     private SpringJoint joint;
 
     [Header("Grappling")]
-    public float maxDistance = 1000f;
+    public float maxDistance = 300f;
 
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.Mouse1;
 
     [Header("Grapple Physics")]
-    public float spring = 0f;
-    public float damper = 10f;
+    public float spring = 1.25f;
+    public float damper = 5.5f;
     public float massScale = 4.5f;
+
+    [Header("Grapple Check")]
+    public Text crosshair;
+    private Ray ray;
 
     private bool grappling = false;
 
@@ -32,9 +37,10 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
+        //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
-            gameObject.GetComponent<Rigidbody>().velocity /= 2;
+            gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             StartGrapple();
             grappling = true;
         }
@@ -99,5 +105,19 @@ public class GrapplingHook : MonoBehaviour
     {
         lr.positionCount = 0;
         Destroy(joint);
+    }
+
+    public void canGrapple(){
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit)){
+            Debug.Log(hit.collider.name);
+            if (hit.distance >= maxDistance){
+                crosshair.color = Color.red;
+            }
+            else{
+                crosshair.color = Color.black;
+            }
+        }
     }
 }

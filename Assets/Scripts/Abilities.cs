@@ -152,7 +152,7 @@ public class Abilities : MonoBehaviour
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
                 timer = 7.5f * speedMultiplier;
-                if (gameObject.GetComponent<PlayerHP2>().hp < 100){
+                if (PlayerHP2.hp < 100){
                     Skill1Cooldown = 9;
                 }
             }
