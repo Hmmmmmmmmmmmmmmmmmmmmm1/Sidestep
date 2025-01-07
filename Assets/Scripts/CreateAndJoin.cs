@@ -35,6 +35,7 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        //add choice for which scene to go to here
         PhotonNetwork.LoadLevel("Lucian's Scene");
     }
 
