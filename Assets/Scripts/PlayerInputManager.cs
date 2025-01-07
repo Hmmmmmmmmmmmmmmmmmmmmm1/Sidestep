@@ -30,6 +30,7 @@ namespace Assets.Scripts.CharacterControl
             {
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
                 rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
+                ClassObject = GameObject.Find("Classes");
                 KeysPressed keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 
@@ -46,7 +47,7 @@ namespace Assets.Scripts.CharacterControl
                 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, waiter);
                 /*(swung, waiter) = */attack.Begin();
-                //move.CheckClass();
+                move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }
         }
