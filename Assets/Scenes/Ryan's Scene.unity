@@ -1613,6 +1613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfda7ec338694744adb780bbb24e045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  timer: 5
 --- !u!1 &2010091031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,14 +1810,6 @@ PrefabInstance:
       propertyPath: crosshair
       value: 
       objectReference: {fileID: 1058973467}
-    - target: {fileID: 2796052627906695059, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
-      propertyPath: maxDistance
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 6095218716462183771, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7200904037037588082, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
       propertyPath: hpNum
       value: 
@@ -1864,16 +1858,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8583019397415324427, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8870983826097865563, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
       propertyPath: m_Name
       value: Orion
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7255945751102041670, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

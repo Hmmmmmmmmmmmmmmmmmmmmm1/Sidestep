@@ -34,7 +34,7 @@ public class PlayerHP2 : MonoBehaviour
         }
         if (dmgInterval <= 0){
             if(other.gameObject.tag == "damage"){
-                changeHealth(-10);
+                changeHealth(-1);
             }
             else if(other.gameObject.tag == "heal"){
                 changeHealth(20);

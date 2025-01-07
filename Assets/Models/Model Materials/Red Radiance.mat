@@ -9,12 +9,12 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Red Radiance
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: -6629797300637803691, guid: 97b411760841d48aeb91a764ff46e191, type: 3}
-  m_ModifiedSerializedProperties: 18
+  m_Parent: {fileID: 2100000, guid: 39d00d2a6a0bc46bca409013e6aad7b7, type: 2}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -25,8 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _Mode: 0
+    m_Floats: []
     m_Colors:
     - _EmissionColor: {r: 1, g: 0, b: 0.049950123, a: 1}
   m_BuildTextureStacks: []

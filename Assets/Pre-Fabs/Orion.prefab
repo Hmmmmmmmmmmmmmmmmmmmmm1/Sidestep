@@ -760,7 +760,6 @@ GameObject:
   - component: {fileID: 296296924525269716}
   - component: {fileID: 4164102215724870342}
   - component: {fileID: 4723292887122866956}
-  - component: {fileID: 7255945751102041670}
   - component: {fileID: 2796052627906695059}
   - component: {fileID: 7200904037037588082}
   - component: {fileID: 789405301329346563}
@@ -856,7 +855,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -936,19 +935,6 @@ MonoBehaviour:
   SwordHolder: {fileID: 89268987429800015}
   swung: 0
   waiter: 0
---- !u!114 &7255945751102041670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8870983826097865563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6353b9a655f0f44c3bbddfb6f614d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: {fileID: 0}
 --- !u!114 &2796052627906695059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,11 +951,12 @@ MonoBehaviour:
   grapplePoint: {x: 0, y: 0, z: 0}
   gunTip: {fileID: 2669745070231341581}
   cam: {fileID: 5555971607151678895}
-  maxDistance: 1000
+  maxDistance: 300
   grappleKey: 324
   spring: 1.25
   damper: 5.5
   massScale: 4.5
+  crosshair: {fileID: 0}
 --- !u!114 &7200904037037588082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,7 +971,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   hpNum: {fileID: 0}
-  hp: 100
   hpChangeTick: 0
 --- !u!114 &789405301329346563
 MonoBehaviour:
