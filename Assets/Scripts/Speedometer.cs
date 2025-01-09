@@ -19,7 +19,7 @@ public class Speedometer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float faster = player.GetComponent<Rigidbody>().velocity.magnitude / 100;
+        float faster = player.GetComponent<Rigidbody>().velocity.magnitude / 70;
         //Debug.Log(grum + "  " + player.GetComponent<Rigidbody>().velocity.magnitude);
         //needle.transform.rotation = new Quaternion(0,0,90 - 0,0);
         if (faster <= 1){

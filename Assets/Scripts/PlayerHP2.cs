@@ -14,11 +14,17 @@ public class PlayerHP2 : MonoBehaviour
     public float hpChangeTick = 0;
 
     private float dmgInterval = 0;
+    private GameObject touchingObject;
 
     void Start(){
         changeHealth(0);
         hpNum.text = hp + "";
     }
+
+    void Update(){
+        dmgCheck();
+    }
+
     public void changeHealth(int change){
         hp += change;
         hp = Mathf.Min(hp,100);
@@ -26,21 +32,33 @@ public class PlayerHP2 : MonoBehaviour
         slider.value = hp;
         hpNum.text = hp + "";
     }
-
-    void OnCollisionStay(Collision other)
+    
+    public void dmgCheck()
     {
         if (dmgInterval > 0){
             dmgInterval -= Time.deltaTime;
         }
         if (dmgInterval <= 0){
-            if(other.gameObject.tag == "damage"){
-                changeHealth(-1);
+            if(touchingObject && touchingObject.tag == "damage"){
+                changeHealth(-3);
             }
-            else if(other.gameObject.tag == "heal"){
-                changeHealth(20);
+            else if(touchingObject && touchingObject.tag == "heal"){
+                changeHealth(6);
                 //playerStatusManager.AddEffect(atkUp);
             }
-            dmgInterval = 0.5f;
+            dmgInterval = 0.25f;
         }
+        //Debug.Log(dmgInterval);
+        if (Input.GetKeyDown(KeyCode.L)){
+            Debug.Log(dmgInterval);
+        }
+    }
+    
+    void OnCollisionEnter(Collision other){
+        touchingObject = other.gameObject;
+    }
+
+        void OnCollisionExit(Collision other){
+        touchingObject = null;
     }
 }
