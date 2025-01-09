@@ -30,32 +30,25 @@ namespace Assets.Scripts.CharacterControl
             this.waiter = waiter;
         }
 
-        public void/*(bool, bool)*/ Begin()
+        public bool Begin()
         {
             
-            if ((Keys.ML) && (!waiter))
+            if ((Keys.ML) && (!swung))
             {
                 swung = true;
                 waiter = true;
                 pos = pos * -1;
                 Swing();
-                Task.Delay(400).ContinueWith(t=> SetFalse());
+                PlayerInputManager.AnActualWaitClass("SetFalse", 400);
             } else if (swung)
             {
                 Swing();
-            } 
-            
-            
-//            return (swung, waiter);
+                Debug.Log("izzet");
+            }   
+            return swung;
         }
 
-        public void SetFalse()
-        {
-            Debug.Log("HIIIIIII");
-            waiter = false;
-            swung = false;
-            side *= -1;
-        }
+
 
         public void Swing()
         {   
