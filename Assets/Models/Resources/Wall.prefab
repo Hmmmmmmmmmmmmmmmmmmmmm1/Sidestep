@@ -120,7 +120,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!64 &5133637243004396542
 MeshCollider:
@@ -156,4 +156,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffb91fb71379439daa073b1b33f111d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expire: 15
   GLOW: {fileID: 2100000, guid: 2f93ea2e0a87f4901a2cb9da27148d5c, type: 2}

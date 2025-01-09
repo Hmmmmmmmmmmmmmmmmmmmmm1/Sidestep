@@ -18,8 +18,8 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         public bool pluh;
         public GameObject SwordHolder;
-        public static bool swung;
-        public static bool waiter;
+        public bool swung;
+        public bool waiter;
 
         void Update()
         {
@@ -30,7 +30,6 @@ namespace Assets.Scripts.CharacterControl
             {
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
                 rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
-                ClassObject = GameObject.Find("Classes");
                 KeysPressed keys = 
                     new KeysPressed(
                         Input.GetKey(KeyCode.W), 
