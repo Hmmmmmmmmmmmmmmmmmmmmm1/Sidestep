@@ -35,7 +35,7 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Lucian's Scene");
+        PhotonNetwork.LoadLevel("Rough Draft");
     }
 
 }
