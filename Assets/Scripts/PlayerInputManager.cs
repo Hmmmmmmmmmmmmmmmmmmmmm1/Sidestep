@@ -44,23 +44,27 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject);
                 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, waiter);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, waiter, this);
                 Debug.Log(swung);
-                attack.Begin();
+                swung = attack.Begin();
+                Debug.Log(swung + "in input");
                 //move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }
         }
 
-        public void AnActualWaitClass(String method, float time)
+        public void AnActualWaitClass(string method, float time)
         {
             Invoke(method, time);
         }
 
         public void SetFalse()
         {
-            PlayerInputManager.swung = false;
+            swung = false;
+            Debug.Log("off");
         }
+
+        
 
 
     }
