@@ -53,6 +53,9 @@ public class Abilities : MonoBehaviour
     private float timer;
     private float healInterval = 0f;
 
+    private float evilTimer;
+    private float dmgInterval = 0f;
+
     private float speedMultiplier;
 
     // Start is called before the first frame update
@@ -155,6 +158,25 @@ public class Abilities : MonoBehaviour
                 if (PlayerHP2.hp < 100){
                     Skill1Cooldown = 9;
                 }
+            }
+        }
+
+
+        //Lymphoma Mode
+        if (Skill2 == 1){
+            if (timer > 0){
+                if (dmgInterval > 0){
+                    dmgInterval -= Time.deltaTime;
+                }
+                if (dmgInterval <= 0){
+                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    dmgInterval = 0.35f;
+                }
+            }
+            timer -= Time.deltaTime;
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1){
+                timer = 4.5f * speedMultiplier;
+                    Skill1Cooldown = 9;
             }
         }
 

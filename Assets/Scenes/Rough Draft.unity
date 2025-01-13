@@ -762,6 +762,10 @@ PrefabInstance:
       propertyPath: Skill2Text
       value: 
       objectReference: {fileID: 952196531}
+    - target: {fileID: 789405301329346563, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
+      propertyPath: Skill2Trigger
+      value: 118
+      objectReference: {fileID: 0}
     - target: {fileID: 2796052627906695059, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
       propertyPath: damper
       value: 2.5

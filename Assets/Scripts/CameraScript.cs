@@ -30,7 +30,7 @@ public class CameraScript : MonoBehaviour
 
         //rotate player around y
         
-        if(1+12 == 2){
+        if(1+1 == 2){
             if(!GetComponent<PhotonView>().IsMine)
             {
                 Destroy(this.gameObject);
