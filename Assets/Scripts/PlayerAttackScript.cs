@@ -19,8 +19,9 @@ namespace Assets.Scripts.CharacterControl
         public bool waiter;
         private Vector3 pos;
         private bool t;
+        PlayerInputManager input;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, bool waiter)
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, bool waiter, PlayerInputManager input)
         {
             this.Keys = Keys;
 //            this.move = move;
@@ -28,38 +29,35 @@ namespace Assets.Scripts.CharacterControl
             this.pos = SwordHolder.localPosition;
             this.swung = swung;
             this.waiter = waiter;
+            this.input = input;
         }
 
-        public void/*(bool, bool)*/ Begin()
+        public bool Begin()
         {
             
-            if ((Keys.ML) && (!waiter))
+            if ((Keys.ML) && (!swung))
             {
                 swung = true;
+                
                 waiter = true;
                 pos = pos * -1;
                 Swing();
-                Task.Delay(400).ContinueWith(t=> SetFalse());
+                
+                input.Invoke("SetFalse", .4f);
+                
             } else if (swung)
             {
                 Swing();
-            } 
-            
-            
-//            return (swung, waiter);
+                Debug.Log("izzet");
+            }   
+            return swung;
         }
 
-        public void SetFalse()
-        {
-            Debug.Log("HIIIIIII");
-            waiter = false;
-            swung = false;
-            side *= -1;
-        }
+        
 
         public void Swing()
         {   
-            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, 1f);
+            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, Time.deltaTime);
             Debug.Log("swung");
         }
 //        public float side = 1f;
