@@ -72,6 +72,6 @@ public class AbilitySelection : MonoBehaviour
     }
 
     public void sendScore(){
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
 }
