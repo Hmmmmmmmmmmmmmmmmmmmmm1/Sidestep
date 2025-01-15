@@ -28,10 +28,14 @@ public class Dead : MonoBehaviour
         }
         timer -= Time.deltaTime;
         if (timer >= 0){
+            if (text){
             text.text = timer.ToString().Substring(0,1);
+            }
         }
         else{
-            text.text = "try again";
+            if (text){
+                text.text = "try again";
+            }
         }
     }
 

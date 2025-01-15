@@ -9,7 +9,7 @@ public class CameraScript : MonoBehaviour
     public float mouseSensitivity;
     private float VerticalRotation = 0f;
 
-    void Start()
+    void Awake()
     {
         //get transform
         //Lock and hide Cursor
