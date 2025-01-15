@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4411444561210824543}
   - component: {fileID: 8902351543896476664}
   - component: {fileID: 437797244618577908}
+  - component: {fileID: 2986263961487726970}
   m_Layer: 0
   m_Name: Marker
   m_TagString: Untagged
@@ -139,6 +140,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000044703484, y: 0, z: 0.00000014901161}
+--- !u!114 &2986263961487726970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544358217667697085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8708dfd94f8a34e18bc4eccd5e21c0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2133970300388558946
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5299299987954484913}
   - component: {fileID: 7907225069777268596}
+  - component: {fileID: 4751601035490754497}
   m_Layer: 3
   m_Name: Mini Map
   m_TagString: Untagged
@@ -317,6 +331,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &4751601035490754497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7386714443355742405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007cb60fd20f6479cb9470ee550e8be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8870983826097865563
 GameObject:
   m_ObjectHideFlags: 0
