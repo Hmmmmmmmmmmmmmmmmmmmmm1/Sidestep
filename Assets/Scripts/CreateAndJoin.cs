@@ -48,7 +48,7 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
         }
         if (Lucian == true)
         {
-            PhotonNetwork.LoadLevel("Lucian's Scene");
+            PhotonNetwork.LoadLevel("Rough Draft");
         }
     }
     public void setLucian()
