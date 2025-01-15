@@ -12,9 +12,10 @@ public class SwordDamageScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Vector3 velocity = gameObject.transform.parent.GetComponent<PlayerInputManager>().move.GetVelocity();
-        if (GetComponent<Collider>().GetComponent<PlayerHP>() != null)
+        if (other.gameObject.GetComponent<PlayerHP>() != null)
         {
-            GetComponent<Collider>().GetComponent<PlayerHP>().DecreaseHP((int)(velocity.magnitude *damage));
+            other.gameObject.GetComponent<PlayerHP>().DecreaseHP((int)(velocity.magnitude *damage));
+            Debug.Log("hit");
         }
 
     }
