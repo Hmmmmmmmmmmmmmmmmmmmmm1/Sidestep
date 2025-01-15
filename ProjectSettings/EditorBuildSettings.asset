@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Casey's Scene.unity
     guid: a4051a7dec232497d89a95803832a507
+  - enabled: 1
+    path: Assets/Scenes/Loser's Scene.unity
+    guid: 86abc8a5a2dc644ffae5575815aa9410
+  - enabled: 1
+    path: Assets/Scenes/Rough Draft.unity
+    guid: cd046d26fa1b0454d86ba673961e5406
+  - enabled: 1
+    path: Assets/Scenes/Menu Rough Draft.unity
+    guid: 791078be774384526915589a708d1150
   m_configObjects: {}
