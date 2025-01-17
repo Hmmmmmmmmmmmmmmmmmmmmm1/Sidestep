@@ -13,7 +13,7 @@ public class SwordDamageScript : MonoBehaviour
     public void Start()
     {
         damage = 2;
-        Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
+        Vector3 velocity = gameObject.GetComponent<Rigidbody>().velocity;
     }
     
     private void OnTriggerEnter(Collider other)
