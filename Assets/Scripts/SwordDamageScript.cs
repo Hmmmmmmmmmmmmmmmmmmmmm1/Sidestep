@@ -18,10 +18,11 @@ public class SwordDamageScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        Debug.Log("hit");
+        
         if (other.gameObject.GetComponent<PlayerHP2>() != null)
         {
-            other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)(velocity.magnitude *damage));
+            Debug.Log("hit");
+            other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude *damage)+5));
             
         }
 
