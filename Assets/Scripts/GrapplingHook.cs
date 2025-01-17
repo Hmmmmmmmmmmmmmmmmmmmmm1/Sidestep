@@ -43,7 +43,7 @@ public class GrapplingHook : MonoBehaviour
         //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
-            gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
+            //gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             StartGrapple();
             grappling = true;
         }
@@ -76,6 +76,7 @@ public class GrapplingHook : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
         {
+            gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             grapplePoint = hit.point;
             joint = gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
