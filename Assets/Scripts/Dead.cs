@@ -24,6 +24,7 @@ public class Dead : MonoBehaviour
                 SceneManager.LoadScene(4);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                Debug.Log("you died");
             }
         }
         timer -= Time.deltaTime;
