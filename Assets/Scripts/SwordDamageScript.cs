@@ -12,6 +12,7 @@ public class SwordDamageScript : MonoBehaviour
     public Vector3 velocity;
     public void Start()
     {
+        damage = 2
         Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
     }
     
@@ -22,7 +23,7 @@ public class SwordDamageScript : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerHP2>() != null)
         {
             Debug.Log("hit");
-            other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude *damage)+5));
+            other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude *damage)));
             
         }
 
