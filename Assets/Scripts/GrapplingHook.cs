@@ -31,12 +31,15 @@ public class GrapplingHook : MonoBehaviour
 
     void Awake()
     {
-
+        
     }
 
 
     void Update()
     {
+        cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
+        lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
+        gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
         //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
