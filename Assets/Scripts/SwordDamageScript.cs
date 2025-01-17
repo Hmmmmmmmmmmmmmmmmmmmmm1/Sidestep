@@ -12,7 +12,7 @@ public class SwordDamageScript : MonoBehaviour
     public Vector3 velocity;
     public void Start()
     {
-        damage = 2;
+        damage = .2;
         
     }
     
