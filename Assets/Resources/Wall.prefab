@@ -89,6 +89,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29956ef2347f640c8929bd4dbd3b2f5b, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7325481717507117938}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29956ef2347f640c8929bd4dbd3b2f5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2690653385483287444}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29956ef2347f640c8929bd4dbd3b2f5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2134281840680784363}
   m_SourcePrefab: {fileID: 100100000, guid: 29956ef2347f640c8929bd4dbd3b2f5b, type: 3}
 --- !u!1 &1368407527091712539 stripped
 GameObject:
@@ -158,3 +164,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expire: 15
   GLOW: {fileID: 2100000, guid: 2f93ea2e0a87f4901a2cb9da27148d5c, type: 2}
+--- !u!114 &2690653385483287444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368407527091712539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2134281840680784363}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2134281840680784363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368407527091712539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0

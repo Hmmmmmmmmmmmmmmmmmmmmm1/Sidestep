@@ -5,6 +5,7 @@ using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Abilities : MonoBehaviour
 {
@@ -77,7 +78,7 @@ public class Abilities : MonoBehaviour
 
             int lookingDown;
             if (Skill1Cooldown < 1){
-                if ((Vector3.Dot(transform.Find("Camera").forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(transform.Find("Camera").forward,Vector3.up)){
+                if ((Vector3.Dot(transform.Find("Camera(Clone)").forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(transform.Find("Camera(Clone)").forward,Vector3.up)){
                     lookingDown = 1;
                 }
                 else{
@@ -104,8 +105,9 @@ public class Abilities : MonoBehaviour
         //Legos Mode
         if (Skill1 == 2){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                GameObject lego = Instantiate(legos, ray.GetPoint(20 * speedMultiplier), legos.transform.rotation);
+                //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                ray = transform.Find("Camera(Clone)").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                GameObject lego = PhotonNetwork.Instantiate("Wall", ray.GetPoint(20 * speedMultiplier), legos.transform.rotation);
                 lego.GetComponent<SelfDestruct>().expire = (int)(lego.GetComponent<SelfDestruct>().expire * speedMultiplier);
                 lego.transform.localScale *= (int)Math.Pow(speedMultiplier,2);
                 legoesPerAbility++;
@@ -118,7 +120,8 @@ public class Abilities : MonoBehaviour
         //Lightspeed Mode
         if (Skill1 == 3){
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1){
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                ray = transform.Find("Camera(Clone)").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 
                 //Debug.DrawLine(ray.origin,ray.GetPoint(grub),Color.cyan,100f);
                 Collider[] gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
@@ -182,7 +185,7 @@ public class Abilities : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.P)){
-            Debug.Log(Skill1);
+            Debug.Log(Skill1 + " oogde");
         }
 
     }
