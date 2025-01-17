@@ -702,8 +702,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Skill1Trigger: 99
   Skill2Trigger: 120
-  Skill1Text: {fileID: 0}
-  Skill2Text: {fileID: 0}
+  Skill1Text: {fileID: 2248137781826233883}
+  Skill2Text: {fileID: 6420036601806071802}
 --- !u!114 &8197021205552191761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,6 +878,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8042552950000984949}
   m_SourcePrefab: {fileID: 100100000, guid: df860c0922ec144329e73aa275df4946, type: 3}
+--- !u!114 &2248137781826233883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 519887724116797680, guid: df860c0922ec144329e73aa275df4946, type: 3}
+  m_PrefabInstance: {fileID: 1731069215591517931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2730364440933320997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4459071303172884430, guid: df860c0922ec144329e73aa275df4946, type: 3}
@@ -981,6 +992,17 @@ RectTransform:
 --- !u!114 &5570487051907634531 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
+  m_PrefabInstance: {fileID: 1731069215591517931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6420036601806071802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4692032838870657297, guid: df860c0922ec144329e73aa275df4946, type: 3}
   m_PrefabInstance: {fileID: 1731069215591517931}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

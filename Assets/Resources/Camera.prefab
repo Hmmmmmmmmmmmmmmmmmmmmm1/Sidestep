@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 2
-  Player: {fileID: 1213309871202278391, guid: 822021b58d63b4383a3658f8ddae578f, type: 3}
 --- !u!114 &6295474799137877263
 MonoBehaviour:
   m_ObjectHideFlags: 0

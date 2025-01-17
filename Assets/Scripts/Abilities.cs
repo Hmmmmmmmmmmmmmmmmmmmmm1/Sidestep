@@ -77,7 +77,7 @@ public class Abilities : MonoBehaviour
 
             int lookingDown;
             if (Skill1Cooldown < 1){
-                if ((Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(GameObject.Find("Main Camera").transform.forward,Vector3.up)){
+                if ((Vector3.Dot(transform.Find("Camera").forward,Vector3.up) + 1) * 9 > 1 - Vector3.Dot(transform.Find("Camera").forward,Vector3.up)){
                     lookingDown = 1;
                 }
                 else{
