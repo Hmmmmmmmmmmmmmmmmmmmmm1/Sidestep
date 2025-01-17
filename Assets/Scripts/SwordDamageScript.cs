@@ -9,9 +9,15 @@ public class SwordDamageScript : MonoBehaviour
 {
     public float damage;
 
+    public Vector3 velocity;
+    public void Start()
+    {
+        Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        Vector3 velocity = gameObject.transform.parent.transform.parent.GetComponent<PlayerInputManager>().move.GetVelocity();
+        
         Debug.Log("hit");
         if (other.gameObject.GetComponent<PlayerHP2>() != null)
         {
