@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,8 +42,12 @@ public class GrapplingHook : MonoBehaviour
         if (transform.Find("Camera(Clone)")){
             cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
         }
+        if (transform.Find("Camera(Clone)/Grapple Gun")){
         lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
+        }
+        if (transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip")){
         gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
+        }
         //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
@@ -80,11 +85,12 @@ public class GrapplingHook : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
         {
             gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
-            //GameObject oog = Instantiate("",hit.point,hit.transform.rotation,hit.transform);
-            ooog = new GameObject("hit");
-            ooog.transform.parent = hit.transform;
-            ooog.transform.position = hit.point;
-            grapplePoint = ooog.transform.position;
+            //GameObject oog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
+            //ooog = new GameObject("hit");
+            //ooog.transform.parent = hit.transform;
+            //ooog.transform.position = hit.point;
+            //grapplePoint = ooog.transform.position;
+            grapplePoint = hit.point;
             joint = gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grapplePoint;
