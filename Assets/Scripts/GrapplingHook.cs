@@ -7,6 +7,7 @@ public class GrapplingHook : MonoBehaviour
 {
     [Header("References")]
     public LineRenderer lr;
+    private GameObject ooog;
     public Vector3 grapplePoint;
     public Transform gunTip;
     public Camera cam;
@@ -37,7 +38,9 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
-        cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
+        if (transform.Find("Camera(Clone)")){
+            cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
+        }
         lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
         gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
         //canGrapple();
@@ -77,7 +80,11 @@ public class GrapplingHook : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
         {
             gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
-            grapplePoint = hit.point;
+            //GameObject oog = Instantiate("",hit.point,hit.transform.rotation,hit.transform);
+            ooog = new GameObject("hit");
+            ooog.transform.parent = hit.transform;
+            ooog.transform.position = hit.point;
+            grapplePoint = ooog.transform.position;
             joint = gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grapplePoint;
@@ -109,6 +116,7 @@ public class GrapplingHook : MonoBehaviour
     {
         lr.positionCount = 0;
         Destroy(joint);
+        Destroy(ooog);
     }
 
     public void canGrapple(){
