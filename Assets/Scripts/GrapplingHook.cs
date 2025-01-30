@@ -68,6 +68,13 @@ public class GrapplingHook : MonoBehaviour
             joint.damper = 10f;
             */
         }
+        if (grappling){
+            joint.connectedAnchor = grapplePoint.transform.position;
+
+            float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
+
+            //joint.maxDistance = distanceFromPoint * 0.08f;
+        }
     }
 
 
