@@ -60,6 +60,7 @@ namespace Assets.Scripts.CharacterControl
         {
             swung = false;
             Debug.Log("off");
+            attack.Swing();
         }
 
         

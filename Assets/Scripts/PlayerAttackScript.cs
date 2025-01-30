@@ -39,7 +39,7 @@ namespace Assets.Scripts.CharacterControl
             
             if ((Keys.ML) && (!swung))
             {
-                
+
                 swung = true;
                 time = 0f;
                 input.Invoke("SetFalse", .4f);
@@ -57,7 +57,7 @@ namespace Assets.Scripts.CharacterControl
         public void Swing()
         {   
             time += Time.deltaTime;
-            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4);
             Debug.Log(pos);
         }
 //        public float side = 1f;
