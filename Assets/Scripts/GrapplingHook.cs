@@ -83,15 +83,20 @@ public class GrapplingHook : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
         {
-            Transform doug =hit.transform.parent;
-            while(doug.parent){
-                doug = doug.parent;
+            Transform doug = hit.transform;
+            
+            if (doug){
+                //Debug.Log(doug.name + "juah" + doug.parent);
+                while(doug.parent){
+                    doug = doug.parent;
+                    Debug.Log(doug.name + "juah" + doug.parent);
+                }
+                if (doug == transform){
+                    Debug.Log("augh>?");
+                    UnityEditor.EditorApplication.isPlaying = false;
+                    Application.Quit();
+                }
             }
-            if (doug == transform){
-                Debug.Log("augh>?");
-            }
-
-
 
             gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             //GameObject ooog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
