@@ -57,7 +57,7 @@ namespace Assets.Scripts.CharacterControl
         public void Swing()
         {   
             time += Time.deltaTime;
-            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4);
+            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
             Debug.Log(pos);
         }
 //        public float side = 1f;
