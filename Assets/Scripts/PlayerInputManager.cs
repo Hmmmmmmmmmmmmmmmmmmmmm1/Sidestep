@@ -44,10 +44,8 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButtonDown(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject);
                 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, waiter, this);
-                Debug.Log(swung);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
                 swung = attack.Begin();
-                Debug.Log(swung + "in input");
                 //move.CheckClass();
                 rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
             }

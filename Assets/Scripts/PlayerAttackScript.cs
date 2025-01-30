@@ -20,13 +20,15 @@ namespace Assets.Scripts.CharacterControl
         private Vector3 pos;
         private bool t;
         PlayerInputManager input;
+        private static Vector3 oriental;
+        private static float time;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, bool waiter, PlayerInputManager input)
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input)
         {
             this.Keys = Keys;
 //            this.move = move;
             this.SwordHolder = SwordHolder;
-            this.pos = SwordHolder.localPosition;
+            this.pos = oriental * -1;
             this.swung = swung;
             this.waiter = waiter;
             this.input = input;
@@ -37,18 +39,15 @@ namespace Assets.Scripts.CharacterControl
             
             if ((Keys.ML) && (!swung))
             {
+                
                 swung = true;
-                
-                waiter = true;
-                pos = pos * -1;
-                Swing();
-                
+                time = 0f;
                 input.Invoke("SetFalse", .4f);
+                oriental = SwordHolder.localPosition;
                 
             } else if (swung)
             {
                 Swing();
-                Debug.Log("izzet");
             }   
             return swung;
         }
@@ -57,8 +56,9 @@ namespace Assets.Scripts.CharacterControl
 
         public void Swing()
         {   
-            SwordHolder.localPosition = Vector3.Lerp (SwordHolder.localPosition, pos, Time.deltaTime);
-            Debug.Log("swung");
+            time += Time.deltaTime;
+            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            Debug.Log(pos);
         }
 //        public float side = 1f;
 //        //mouse input
