@@ -8,8 +8,7 @@ public class GrapplingHook : MonoBehaviour
 {
     [Header("References")]
     public LineRenderer lr;
-    private GameObject ooog;
-    public Vector3 grapplePoint;
+    private GameObject grapplePoint;
     public Transform gunTip;
     public Camera cam;
     private SpringJoint joint;
@@ -84,18 +83,29 @@ public class GrapplingHook : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
         {
+            Transform doug =hit.transform.parent;
+            while(doug.parent){
+                doug = doug.parent;
+            }
+            if (doug == transform){
+                Debug.Log("augh>?");
+            }
+
+
+
             gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
-            //GameObject oog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
-            //ooog = new GameObject("hit");
-            //ooog.transform.parent = hit.transform;
+            //GameObject ooog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
+            grapplePoint = new GameObject("hit");
+            grapplePoint.transform.parent = hit.transform;
+            //ooog.transform.localPosition = Vector3.zero;
+            grapplePoint.transform.position = hit.point;
+
             //ooog.transform.position = hit.point;
-            //grapplePoint = ooog.transform.position;
-            grapplePoint = hit.point;
             joint = gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = grapplePoint;
+            joint.connectedAnchor = grapplePoint.transform.position;
 
-            float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint);
+            float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
 
             //The distance grapple will try to keep from grapple point.
             joint.maxDistance = distanceFromPoint * 0.08f;
@@ -115,14 +125,14 @@ public class GrapplingHook : MonoBehaviour
         if (!joint) return;
 
         lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, grapplePoint);
+        lr.SetPosition(1, grapplePoint.transform.position);
     }
 
     void StopGrapple()
     {
         lr.positionCount = 0;
         Destroy(joint);
-        Destroy(ooog);
+        Destroy(grapplePoint);
     }
 
     public void canGrapple(){
