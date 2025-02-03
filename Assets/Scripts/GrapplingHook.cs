@@ -90,45 +90,45 @@ public class GrapplingHook : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
         {
-            Transform doug = hit.transform;
-            
-            if (doug){
+            Transform parentCheck = hit.transform;
+            bool touchingYourself = true;
+            if (parentCheck){
                 //Debug.Log(doug.name + "juah" + doug.parent);
-                while(doug.parent){
-                    doug = doug.parent;
-                    Debug.Log(doug.name + "juah" + doug.parent);
+                while(parentCheck.parent){
+                    parentCheck = parentCheck.parent;
+                    Debug.Log(parentCheck.name + "juah" + parentCheck.parent);
                 }
-                if (doug == transform){
+                if (parentCheck == transform){
                     Debug.Log("augh>?");
-                    UnityEditor.EditorApplication.isPlaying = false;
-                    Application.Quit();
+                    touchingYourself = false;
                 }
             }
+            if (touchingYourself){
+                gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
+                //GameObject ooog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
+                grapplePoint = new GameObject("hit");
+                grapplePoint.transform.parent = hit.transform;
+                //ooog.transform.localPosition = Vector3.zero;
+                grapplePoint.transform.position = hit.point;
 
-            gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
-            //GameObject ooog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
-            grapplePoint = new GameObject("hit");
-            grapplePoint.transform.parent = hit.transform;
-            //ooog.transform.localPosition = Vector3.zero;
-            grapplePoint.transform.position = hit.point;
+                //ooog.transform.position = hit.point;
+                joint = gameObject.AddComponent<SpringJoint>();
+                joint.autoConfigureConnectedAnchor = false;
+                joint.connectedAnchor = grapplePoint.transform.position;
 
-            //ooog.transform.position = hit.point;
-            joint = gameObject.AddComponent<SpringJoint>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = grapplePoint.transform.position;
+                float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
 
-            float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
+                //The distance grapple will try to keep from grapple point.
+                joint.maxDistance = distanceFromPoint * 0.08f;
+                //joint.minDistance = distanceFromPoint * 0.25f;
 
-            //The distance grapple will try to keep from grapple point.
-            joint.maxDistance = distanceFromPoint * 0.08f;
-            //joint.minDistance = distanceFromPoint * 0.25f;
+                //Adjust these values to fit your game.
+                joint.spring = spring;
+                joint.damper = damper;
+                joint.massScale = massScale;
 
-            //Adjust these values to fit your game.
-            joint.spring = spring;
-            joint.damper = damper;
-            joint.massScale = massScale;
-
-            lr.positionCount = 2;
+                lr.positionCount = 2;
+            }
         }
     }
 
