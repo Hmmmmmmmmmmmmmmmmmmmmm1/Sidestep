@@ -42,7 +42,7 @@ namespace Assets.Scripts.CharacterControl
 
                 swung = true;
                 time = 0f;
-                input.Invoke("SetFalse", .4f);
+                input.Invoke("SetFalse", .45f);
                 oriental = SwordHolder.localPosition;
                 
             } else if (swung)
