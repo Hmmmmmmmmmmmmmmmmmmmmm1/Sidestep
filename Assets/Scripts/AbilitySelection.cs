@@ -13,6 +13,8 @@ public class AbilitySelection : MonoBehaviour
     private int Select2;
     public Text Skill1Text;
     public Text Skill2Text;
+
+    public Text voting;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,19 +58,44 @@ public class AbilitySelection : MonoBehaviour
 
     public void geagled(int fortnite){
         if (fortnite ==0){
-            Skill2 = "Independent";
+            Skill2 = "no options available";
             Select2 = 0;
         }
         if (fortnite ==1){
-            Skill2 = "republiCANT";
+            Skill2 = "Fire Aspect II";
             Select2 = 1;
         }
         if (fortnite ==2){
-            Skill2 = "DUMBocrat";
+            Skill2 = "Knockback II";
+            Select2 = 2;
+        }
+        if (fortnite ==3){
+            Skill2 = "Lifesteal";
+            Select2 = 2;
+        }
+        if (fortnite ==4){
+            Skill2 = "Immobilize";
+            Select2 = 2;
+        }
+        if (fortnite ==5){
+            Skill2 = "DDOS";
             Select2 = 2;
         }
         Skill2Text.text = Skill2;
         Abilities.Skill2 = Select2;
+    }
+
+        public void geag(int fortnite){
+        if (fortnite ==0){
+            Skill2 = "Independent";
+        }
+        if (fortnite ==1){
+            Skill2 = "republiCANT";
+        }
+        if (fortnite ==2){
+            Skill2 = "DUMBocrat";
+        }
+        voting.text = Skill2;
     }
 
     public void sendScore(){

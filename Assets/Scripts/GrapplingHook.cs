@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class GrapplingHook : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class GrapplingHook : MonoBehaviour
 
     private bool grappling = false;
 
+    PhotonView PV;
+
     void Awake()
     {
         
@@ -52,6 +55,7 @@ public class GrapplingHook : MonoBehaviour
         {
             //gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             StartGrapple();
+            PV.RPC("RPC_Beam", RpcTarget.All, this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 5));
             grappling = true;
         }
 
@@ -159,5 +163,14 @@ public class GrapplingHook : MonoBehaviour
                 crosshair.color = Color.black;
             }
         }
+    }
+
+    [PunRPC]
+    public void RPC_Beam(Vector3 start, Vector3 end)
+    {
+        lr.enabled = true;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
+        Debug.Log("Beam!! " + start + " | " + end);
     }
 }

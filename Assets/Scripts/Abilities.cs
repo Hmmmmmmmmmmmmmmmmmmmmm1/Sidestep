@@ -11,7 +11,7 @@ public class Abilities : MonoBehaviour
 {
     //Movement
 
-    //direction change
+    //direction change      :)
     //blink                 :)
     //launch                :)
     //temp sturctures       :)
@@ -23,6 +23,7 @@ public class Abilities : MonoBehaviour
     //immobiliazaiton
     //fire aspect II
     //knockback
+    //"DDOS"
 
     public enum MovementAbility {DirectionChange, Blink, Launch, LegoBuildMode, Heal}
     public static int Skill1;
@@ -54,9 +55,11 @@ public class Abilities : MonoBehaviour
     private float timer;
     private float healInterval = 0f;
 
+    //fireaspect
     private float evilTimer;
     private float dmgInterval = 0f;
 
+    //general
     private float speedMultiplier;
 
     // Start is called before the first frame update
@@ -165,9 +168,9 @@ public class Abilities : MonoBehaviour
         }
 
 
-        //Lymphoma Mode
+        //grog Mode
         if (Skill2 == 1){
-            if (timer > 0){
+            if (evilTimer > 0){
                 if (dmgInterval > 0){
                     dmgInterval -= Time.deltaTime;
                 }
@@ -176,10 +179,10 @@ public class Abilities : MonoBehaviour
                     dmgInterval = 0.35f;
                 }
             }
-            timer -= Time.deltaTime;
+            evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1){
-                timer = 4.5f * speedMultiplier;
-                    Skill1Cooldown = 9;
+                evilTimer = 4.5f * speedMultiplier;
+                    Skill2Cooldown = 9;
             }
         }
 
