@@ -17,6 +17,8 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         private Classism classism;
         public float Class;
+        public bool lHit;
+        public bool rHit;
 
 
         
@@ -41,7 +43,7 @@ namespace Assets.Scripts.CharacterControl
 
         }
         
-        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject)
+        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit)
         {
             this.Keys = Keys;
             this.Effects = Effects;
@@ -50,6 +52,8 @@ namespace Assets.Scripts.CharacterControl
             this.lGrounded = lGrounded;
             this.rGrounded = rGrounded;
             this.ClassObject = ClassObject;
+            this.lHit = lHit;
+            this.rHit = rHit;
         }
 
         public Vector3 GetVelocity()
@@ -184,9 +188,13 @@ namespace Assets.Scripts.CharacterControl
 
                 
             }
+            //not grounded && not wall runnign 
+            // reset
+            // wall hit 
+            //rotate
             
             //Vector3 friction;
-            if (Keys.SH || !Grounded)
+            if (Keys.SH || (!Grounded))
             {
                 rb.drag = 0f;
             }
