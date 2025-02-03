@@ -55,7 +55,7 @@ public class GrapplingHook : MonoBehaviour
         {
             //gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             StartGrapple();
-            PV.RPC("RPC_Beam", RpcTarget.All, this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 5));
+
             grappling = true;
         }
 
@@ -74,7 +74,7 @@ public class GrapplingHook : MonoBehaviour
         }
         if (grappling){
             joint.connectedAnchor = grapplePoint.transform.position;
-
+            PV.RPC("RPC_Beam", RpcTarget.All, this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 5));
             float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
 
             //joint.maxDistance = distanceFromPoint * 0.08f;
