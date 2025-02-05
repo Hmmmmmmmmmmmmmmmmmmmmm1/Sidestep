@@ -42,12 +42,14 @@ public class GrapplingHook : MonoBehaviour
         if (transform.Find("Camera(Clone)")){
             cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
         }
+        /*
         if (transform.Find("Camera(Clone)/Grapple Gun")){
         lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
         }
         if (transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip")){
         gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
         }
+        */
     }
 
     void Update()
