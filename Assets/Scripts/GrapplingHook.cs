@@ -61,8 +61,9 @@ public class GrapplingHook : MonoBehaviour
 
         else if (Input.GetKeyUp(grappleKey))
         {
-            StopGrapple();
             grappling = false;
+            StopGrapple();
+
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2) && grappling){
@@ -76,7 +77,9 @@ public class GrapplingHook : MonoBehaviour
             PV.RPC("RPC_Beam", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
             //PV.RPC("RPC_Beam", RpcTarget.All, new Vector3(5,5,5), new Vector3(15,15,15));
             float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
+            if(joint){
             joint.connectedAnchor = grapplePoint.transform.position;
+            }
 
             //joint.maxDistance = distanceFromPoint * 0.08f;
         }
@@ -149,8 +152,12 @@ public class GrapplingHook : MonoBehaviour
 
     void StopGrapple()
     {
-        lr.positionCount = 0;
-        Destroy(joint);
+        if(!grappling){
+            //lr.positionCount = 0;
+            lr.enabled = false;
+            Destroy(joint);
+        }
+        
         //Destroy(grapplePoint);
     }
 
@@ -174,6 +181,6 @@ public class GrapplingHook : MonoBehaviour
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-        Debug.Log("Beam!! " + start + " | " + end);
+        //Debug.Log("Beam!! " + start + " | " + end);
     }
 }
