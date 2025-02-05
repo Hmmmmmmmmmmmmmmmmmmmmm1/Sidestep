@@ -13,10 +13,13 @@ public class Spawner : MonoBehaviour
     public GameObject Camera;
     public static int playerCount = 1;
 
+    PhotonView PV;
+
     void Start()
     {
         Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 10, 2), Quaternion.identity);
-        //PV.RPC("RPC_Beam", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+        PV = Player.GetComponent<PhotonView>();
+        PV.RPC("RPC_Beam", RpcTarget.All);
         playerCount++;
         GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
         Camera.transform.parent = Player.transform;
