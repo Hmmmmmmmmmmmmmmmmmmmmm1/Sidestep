@@ -255,7 +255,6 @@ GameObject:
   - component: {fileID: 1317527580968515820}
   - component: {fileID: 3110251937133064629}
   - component: {fileID: 2789779492177902216}
-  - component: {fileID: 3859569109753817717}
   - component: {fileID: 1194729713621867128}
   m_Layer: 31
   m_Name: Grapple Gun
@@ -330,27 +329,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3859569109753817717
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079531127408298224}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.000000014901161, y: 0, z: 0.00000023841858}
 --- !u!120 &1194729713621867128
 LineRenderer:
   serializedVersion: 2
