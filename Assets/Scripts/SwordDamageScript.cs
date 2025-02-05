@@ -16,7 +16,7 @@ namespace Assets.Scripts.CharacterControl
             damage = .2f;
 
         }
-        public void CheckClass()
+        /*public void CheckClass()
         {
             classism = ClassObject.GetComponent<Classism>();
             if (classism.tank == true || classism.wizard == true)
@@ -35,7 +35,7 @@ namespace Assets.Scripts.CharacterControl
                 Debug.Log("else hopefully fighter");
             }
 
-        }
+        }*/
 
 
         private void OnTriggerEnter(Collider other)
