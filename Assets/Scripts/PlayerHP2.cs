@@ -48,10 +48,6 @@ public class PlayerHP2 : MonoBehaviour
             }
             dmgInterval = 0.25f;
         }
-        //Debug.Log(dmgInterval);
-        if (Input.GetKeyDown(KeyCode.L)){
-            Debug.Log(dmgInterval);
-        }
     }
     
     void OnCollisionEnter(Collision other){

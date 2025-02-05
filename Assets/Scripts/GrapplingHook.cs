@@ -35,34 +35,39 @@ public class GrapplingHook : MonoBehaviour
 
     void Awake()
     {
-        
+        PV = gameObject.GetComponent<PhotonView>();
     }
 
-
-    void Update()
-    {
+    void Start(){
         if (transform.Find("Camera(Clone)")){
             cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
         }
+        /*
         if (transform.Find("Camera(Clone)/Grapple Gun")){
         lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
         }
         if (transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip")){
         gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
         }
+        */
+    }
+
+    void Update()
+    {
         //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
             //gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
             StartGrapple();
-            PV.RPC("RPC_Beam", RpcTarget.All, this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 5));
+
             grappling = true;
         }
 
         else if (Input.GetKeyUp(grappleKey))
         {
-            StopGrapple();
             grappling = false;
+            StopGrapple();
+            PV.RPC("RPC_BeamOff", RpcTarget.All);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2) && grappling){
@@ -73,11 +78,18 @@ public class GrapplingHook : MonoBehaviour
             */
         }
         if (grappling){
-            joint.connectedAnchor = grapplePoint.transform.position;
-
+            PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+            //PV.RPC("RPC_Beam", RpcTarget.All, new Vector3(5,5,5), new Vector3(15,15,15));
             float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
+            if(joint){
+            joint.connectedAnchor = grapplePoint.transform.position;
+            }
 
             //joint.maxDistance = distanceFromPoint * 0.08f;
+        }
+
+        if(Input.GetKey(KeyCode.L)){
+            //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
         }
     }
 
@@ -100,10 +112,8 @@ public class GrapplingHook : MonoBehaviour
                 //Debug.Log(doug.name + "juah" + doug.parent);
                 while(parentCheck.parent){
                     parentCheck = parentCheck.parent;
-                    Debug.Log(parentCheck.name + "juah" + parentCheck.parent);
                 }
                 if (parentCheck == transform){
-                    Debug.Log("augh>?");
                     touchingYourself = false;
                 }
             }
@@ -140,15 +150,19 @@ public class GrapplingHook : MonoBehaviour
     {
         if (!joint) return;
 
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, grapplePoint.transform.position);
+        //lr.SetPosition(0, gunTip.position);
+        //lr.SetPosition(1, grapplePoint.transform.position);
     }
 
     void StopGrapple()
     {
-        lr.positionCount = 0;
-        Destroy(joint);
-        Destroy(grapplePoint);
+        if(!grappling){
+            //lr.positionCount = 0;
+            lr.enabled = false;
+            Destroy(joint);
+        }
+        
+        //Destroy(grapplePoint);
     }
 
     public void canGrapple(){
@@ -166,11 +180,17 @@ public class GrapplingHook : MonoBehaviour
     }
 
     [PunRPC]
-    public void RPC_Beam(Vector3 start, Vector3 end)
+    void RPC_BeamOn(Vector3 start, Vector3 end)
     {
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-        Debug.Log("Beam!! " + start + " | " + end);
+        //Debug.Log("Beam!! " + start + " | " + end);
+    }
+
+    [PunRPC]
+    void RPC_BeamOff()
+    {
+        lr.enabled = false;
     }
 }

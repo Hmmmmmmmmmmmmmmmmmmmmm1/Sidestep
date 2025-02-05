@@ -612,6 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Skill1Text: {fileID: 673971905}
   Skill2Text: {fileID: 1121918571}
+  voting: {fileID: 2079505326}
 --- !u!4 &133689900
 Transform:
   m_ObjectHideFlags: 0
