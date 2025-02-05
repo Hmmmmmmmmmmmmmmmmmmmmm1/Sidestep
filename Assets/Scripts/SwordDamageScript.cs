@@ -14,28 +14,18 @@ namespace Assets.Scripts.CharacterControl
         public void Start()
         {
             damage = .2f;
-
+            CheckClass();
         }
-        /*public void CheckClass()
+        public void CheckClass()
         {
+            ClassObject = GameObject.Find("Classes");
             classism = ClassObject.GetComponent<Classism>();
-            if (classism.tank == true || classism.wizard == true)
+            if (classism.tank == true || classism.fighter == true)
             {
-                Class = 1.5f;
+                damage = .25f;
                 Debug.Log("tank or wizard");
             }
-            if (classism.assassin == true)
-            {
-                Class = 0.75f;
-                Debug.Log("Assassin");
-            }
-            else
-            {
-                Class = 1f;
-                Debug.Log("else hopefully fighter");
-            }
-
-        }*/
+        }
 
 
         private void OnTriggerEnter(Collider other)

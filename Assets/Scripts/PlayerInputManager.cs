@@ -25,7 +25,7 @@ namespace Assets.Scripts.CharacterControl
 
         void Update()
         {
-            
+            ClassObject = GameObject.Find("Classes");
             Grounded = lGrounded && rGrounded;
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
             if(GetComponent<PhotonView>().IsMine == true)
