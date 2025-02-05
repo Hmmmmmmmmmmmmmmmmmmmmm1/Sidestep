@@ -65,6 +65,7 @@ public class GrapplingHook : MonoBehaviour
 
         else if (Input.GetKeyUp(grappleKey))
         {
+            lr.enabled = false;
             grappling = false;
             StopGrapple();
 
@@ -158,7 +159,6 @@ public class GrapplingHook : MonoBehaviour
     {
         if(!grappling){
             //lr.positionCount = 0;
-            lr.enabled = false;
             Destroy(joint);
         }
         
