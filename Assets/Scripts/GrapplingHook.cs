@@ -38,9 +38,7 @@ public class GrapplingHook : MonoBehaviour
         PV = gameObject.GetComponent<PhotonView>();
     }
 
-
-    void Update()
-    {
+    void Start(){
         if (transform.Find("Camera(Clone)")){
             cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
         }
@@ -50,6 +48,10 @@ public class GrapplingHook : MonoBehaviour
         if (transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip")){
         gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
         }
+    }
+
+    void Update()
+    {
         //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
