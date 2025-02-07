@@ -201,12 +201,13 @@ namespace Assets.Scripts.CharacterControl
             {
                 if (lHit)
                 {
-                    tra.Rotate(new Vector3(0,0,-45));
-                    Debug.Break();
-                    
+                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -45);
+                    //tra.position = tra.position + (tra.up*Time.deltaTime);
+                    Debug.Break(); 
+
                 } else if (rHit)
                 {
-                    tra.Rotate(new Vector3(0,0,45));
+                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 45);
                 } else
                 {
                     ResetRotation();
