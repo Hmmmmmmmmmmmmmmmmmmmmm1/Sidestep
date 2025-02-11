@@ -18,14 +18,14 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        PV = gameObject.GetComponent<PhotonView>();
-        if(PV.IsMine){
+        //PV = gameObject.GetComponent<PhotonView>();
+        Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 15, 2), Quaternion.identity);
+        PV = Player.GetComponent<PhotonView>();
+        players.Add(Player);
         PV.RPC("PlayerSpawn", RpcTarget.All, playerCount);
-        }
-
         Debug.Log(playerCount + " " + players.Count);
-                playerCount++;
-
+        GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
+        Camera.transform.parent = Player.transform;
         //Camera.SetActive(true);
         //Camera.GetComponent<CameraScript>().player = Player;
         
@@ -43,13 +43,14 @@ public class Spawner : MonoBehaviour
             Debug.Log(players[x].name);
         }
         */
-        Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 15, 2), Quaternion.identity);
-        players.Add(Player);
-        GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
-        Camera.transform.parent = Player.transform;
-
-        Player.name = "Player " + num;
+        gameObject.name = "Player " + num;
         Player.transform.Find("Marker").GetComponent<MeshRenderer>().material = glows[num - 1];
         Debug.Log("Player #" + num + " has joined");
+    }
+
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.M)){
+            Debug.Log(playerCount + " " + players.Count);
+        }
     }
 }
