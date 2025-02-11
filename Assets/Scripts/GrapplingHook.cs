@@ -11,7 +11,7 @@ public class GrapplingHook : MonoBehaviour
     public LineRenderer lr;
     private GameObject grapplePoint;
     public Transform gunTip;
-    public Camera cam;
+    private Camera cam;
     private SpringJoint joint;
 
     [Header("Grappling")]
