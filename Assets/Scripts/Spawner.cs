@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
 
     public Material[] glows;
     public GameObject Camera;
-    public static int playerCount = 0;
+    public static int playerCount = 1;
 
     PhotonView PV;
 
