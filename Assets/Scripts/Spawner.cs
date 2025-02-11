@@ -22,8 +22,7 @@ public class Spawner : MonoBehaviour
         Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 15, 2), Quaternion.identity);
         players.Add(Player);
         PV.RPC("PlayerSpawn", RpcTarget.All);
-        Debug.Log(playerCount);
-        playerCount++;
+        Debug.Log(playerCount + " " + players.Count);
         GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
         Camera.transform.parent = Player.transform;
         //Camera.SetActive(true);
@@ -37,6 +36,10 @@ public class Spawner : MonoBehaviour
         players[playerCount - 1].name = "Player " + playerCount;
         players[playerCount - 1].transform.Find("Marker").GetComponent<MeshRenderer>().material = glows[playerCount - 1];
         Debug.Log("Player #" + playerCount + " has joined");
+        playerCount++;
+        for(int x=0; x<players.Count;x++){
+            Debug.Log(players[x].name);
+        }
         //Player.name = "Player " + playerCount;
         //Player.transform.Find("Marker").GetComponent<MeshRenderer>().material = glows[playerCount - 1];
         //Debug.Log("Player #" + playerCount + " has joined");
