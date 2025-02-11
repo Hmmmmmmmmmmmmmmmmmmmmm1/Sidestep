@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 10, 2), Quaternion.identity);
+        Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 15, 2), Quaternion.identity);
         PV = Player.GetComponent<PhotonView>();
         PV.RPC("PlayerSpawn", RpcTarget.All);
         playerCount++;
