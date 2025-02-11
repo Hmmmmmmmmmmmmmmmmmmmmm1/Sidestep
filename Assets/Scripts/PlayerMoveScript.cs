@@ -10,7 +10,7 @@ namespace Assets.Scripts.CharacterControl
         public Rigidbody rb;
         public Transform tra;
         public ArrayList Effects;
-        public Vector3 minVec = new Vector3(0.2f,0.2f,0.2f);
+        public Vector3 minVec = new Vector3(0.2f, 0.2f, 0.2f);
         public bool Grounded;
         public bool lGrounded;
         public bool rGrounded;
@@ -21,28 +21,28 @@ namespace Assets.Scripts.CharacterControl
         public bool rHit;
 
 
-        
+
         public void CheckClass()
         {
             classism = ClassObject.GetComponent<Classism>();
-            if(classism.tank == true || classism.wizard == true)
+            if (classism.tank == true || classism.wizard == true)
             {
-                Class = 1.5f;
+                Class = 1.25f;
                 Debug.Log("tank or wizard");
             }
-            if(classism.assassin == true)
+            if (classism.assassin == true)
             {
                 Class = 0.75f;
                 Debug.Log("Assassin");
             }
-            else
+            if (classism.fighter == true)
             {
                 Class = 1f;
                 Debug.Log("else hopefully fighter");
             }
 
         }
-        
+
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit)
         {
             this.Keys = Keys;
@@ -59,7 +59,7 @@ namespace Assets.Scripts.CharacterControl
         public Vector3 GetVelocity()
         {
             return rb.velocity;
-        }   
+        }
 
         public void RemoveEffect(ActiveEffects effect)
         {
@@ -78,26 +78,26 @@ namespace Assets.Scripts.CharacterControl
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
+                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
+                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*-8000;
+                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right)*(-5*Mathf.Log(rb.velocity.magnitude +1)+30)*8000;
+                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
             }
             if (Grounded && !Keys.SH)
             {
-                rb.drag = 1f *Class;
+                rb.drag = 1f * Class;
                 if (Keys.W)
                 {
                     vec += (tra.forward * 900f);
@@ -105,11 +105,12 @@ namespace Assets.Scripts.CharacterControl
                     {
                         Effects.Add(ActiveEffects.ForwardHeld);
                     }
-                } else if (Input.GetKeyUp(KeyCode.W))
-                {
-                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.ForwardHeld));
                 }
-                    //do that to all of them
+                else if (Input.GetKeyUp(KeyCode.W))
+                {
+                    Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.ForwardHeld));
+                }
+                //do that to all of them
                 if (Keys.S)
                 {
                     vec += (tra.forward * -900f);
@@ -117,9 +118,10 @@ namespace Assets.Scripts.CharacterControl
                     {
                         Effects.Add(ActiveEffects.BackHeld);
                     }
-                } else if (Input.GetKeyUp(KeyCode.S))
+                }
+                else if (Input.GetKeyUp(KeyCode.S))
                 {
-                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.BackHeld));
+                    Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.BackHeld));
                 }
                 if (Keys.A)
                 {
@@ -128,9 +130,10 @@ namespace Assets.Scripts.CharacterControl
                     {
                         Effects.Add(ActiveEffects.LeftHeld);
                     }
-                } else if (Input.GetKeyUp(KeyCode.A))
+                }
+                else if (Input.GetKeyUp(KeyCode.A))
                 {
-                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.LeftHeld));
+                    Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.LeftHeld));
                 }
                 if (Keys.D)
                 {
@@ -139,60 +142,62 @@ namespace Assets.Scripts.CharacterControl
                     {
                         Effects.Add(ActiveEffects.RightHeld);
                     }
-                } else if (Input.GetKeyUp(KeyCode.D))
-                {
-                    Task.Delay(100).ContinueWith(t=> Effects.Remove(ActiveEffects.RightHeld));
                 }
-            } else if (!Keys.SH)
+                else if (Input.GetKeyUp(KeyCode.D))
+                {
+                    Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.RightHeld));
+                }
+            }
+            else if (!Keys.SH)
             {
                 if (Keys.W)
-                    vec += (tra.forward * 0.5f*40);
+                    vec += (tra.forward * 0.5f * 40);
                 if (Keys.S)
-                    vec +=(tra.forward * -0.5f*40);
+                    vec += (tra.forward * -0.5f * 40);
                 if (Keys.A)
-                    vec +=(tra.right * -0.5f*40);
+                    vec += (tra.right * -0.5f * 40);
                 if (Keys.D)
-                    vec +=(tra.right * 0.5f*40);
+                    vec += (tra.right * 0.5f * 40);
             }
-            
+
             if (Keys.SP && Grounded)
             {
-                vec += new Vector3(0,Mathf.Max(GetVelocity().magnitude*900f, 9000),0);//or if get velocity is less than a certain ammount, just apply a set ammount
+                vec += new Vector3(0, Mathf.Max(GetVelocity().magnitude * 900f, 9000), 0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
             if ((lGrounded || rGrounded) && !Grounded)
             {
                 if (!Keys.SH)
                 {
-                    rb.drag =0.75f * Class;
+                    rb.drag = 0.75f * Class;
                     if (Keys.W)
                     {
-                        vec += tra.forward * 15f*40;
+                        vec += tra.forward * 15f * 40;
                     }
                     if (Keys.S)
                     {
-                        vec += tra.forward * -15f*40;
+                        vec += tra.forward * -15f * 40;
                     }
                     if (Keys.A)
                     {
-                        vec += tra.right * -15f*40;
+                        vec += tra.right * -15f * 40;
                     }
                     if (Keys.D)
                     {
-                        vec += tra.right * 15f*40;
+                        vec += tra.right * 15f * 40;
                     }
                     if (Keys.SP)
                     {
-                    vec += tra.up * 15f*40;
+                        vec += tra.up * 15f * 40;
                     }
                 }
 
-                
+
             }
             //not grounded && not wall runnign 
             // reset
             // wall hit 
             //rotate
-            
+
             //Vector3 friction;
             if (Keys.SH || (!Grounded))
             {
