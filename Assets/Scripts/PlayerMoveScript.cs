@@ -203,12 +203,12 @@ namespace Assets.Scripts.CharacterControl
                 {
                     tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -45);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
-                    Debug.Break(); 
+                    //Debug.Break(); 
 
                 } else if (rHit)
                 {
                     tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 45);
-                } else
+                } else if (!(lGrounded || rGrounded))
                 {
                     ResetRotation();
                 }
