@@ -254,7 +254,7 @@ public class Abilities : MonoBehaviour
         {
             classRegen = 0.75f;
         }
-        else if (classism.assassin == true)
+        if (classism.assassin == true)
         {
             classRegen = 1.25f;
         }

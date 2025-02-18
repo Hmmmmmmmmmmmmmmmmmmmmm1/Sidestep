@@ -844,6 +844,9 @@ MonoBehaviour:
   Skill2Trigger: 99
   Skill1Text: {fileID: 2248137781826233883}
   Skill2Text: {fileID: 6420036601806071802}
+  classRegen: 0
+  classPower: 0
+  ClassObject: {fileID: 0}
 --- !u!114 &8197021205552191761
 MonoBehaviour:
   m_ObjectHideFlags: 0
