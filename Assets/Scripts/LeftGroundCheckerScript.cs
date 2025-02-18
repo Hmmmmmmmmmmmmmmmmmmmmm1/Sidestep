@@ -17,7 +17,7 @@ public class LeftGroundCheckerScript : GroundCheckerScript
 /*
     public void Check()
     {
-        gameObject.GetComponent<BoxCollider>().bounds.Intersects(collider);
+        //gameObject.GetComponent<BoxCollider>().bounds.Intersects(collider);
     }
     */
 }
