@@ -807,7 +807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lr: {fileID: 1608892470003546799}
   gunTip: {fileID: 7618334235654252660}
-  cam: {fileID: 0}
   maxDistance: 300
   grappleKey: 324
   spring: 1.25
