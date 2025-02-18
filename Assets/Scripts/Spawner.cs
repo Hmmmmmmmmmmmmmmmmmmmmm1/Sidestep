@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
+using ExitGames.Client.Photon;
 
 public class Spawner : MonoBehaviour
 {
     GameObject Player;
-
+    GameObject PlayerManager;
     public Material[] glows;
     private List<GameObject> players = new List<GameObject>();
     public GameObject Camera;
@@ -18,26 +20,22 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        /*
+
         //PV = gameObject.GetComponent<PhotonView>();
         Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 15, 2), Quaternion.identity);
+        //bigSad();
         PV = Player.GetComponent<PhotonView>();
-        players.Add(Player);
-        PV.RPC("PlayerSpawn", RpcTarget.All, playerCount);
-        playerCount++;
-        Debug.Log(playerCount + " " + players.Count);
+        //players.Add(Player);
+        PV.RPC("PlayerSpawn", RpcTarget.All);
+        //Debug.Log(playerCount + " " + players.Count);
         GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
         Camera.transform.parent = Player.transform;
         //Camera.SetActive(true);
         //Camera.GetComponent<CameraScript>().player = Player;
-        */
-
-        PV = gameObject.GetComponent<PhotonView>();
-        PV.RPC("PlayerSpawn", RpcTarget.All, playerCount);
     }
 
     [PunRPC]
-    void PlayerSpawn(int num)
+    void PlayerSpawn()
     {
         /*
         players[playerCount - 1].name = "Player " + playerCount;
@@ -54,16 +52,21 @@ public class Spawner : MonoBehaviour
         Debug.Log("Player #" + num + " has joined");
         */
 
-        Player = PhotonNetwork.Instantiate("Ian 1", new Vector3(Random.Range(-6, 0), 15, 2), Quaternion.identity);
-        GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
-        Camera.transform.parent = Player.transform;
-
-        Player.name = "Joe" + playerCount;
+        Player.name = "Player " + seeingPeopleOnlyBasedOnTheirColor.playerCount;
+        Player.transform.Find("Marker").GetComponent<MeshRenderer>().material = PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().glows[seeingPeopleOnlyBasedOnTheirColor.playerCount - 1];
+        PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().newPlayerJoin();
     }
 
-    void Update(){
-        if (Input.GetKeyDown(KeyCode.M)){
-            Debug.Log(playerCount + " " + players.Count);
-        }
+    public void bigSad(){
+        Player.name = "Player " + playerCount;
+        Player.transform.Find("Marker").GetComponent<MeshRenderer>().material = glows[playerCount - 1];
+        playerCount++;
+    }
+
+    private void SendMoveUnitsToTargetPositionEvent()
+    {
+        const byte dodohed = 1;
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        PhotonNetwork.RaiseEvent(dodohed, Player, raiseEventOptions, SendOptions.SendReliable);
     }
 }
