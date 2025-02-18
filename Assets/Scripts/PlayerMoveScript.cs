@@ -27,18 +27,18 @@ namespace Assets.Scripts.CharacterControl
             classism = ClassObject.GetComponent<Classism>();
             if (classism.tank == true || classism.wizard == true)
             {
-                Class = 1.25f;
-                Debug.Log("tank or wizard");
+                Class = 1.5f;
+                //Debug.Log("tank or wizard");
             }
-            if (classism.assassin == true)
+            else if (classism.assassin == true)
             {
                 Class = 0.75f;
-                Debug.Log("Assassin");
+                //Debug.Log("Assassin");
             }
-            if (classism.fighter == true)
+            else if (classism.fighter == true)
             {
                 Class = 1f;
-                Debug.Log("else hopefully fighter");
+                //Debug.Log("hopefully fighter");
             }
 
         }

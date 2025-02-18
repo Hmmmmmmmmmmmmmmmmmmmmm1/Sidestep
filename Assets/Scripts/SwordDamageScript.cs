@@ -28,7 +28,7 @@ namespace Assets.Scripts.CharacterControl
             if (classism.tank == true || classism.fighter == true)
             {
                 damageMultiplier = 1.25f;
-                Debug.Log("tank or wizard");
+                //Debug.Log("tank or fighter");
             }
         }
 

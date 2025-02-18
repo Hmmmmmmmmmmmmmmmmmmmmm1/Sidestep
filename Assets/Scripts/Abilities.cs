@@ -77,7 +77,9 @@ public class Abilities : MonoBehaviour
     void Update()
     {
         Cooldown();
+        CheckClass();
         SpeedCheck();
+    
 
 
         //Lunch Mode
@@ -101,7 +103,7 @@ public class Abilities : MonoBehaviour
 
                     gameObject.GetComponent<Rigidbody>().drag = 5;
                     activated = true;
-                    Skill1Cooldown = 5;
+                    Skill1Cooldown = 5 * classRegen;
                 }
 
             }
@@ -131,7 +133,7 @@ public class Abilities : MonoBehaviour
                 if (legoesPerAbility == 5)
                 {
                     legoesPerAbility = 0;
-                    Skill1Cooldown = 10;
+                    Skill1Cooldown = 10 * classRegen;
                 }
             }
         }
@@ -154,7 +156,7 @@ public class Abilities : MonoBehaviour
                 }
                 gameObject.transform.position = ray.GetPoint(blinkDistance);
                 blinkDistance = 20 * speedMultiplier;
-                Skill1Cooldown = 3;
+                Skill1Cooldown = 3 * classRegen;
             }
         }
         //Lapse in Judgement Mode
@@ -164,7 +166,7 @@ public class Abilities : MonoBehaviour
             {
                 //gameObject.GetComponent<Rigidbody>().velocity *= -1;
                 gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1) * speedMultiplier / 2;
-                Skill1Cooldown = 3;
+                Skill1Cooldown = 3 * classRegen;
             }
         }
         //Lymphoma Mode
@@ -188,7 +190,7 @@ public class Abilities : MonoBehaviour
                 timer = 7.5f * speedMultiplier;
                 if (PlayerHP2.hp < 100)
                 {
-                    Skill1Cooldown = 9;
+                    Skill1Cooldown = 9 * classRegen;
                 }
             }
         }
@@ -245,6 +247,7 @@ public class Abilities : MonoBehaviour
     public void SpeedCheck()
     {
         speedMultiplier = (float)(Math.Pow(Speedometer.currentSpeed + 1, 1 / 7f));
+        speedMultiplier *= classPower;
     }
     public void CheckClass()
     {
@@ -253,10 +256,17 @@ public class Abilities : MonoBehaviour
         if (classism.wizard == true)
         {
             classRegen = 0.75f;
+            classPower = 1.25f;
         }
-        if (classism.assassin == true)
+        else if (classism.assassin == true)
         {
             classRegen = 1.25f;
+            classPower = 1.25f;
+        }
+        else 
+        {
+            classRegen = 1f;
+            classPower = 1f;
         }
     }
 }
