@@ -452,6 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062049037}
   - component: {fileID: 1062049036}
+  - component: {fileID: 1062049038}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -472,10 +473,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glows:
-  - {fileID: 2100000, guid: 2f93ea2e0a87f4901a2cb9da27148d5c, type: 2}
-  - {fileID: 2100000, guid: 39d00d2a6a0bc46bca409013e6aad7b7, type: 2}
-  - {fileID: 2100000, guid: d41d84e5493e3496ba6cc225bf963c8e, type: 2}
   - {fileID: 2100000, guid: 39b5102b6bd464b5c95fcb5a91dd8eec, type: 2}
+  - {fileID: 2100000, guid: d41d84e5493e3496ba6cc225bf963c8e, type: 2}
+  - {fileID: 2100000, guid: 39d00d2a6a0bc46bca409013e6aad7b7, type: 2}
+  - {fileID: 2100000, guid: 2f93ea2e0a87f4901a2cb9da27148d5c, type: 2}
   Camera: {fileID: 2125479005090280881, guid: 76e417947bd9f4644b93d4096b136b58, type: 3}
 --- !u!4 &1062049037
 Transform:
@@ -492,6 +493,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1062049038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062049035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1364321121
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class GrapplingHook : MonoBehaviour
     public LineRenderer lr;
     private GameObject grapplePoint;
     public Transform gunTip;
-    public Camera cam;
+    private Camera cam;
     private SpringJoint joint;
 
     [Header("Grappling")]
@@ -42,12 +42,14 @@ public class GrapplingHook : MonoBehaviour
         if (transform.Find("Camera(Clone)")){
             cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
         }
+        /*
         if (transform.Find("Camera(Clone)/Grapple Gun")){
         lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
         }
         if (transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip")){
         gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
         }
+        */
     }
 
     void Update()
@@ -65,7 +67,7 @@ public class GrapplingHook : MonoBehaviour
         {
             grappling = false;
             StopGrapple();
-
+            PV.RPC("RPC_BeamOff", RpcTarget.All);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2) && grappling){
@@ -76,7 +78,7 @@ public class GrapplingHook : MonoBehaviour
             */
         }
         if (grappling){
-            PV.RPC("RPC_Beam", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+            PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
             //PV.RPC("RPC_Beam", RpcTarget.All, new Vector3(5,5,5), new Vector3(15,15,15));
             float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
             if(joint){
@@ -178,11 +180,17 @@ public class GrapplingHook : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_Beam(Vector3 start, Vector3 end)
+    void RPC_BeamOn(Vector3 start, Vector3 end)
     {
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
         //Debug.Log("Beam!! " + start + " | " + end);
+    }
+
+    [PunRPC]
+    void RPC_BeamOff()
+    {
+        lr.enabled = false;
     }
 }

@@ -67,6 +67,11 @@ namespace Assets.Scripts.CharacterControl
                 Effects.Remove(effect);
         }
 
+        public void ResetRotation()
+        {
+            tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 0);
+        }
+
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
         //            vec = new Vector3(0,0,0);   for like min velocity
 
@@ -193,8 +198,28 @@ namespace Assets.Scripts.CharacterControl
 
 
             }
-            //not grounded && not wall runnign 
+            if (Grounded)
+            {
+                ResetRotation();
+            } else 
+            {
+                if (lHit)
+                {
+                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -45);
+                    //tra.position = tra.position + (tra.up*Time.deltaTime);
+                    //Debug.Break(); 
+
+                } else if (rHit)
+                {
+                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 45);
+                } else if (!(lGrounded || rGrounded))
+                {
+                    ResetRotation();
+                }
+            }
+            //if grounded
             // reset
+            //else
             // wall hit 
             //rotate
 

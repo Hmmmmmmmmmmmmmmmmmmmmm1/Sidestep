@@ -23,7 +23,7 @@ namespace Assets.Scripts.CharacterControl
         public bool swung;
         public bool waiter;
 
-        void Update()
+        void FixedUpdate()
         {
             ClassObject = GameObject.Find("Classes");
             Grounded = lGrounded && rGrounded;
