@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
         //bigSad();
         PV = Player.GetComponent<PhotonView>();
         //players.Add(Player);
-        PV.RPC("PlayerSpawn", RpcTarget.All);
+        //PV.RPC("PlayerSpawn", RpcTarget.All);
         //Debug.Log(playerCount + " " + players.Count);
         GameObject Camera = PhotonNetwork.Instantiate("Camera", new Vector3(Player.transform.position.x,Player.transform.position.y + 0.5f,Player.transform.position.z ), Quaternion.identity);
         Camera.transform.parent = Player.transform;
