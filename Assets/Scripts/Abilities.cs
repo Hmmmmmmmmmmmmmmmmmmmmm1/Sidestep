@@ -187,9 +187,9 @@ public class Abilities : MonoBehaviour
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1)
             {
-                timer = 7.5f * speedMultiplier;
                 if (PlayerHP2.hp < 100)
                 {
+                    timer = 7.5f * speedMultiplier;
                     Skill1Cooldown = 9 * classRegen;
                 }
             }
@@ -214,6 +214,7 @@ public class Abilities : MonoBehaviour
             evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
+                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = Resources.Load("Red Radiance").GetComponent<Material>();
                 evilTimer = 4.5f * speedMultiplier;
                 Skill2Cooldown = 9;
             }
