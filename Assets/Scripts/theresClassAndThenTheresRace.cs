@@ -17,7 +17,7 @@ public class theresClassAndThenTheresRace : MonoBehaviour
     void Start()
     {
         PV = gameObject.GetComponent<PhotonView>();
-        PV.RPC("PlayerSpawn", RpcTarget.All);
+        PV.RPC("PlayerSpawn", RpcTarget.AllBufferedViaServer);
     }
 
     [PunRPC]
