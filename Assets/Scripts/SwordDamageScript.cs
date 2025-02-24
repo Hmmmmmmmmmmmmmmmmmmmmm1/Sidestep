@@ -36,6 +36,9 @@ namespace Assets.Scripts.CharacterControl
         private void OnTriggerEnter(Collider other)
         {
             Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
+            if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
+                other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
+            }
 
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {

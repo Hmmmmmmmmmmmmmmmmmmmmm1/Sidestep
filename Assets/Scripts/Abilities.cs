@@ -58,6 +58,8 @@ public class Abilities : MonoBehaviour
     //fireaspect
     private float evilTimer;
     private float dmgInterval = 0f;
+    private Material originalMat;
+    public bool fireActive = false;
 
     //general
     private float speedMultiplier;
@@ -71,6 +73,7 @@ public class Abilities : MonoBehaviour
     {
         legos = Resources.Load<GameObject>("Wall");
         boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
+        originalMat = GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -196,7 +199,7 @@ public class Abilities : MonoBehaviour
         }
 
 
-        //grog Mode
+        //burn Mode
         if (Skill2 == 1)
         {
             if (evilTimer > 0)
@@ -211,11 +214,16 @@ public class Abilities : MonoBehaviour
                     dmgInterval = 0.35f;
                 }
             }
+            else{
+                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
+                fireActive = false;
+            }
             evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = Resources.Load("Red Radiance").GetComponent<Material>();
-                evilTimer = 4.5f * speedMultiplier;
+                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
+                fireActive = true;
+                evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 9;
             }
         }
@@ -223,7 +231,7 @@ public class Abilities : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log(Skill1 + " oogde");
+            Debug.Log(Skill2 + " oogde");
         }
 
     }
