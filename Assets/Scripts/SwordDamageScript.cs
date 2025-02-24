@@ -8,12 +8,17 @@ namespace Assets.Scripts.CharacterControl
     public class SwordDamageScript : MonoBehaviour
     {
         public float damage;
+        public float damageMultiplier;
         public GameObject ClassObject;
         private Classism classism;
         public Vector3 velocity;
         public void Start()
         {
             damage = .2f;
+            damageMultiplier = 1f;
+        }
+        public void Update()
+        {
             CheckClass();
         }
         public void CheckClass()
@@ -22,8 +27,8 @@ namespace Assets.Scripts.CharacterControl
             classism = ClassObject.GetComponent<Classism>();
             if (classism.tank == true || classism.fighter == true)
             {
-                damage = .25f;
-                Debug.Log("tank or wizard");
+                damageMultiplier = 1.25f;
+                //Debug.Log("tank or fighter");
             }
         }
 
@@ -31,11 +36,14 @@ namespace Assets.Scripts.CharacterControl
         private void OnTriggerEnter(Collider other)
         {
             Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
+            if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
+                other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
+            }
 
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 Debug.Log(velocity * damage);
-                other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage)));
+                other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
 
             }
 

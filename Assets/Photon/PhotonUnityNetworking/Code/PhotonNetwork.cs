@@ -3306,7 +3306,12 @@ namespace Photon.Pun
             }
         }
 
-        #endif
+        public static void RaiseEvent(int v, object[] content, RaiseEventOptions raiseEventOptions, object sendReliable)
+        {
+            throw new NotImplementedException();
+        }
+
+#endif
 
     }
 }

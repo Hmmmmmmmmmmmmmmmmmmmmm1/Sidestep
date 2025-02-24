@@ -28,30 +28,30 @@ namespace Assets.Scripts.CharacterControl
             ClassObject = GameObject.Find("Classes");
             Grounded = lGrounded && rGrounded;
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
-            if(GetComponent<PhotonView>().IsMine == true)
+            if (GetComponent<PhotonView>().IsMine == true)
             {
                 lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
                 rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
                 lHit = tra.Find("WallCheckers/LeftWallChecker").gameObject.GetComponent<LeftWallCheckerScript>().lHit;
                 rHit = tra.Find("WallCheckers/RightWallChecker").gameObject.GetComponent<RightWallCheckerScript>().rHit;
-                KeysPressed keys = 
+                KeysPressed keys =
                     new KeysPressed(
-                        Input.GetKey(KeyCode.W), 
-                        Input.GetKey(KeyCode.S), 
-                        Input.GetKey(KeyCode.A), 
-                        Input.GetKey(KeyCode.D), 
-                        Input.GetKey(KeyCode.Q), 
-                        Input.GetKey(KeyCode.E), 
+                        Input.GetKey(KeyCode.W),
+                        Input.GetKey(KeyCode.S),
+                        Input.GetKey(KeyCode.A),
+                        Input.GetKey(KeyCode.D),
+                        Input.GetKey(KeyCode.Q),
+                        Input.GetKey(KeyCode.E),
                         Input.GetKey(KeyCode.LeftShift),
                         Input.GetKey(KeyCode.Space),
-                        Input.GetMouseButtonDown(0), 
+                        Input.GetMouseButtonDown(0),
                         Input.GetMouseButtonDown(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit);
-                
+
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
                 swung = attack.Begin();
-                //move.CheckClass();
-                rb.AddForce(move.UpdateVelocity()*Time.deltaTime);
+                move.CheckClass();
+                rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Assets.Scripts.CharacterControl
             attack.Swing();
         }
 
-        
+
 
 
     }
@@ -102,7 +102,7 @@ namespace Assets.Scripts.CharacterControl
     }
 
     public enum ActiveEffects
-    {  
+    {
         Lifesteal,
         SpeedBoost,
         ForwardHeld,
@@ -110,31 +110,31 @@ namespace Assets.Scripts.CharacterControl
         LeftHeld,
         RightHeld,
     }
-        /*
+    /*
 
-        MAPING OUT THE INPUT MANAGEMENT
-        Variables
-            RigidBody
-            Transform
-            Keep Track of Active Affects
+    MAPING OUT THE INPUT MANAGEMENT
+    Variables
+        RigidBody
+        Transform
+        Keep Track of Active Affects
 
 
 
-        Update
-            Take Inputs
-                Keys
-                    Via Keys Class
-                    we can copy from crimeline
-            Call MovementScript
-                Just input the things in the constructor
-                Run get Update Velocity
-                mybe we apply it here maybe we apply it 
-            Call ActionScript (I think ActionScript will handle attacks and Abilities)
-                Run the inputs
-                //going to need to update this after I map out Action Script
-            Update Active effects
+    Update
+        Take Inputs
+            Keys
+                Via Keys Class
+                we can copy from crimeline
+        Call MovementScript
+            Just input the things in the constructor
+            Run get Update Velocity
+            mybe we apply it here maybe we apply it 
+        Call ActionScript (I think ActionScript will handle attacks and Abilities)
+            Run the inputs
+            //going to need to update this after I map out Action Script
+        Update Active effects
 
-        
-        */
+
+    */
 
 }
