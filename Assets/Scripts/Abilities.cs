@@ -60,6 +60,7 @@ public class Abilities : MonoBehaviour
     private float dmgInterval = 0f;
     private Material originalMat;
     public bool fireActive = false;
+    public bool burned = false;
 
     //general
     private float speedMultiplier;
@@ -210,7 +211,8 @@ public class Abilities : MonoBehaviour
                 }
                 if (dmgInterval <= 0)
                 {
-                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    Debug.Log("how many times has this run");
                     dmgInterval = 0.35f;
                 }
             }
@@ -225,6 +227,9 @@ public class Abilities : MonoBehaviour
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 9;
+            }
+            if (burned){
+
             }
         }
 
@@ -277,5 +282,13 @@ public class Abilities : MonoBehaviour
             classRegen = 1f;
             classPower = 1f;
         }
+    }
+
+    public GameObject burnDmgActivate (GameObject enemy){
+        burned = true;
+        return enemy;
+    }
+    public void burnDmg(){
+
     }
 }
