@@ -9,7 +9,7 @@ public class PlayerHP2 : MonoBehaviour
 {
     public Slider slider;
     public Text hpNum;
-    public static int hp = 100;
+    public int hp = 100;
 
     private int oldHp = 0;
     public float hpChangeTick = 0;

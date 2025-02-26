@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: -8105022020044760695}
   - component: {fileID: 1608892470003546799}
   - component: {fileID: 1969566548693272323}
+  - component: {fileID: 6927378686292354663}
   m_Layer: 0
   m_Name: Ian 1
   m_TagString: Untagged
@@ -828,6 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 3888454626033508103}
   hpNum: {fileID: 4024967859900157581}
+  hp: 100
   hpChangeTick: 0
 --- !u!114 &789405301329346563
 MonoBehaviour:
@@ -846,6 +848,7 @@ MonoBehaviour:
   Skill1Text: {fileID: 2248137781826233883}
   Skill2Text: {fileID: 6420036601806071802}
   fireActive: 0
+  burned: 0
   classRegen: 0
   classPower: 0
   ClassObject: {fileID: 0}
@@ -1039,6 +1042,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerManager: {fileID: 0}
+--- !u!114 &6927378686292354663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870983826097865563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acfda7ec338694744adb780bbb24e045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  timer: 5
 --- !u!1001 &1731069215591517931
 PrefabInstance:
   m_ObjectHideFlags: 0

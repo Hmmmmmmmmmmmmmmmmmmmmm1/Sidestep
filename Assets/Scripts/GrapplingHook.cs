@@ -160,6 +160,7 @@ public class GrapplingHook : MonoBehaviour
             //lr.positionCount = 0;
             lr.enabled = false;
             Destroy(joint);
+            grapplePoint = null;
         }
         
         //Destroy(grapplePoint);
