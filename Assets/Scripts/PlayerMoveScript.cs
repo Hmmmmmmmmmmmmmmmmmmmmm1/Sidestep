@@ -19,7 +19,7 @@ namespace Assets.Scripts.CharacterControl
         public float Class;
         public bool lHit;
         public bool rHit;
-        public Arraylist Dash;
+        public ArrayList Dash;
 
 
 
@@ -82,22 +82,22 @@ namespace Assets.Scripts.CharacterControl
             Grounded = lGrounded & rGrounded;
 
             Vector3 vec = Vector3.zero;
-            if (Effects.Contains(ActiveEffects.ForwardHeld) && Dash.Contains("ForwardHeld"))
+            if (Effects.Contains(ActiveEffects.ForwardHeld) && Dash.Contains(DashKey.UpPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
             }
-            if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
+            if (Effects.Contains(ActiveEffects.BackHeld) && Dash.Contains(DashKey.DownPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
             }
-            if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
+            if (Effects.Contains(ActiveEffects.LeftHeld) && Dash.Contains(DashKey.LeftPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
             }
-            if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
+            if (Effects.Contains(ActiveEffects.RightHeld) && Dash.Contains(DashKey.RightPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;

@@ -10,6 +10,8 @@ namespace Assets.Scripts.CharacterControl
         public Rigidbody rb;
         public Transform tra;
         public ArrayList Effects = new ArrayList();
+        public ArrayList Dash = new ArrayList();
+        public ArrayList KeyUp = new ArrayList();
         public bool lGrounded;
         public bool rGrounded;
         public bool lHit;
@@ -25,21 +27,29 @@ namespace Assets.Scripts.CharacterControl
 
         void Update()
         {
-            if(PlayerInputManager.GetKey(KeyCode.w))
+            if(Input.GetKeyDown(KeyCode.W))
             {
-                move.Dash.add("ForwardHeld");
+                Dash.Add(DashKey.UpPush);
+                Debug.Log("forward");
             }
-            if(PlayerInputManager.GetKey(KeyCode.a))
+            if(Input.GetKeyDown(KeyCode.A))
             {
-                move.Dash.add("LeftHeld");
+                Dash.Add(DashKey.LeftPush);
+                Debug.Log("left");
             }
-            if(PlayerInputManager.GetKey(KeyCode.s))
+            if(Input.GetKeyDown(KeyCode.S))
             {
-                move.Dash.add("DownHeld");
+                Dash.Add(DashKey.DownPush);
+                Debug.Log("down");
             }
-            if(PlayerInputManager.GetKey(KeyCode.d))
+            if(Input.GetKeyDown(KeyCode.D))
             {
-                move.Dash.add("RightHeld");
+                Dash.Add(DashKey.RightPush);
+                Debug.Log("right");
+            }
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                KeyUp.Add(KeyUp.UpUp);
             }
         }
 
@@ -72,7 +82,12 @@ namespace Assets.Scripts.CharacterControl
                 swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
-                move.Dash.RemoveAll;
+                for (int i = 0; i < Dash.Count; i++)
+                {
+                    //this is bad but it may kind of sort of work... I am also pretty sure it will eventually break the game
+                    //Debug.Log(Dash[i]);
+                    Dash[i] = null;
+                }
             }
         }
 
@@ -130,6 +145,21 @@ namespace Assets.Scripts.CharacterControl
         BackHeld,
         LeftHeld,
         RightHeld,
+    }
+    public enum DashKey
+    {
+        DownPush,
+        LeftPush,
+        RightPush,
+        UpPush,
+
+    }
+    public enum KeyRelease
+    {
+        UpUp,
+        DownUp,
+        RightUp,
+        LeftUp,
     }
     /*
 
