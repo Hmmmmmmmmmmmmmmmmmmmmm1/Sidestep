@@ -85,6 +85,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
+  damageMultiplier: 0
+  ClassObject: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!65 &5474561575633239227
 BoxCollider:
   m_ObjectHideFlags: 0

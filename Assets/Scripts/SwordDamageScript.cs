@@ -36,12 +36,16 @@ namespace Assets.Scripts.CharacterControl
         private void OnTriggerEnter(Collider other)
         {
             Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
-
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
+                if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
+                    Debug.Log(other);
+                    //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
+                    gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().burnDmgActivate(other.gameObject);
+                }
+
                 Debug.Log(velocity * damage);
                 other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
-
             }
 
         }

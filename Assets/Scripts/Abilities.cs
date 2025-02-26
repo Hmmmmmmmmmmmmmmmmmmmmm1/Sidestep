@@ -58,6 +58,9 @@ public class Abilities : MonoBehaviour
     //fireaspect
     private float evilTimer;
     private float dmgInterval = 0f;
+    private Material originalMat;
+    public bool fireActive = false;
+    public bool burned = false;
 
     //general
     private float speedMultiplier;
@@ -71,6 +74,7 @@ public class Abilities : MonoBehaviour
     {
         legos = Resources.Load<GameObject>("Wall");
         boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
+        originalMat = GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -187,16 +191,16 @@ public class Abilities : MonoBehaviour
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1)
             {
-                timer = 7.5f * speedMultiplier;
                 if (PlayerHP2.hp < 100)
                 {
+                    timer = 7.5f * speedMultiplier;
                     Skill1Cooldown = 9 * classRegen;
                 }
             }
         }
 
 
-        //grog Mode
+        //burn Mode
         if (Skill2 == 1)
         {
             if (evilTimer > 0)
@@ -207,22 +211,32 @@ public class Abilities : MonoBehaviour
                 }
                 if (dmgInterval <= 0)
                 {
-                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    Debug.Log("how many times has this run");
                     dmgInterval = 0.35f;
                 }
+            }
+            else{
+                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
+                fireActive = false;
             }
             evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                evilTimer = 4.5f * speedMultiplier;
+                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
+                fireActive = true;
+                evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 9;
+            }
+            if (burned){
+
             }
         }
 
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log(Skill1 + " oogde");
+            Debug.Log(Skill2 + " oogde");
         }
 
     }
@@ -268,5 +282,13 @@ public class Abilities : MonoBehaviour
             classRegen = 1f;
             classPower = 1f;
         }
+    }
+
+    public GameObject burnDmgActivate (GameObject enemy){
+        burned = true;
+        return enemy;
+    }
+    public void burnDmg(){
+
     }
 }
