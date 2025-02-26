@@ -23,6 +23,26 @@ namespace Assets.Scripts.CharacterControl
         public bool swung;
         public bool waiter;
 
+        void Update()
+        {
+            if(PlayerInputManager.GetKey(KeyCode.w))
+            {
+                move.Dash.add("ForwardHeld");
+            }
+            if(PlayerInputManager.GetKey(KeyCode.a))
+            {
+                move.Dash.add("LeftHeld");
+            }
+            if(PlayerInputManager.GetKey(KeyCode.s))
+            {
+                move.Dash.add("DownHeld");
+            }
+            if(PlayerInputManager.GetKey(KeyCode.d))
+            {
+                move.Dash.add("RightHeld");
+            }
+        }
+
         void FixedUpdate()
         {
             ClassObject = GameObject.Find("Classes");
@@ -46,12 +66,13 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.Space),
                         Input.GetMouseButtonDown(0),
                         Input.GetMouseButtonDown(1));
-                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit);
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit, Dash);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
                 swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
+                move.Dash.RemoveAll;
             }
         }
 
