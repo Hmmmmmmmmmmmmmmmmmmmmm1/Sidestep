@@ -83,22 +83,22 @@ namespace Assets.Scripts.CharacterControl
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
+                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 800;
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
+                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -800;
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
+                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -800;
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
+                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 800;
             }
             if (Grounded && !Keys.SH)
             {
