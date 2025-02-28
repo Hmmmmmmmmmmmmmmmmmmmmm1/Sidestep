@@ -191,7 +191,7 @@ public class Abilities : MonoBehaviour
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1)
             {
-                if (PlayerHP2.hp < 100)
+                if (gameObject.GetComponent<PlayerHP2>().hp < 100)
                 {
                     timer = 7.5f * speedMultiplier;
                     Skill1Cooldown = 9 * classRegen;
@@ -211,7 +211,7 @@ public class Abilities : MonoBehaviour
                 }
                 if (dmgInterval <= 0)
                 {
-                    //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
                     Debug.Log("how many times has this run");
                     dmgInterval = 0.35f;
                 }
@@ -226,7 +226,8 @@ public class Abilities : MonoBehaviour
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 9;
+                Skill2Cooldown = 0;
+                //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
             }
             if (burned){
 
