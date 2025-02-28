@@ -42,11 +42,12 @@ namespace Assets.Scripts.CharacterControl
                     Debug.Log(other);
                     //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
                     other.gameObject.GetComponent<Abilities>().burnDmgActivate();
+                    other.gameObject.GetComponent<PlayerHP2>().changeHealth(-25);
                     Debug.Log("hehoohoohahahhega");
                 }
 
                 Debug.Log(velocity * damage);
-                other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
+                //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
 
         }
