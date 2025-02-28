@@ -63,7 +63,7 @@ namespace Assets.Scripts.CharacterControl
         void EnemyDamage(int dmg)
         {
             if (!PV.IsMine){
-            gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
+            gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
             }
         }
     }
