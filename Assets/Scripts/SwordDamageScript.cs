@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Assets.Scripts.CharacterControl
 
@@ -12,6 +13,9 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         private Classism classism;
         public Vector3 velocity;
+        
+        public PhotonView PV;
+
         public void Start()
         {
             damage = .2f;
@@ -36,20 +40,31 @@ namespace Assets.Scripts.CharacterControl
         private void OnTriggerEnter(Collider other)
         {
             Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
+
+            if (other.gameObject.GetComponent<PhotonView>()){
+            PV = other.gameObject.GetComponent<PhotonView>();
+            }
+
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
                     Debug.Log(other);
                     //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
-                    other.gameObject.GetComponent<Abilities>().burnDmgActivate();
+                    //other.gameObject.GetComponent<Abilities>().burnDmgActivate();
                     other.gameObject.GetComponent<PlayerHP2>().changeHealth(-25);
                     Debug.Log("hehoohoohahahhega");
                 }
 
+                PV.RPC("enemyDamage",RpcTarget.All,30);
                 Debug.Log(velocity * damage);
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
 
+        }
+
+        [PunRPC]
+        public void enemyDamage(int dmg){
+            gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
         }
     }
 
