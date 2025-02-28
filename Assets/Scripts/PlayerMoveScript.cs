@@ -19,6 +19,7 @@ namespace Assets.Scripts.CharacterControl
         public float Class;
         public bool lHit;
         public bool rHit;
+        public ArrayList Dash;
 
 
 
@@ -43,7 +44,7 @@ namespace Assets.Scripts.CharacterControl
 
         }
 
-        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit)
+        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash)
         {
             this.Keys = Keys;
             this.Effects = Effects;
@@ -54,6 +55,7 @@ namespace Assets.Scripts.CharacterControl
             this.ClassObject = ClassObject;
             this.lHit = lHit;
             this.rHit = rHit;
+            this.Dash = Dash;
         }
 
         public Vector3 GetVelocity()
@@ -80,22 +82,22 @@ namespace Assets.Scripts.CharacterControl
             Grounded = lGrounded & rGrounded;
 
             Vector3 vec = Vector3.zero;
-            if (Effects.Contains(ActiveEffects.ForwardHeld) && Input.GetKeyDown(KeyCode.W))
+            if (Effects.Contains(ActiveEffects.ForwardHeld) && Dash.Contains(DashKey.UpPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
             }
-            if (Effects.Contains(ActiveEffects.BackHeld) && Input.GetKeyDown(KeyCode.S))
+            if (Effects.Contains(ActiveEffects.BackHeld) && Dash.Contains(DashKey.DownPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
             }
-            if (Effects.Contains(ActiveEffects.LeftHeld) && Input.GetKeyDown(KeyCode.A))
+            if (Effects.Contains(ActiveEffects.LeftHeld) && Dash.Contains(DashKey.LeftPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
             }
-            if (Effects.Contains(ActiveEffects.RightHeld) && Input.GetKeyDown(KeyCode.D))
+            if (Effects.Contains(ActiveEffects.RightHeld) && Dash.Contains(DashKey.RightPush))
             {
                 rb.drag = 0.1f * Class;
                 return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
@@ -150,7 +152,7 @@ namespace Assets.Scripts.CharacterControl
                 }
                 else if (Input.GetKeyUp(KeyCode.D))
                 {
-                    Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.RightHeld));
+                    Task.Delay(200).ContinueWith(t => Effects.Remove(ActiveEffects.RightHeld));
                 }
             }
             else if (!Keys.SH)
