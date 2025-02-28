@@ -49,7 +49,7 @@ namespace Assets.Scripts.CharacterControl
             }
             if(Input.GetKeyDown(KeyCode.W))
             {
-                KeyUp.Add(KeyUp.UpUp);
+                //KeyUp.Add(KeyUp.UpUp);
             }
         }
 
