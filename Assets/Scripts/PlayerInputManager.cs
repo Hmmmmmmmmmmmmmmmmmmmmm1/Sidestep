@@ -50,18 +50,22 @@ namespace Assets.Scripts.CharacterControl
             if(Input.GetKeyUp(KeyCode.W))
             {
                 KeyUp.Add(KeyRelease.UpUp);
+                Debug.Log("up release");
             }
             if(Input.GetKeyUp(KeyCode.A))
             {
                 KeyUp.Add(KeyRelease.LeftUp);
+                Debug.Log("left release");
             }
             if(Input.GetKeyUp(KeyCode.S))
             {
                 KeyUp.Add(KeyRelease.DownUp);
+                Debug.Log("down release");
             }
             if(Input.GetKeyUp(KeyCode.D))
             {
                 KeyUp.Add(KeyRelease.RightUp);
+                Debug.Log("right release");
             }
         }
 
@@ -88,7 +92,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.Space),
                         Input.GetMouseButtonDown(0),
                         Input.GetMouseButtonDown(1));
-                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit, Dash);
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit, Dash, KeyUp);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
                 swung = attack.Begin();
@@ -96,9 +100,12 @@ namespace Assets.Scripts.CharacterControl
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
                 for (int i = 0; i < Dash.Count; i++)
                 {
-                    //this is bad but it may kind of sort of work... I am also pretty sure it will eventually break the game
                     //Debug.Log(Dash[i]);
                     Dash[i] = null;
+                }
+                for (int i = 0; i < KeyUp.Count; i++)
+                {
+                    KeyUp[i] = null;
                 }
             }
         }
@@ -114,10 +121,6 @@ namespace Assets.Scripts.CharacterControl
             Debug.Log("off");
             attack.Swing();
         }
-
-
-
-
     }
 
 

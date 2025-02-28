@@ -20,6 +20,7 @@ namespace Assets.Scripts.CharacterControl
         public bool lHit;
         public bool rHit;
         public ArrayList Dash;
+        public ArrayList KeyUp;
 
 
 
@@ -44,7 +45,7 @@ namespace Assets.Scripts.CharacterControl
 
         }
 
-        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash)
+        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash, ArrayList KeyUp)
         {
             this.Keys = Keys;
             this.Effects = Effects;
@@ -56,6 +57,7 @@ namespace Assets.Scripts.CharacterControl
             this.lHit = lHit;
             this.rHit = rHit;
             this.Dash = Dash;
+            this.KeyUp = KeyUp;
         }
 
         public Vector3 GetVelocity()
@@ -85,22 +87,22 @@ namespace Assets.Scripts.CharacterControl
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Dash.Contains(DashKey.UpPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
+                return (tra.forward) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * 2000);
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Dash.Contains(DashKey.DownPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
+                return (tra.forward) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * -2000);
             }
             if (Effects.Contains(ActiveEffects.LeftHeld) && Dash.Contains(DashKey.LeftPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * -8000;
+                return (tra.right) * (-5 * Mathf.Log((rb.velocity.magnitude + 1) + 20) * 2000);
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Dash.Contains(DashKey.RightPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * (-5 * Mathf.Log(rb.velocity.magnitude + 1) + 30) * 8000;
+                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * -2000);
             }
             if (Grounded && !Keys.SH)
             {
@@ -113,7 +115,7 @@ namespace Assets.Scripts.CharacterControl
                         Effects.Add(ActiveEffects.ForwardHeld);
                     }
                 }
-                else if (Input.GetKeyUp(KeyCode.W))
+                else if (KeyUp.Contains(KeyRelease.UpUp))
                 {
                     Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.ForwardHeld));
                 }
@@ -126,7 +128,7 @@ namespace Assets.Scripts.CharacterControl
                         Effects.Add(ActiveEffects.BackHeld);
                     }
                 }
-                else if (Input.GetKeyUp(KeyCode.S))
+                else if (KeyUp.Contains(KeyRelease.DownUp))
                 {
                     Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.BackHeld));
                 }
@@ -138,7 +140,7 @@ namespace Assets.Scripts.CharacterControl
                         Effects.Add(ActiveEffects.LeftHeld);
                     }
                 }
-                else if (Input.GetKeyUp(KeyCode.A))
+                else if (KeyUp.Contains(KeyRelease.LeftUp))
                 {
                     Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.LeftHeld));
                 }
@@ -150,7 +152,7 @@ namespace Assets.Scripts.CharacterControl
                         Effects.Add(ActiveEffects.RightHeld);
                     }
                 }
-                else if (Input.GetKeyUp(KeyCode.D))
+                else if (KeyUp.Contains(KeyRelease.RightUp))
                 {
                     Task.Delay(200).ContinueWith(t => Effects.Remove(ActiveEffects.RightHeld));
                 }
