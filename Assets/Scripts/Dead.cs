@@ -21,11 +21,11 @@ public class Dead : MonoBehaviour
     {
         Scene scene  = SceneManager.GetActiveScene();
         if (!scene.name.Equals("Casey's Scene")){
-            if (gameObject.GetComponent<PlayerHP2>().hp == 0 || 1==2){
+            if (gameObject.GetComponent<PlayerHP2>().hp == 0 && gameObject.name.Equals("Player 1")){
                 SceneManager.LoadScene(4);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                Debug.Log("you died");
+                Debug.Log("you died" + gameObject.name);
             }
         }
         /*

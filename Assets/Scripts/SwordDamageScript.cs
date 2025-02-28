@@ -41,7 +41,7 @@ namespace Assets.Scripts.CharacterControl
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
                     Debug.Log(other);
                     //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
-                    gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().burnDmgActivate(other.gameObject);
+                    other.gameObject.GetComponent<Abilities>().burnDmgActivate();
                 }
 
                 Debug.Log(velocity * damage);

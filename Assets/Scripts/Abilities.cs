@@ -225,7 +225,7 @@ public class Abilities : MonoBehaviour
             {
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
                 fireActive = true;
-                evilTimer = 10f * speedMultiplier;
+                //evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 0;
                 //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
             }
@@ -285,11 +285,8 @@ public class Abilities : MonoBehaviour
         }
     }
 
-    public GameObject burnDmgActivate (GameObject enemy){
+    public void burnDmgActivate (){
         burned = true;
-        return enemy;
-    }
-    public void burnDmg(){
-
+        evilTimer = 10f * speedMultiplier;
     }
 }
