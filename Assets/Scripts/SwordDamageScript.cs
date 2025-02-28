@@ -14,7 +14,7 @@ namespace Assets.Scripts.CharacterControl
         private Classism classism;
         public Vector3 velocity;
         
-        public PhotonView PV;
+        PhotonView PV;
 
         public void Start()
         {
@@ -55,17 +55,16 @@ namespace Assets.Scripts.CharacterControl
                     Debug.Log("hehoohoohahahhega");
                 }
 
-                PV.RPC("enemyDamage",RpcTarget.All,30);
+                PV.RPC("EnemyDamage",RpcTarget.All,30);
                 Debug.Log(velocity * damage);
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
-
         }
 
         [PunRPC]
-        public void enemyDamage(int dmg){
+        void EnemyDamage(int dmg)
+        {
             gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
         }
     }
-
 }
