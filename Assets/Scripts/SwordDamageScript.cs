@@ -41,9 +41,7 @@ namespace Assets.Scripts.CharacterControl
         {
             Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
 
-            if (other.gameObject.GetComponent<PhotonView>()){
             PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
-            }
 
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
@@ -64,7 +62,9 @@ namespace Assets.Scripts.CharacterControl
         [PunRPC]
         void EnemyDamage(int dmg)
         {
+            if (!PV.IsMine){
             gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
+            }
         }
     }
 }
