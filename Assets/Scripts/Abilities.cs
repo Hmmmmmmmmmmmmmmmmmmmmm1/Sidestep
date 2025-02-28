@@ -57,6 +57,7 @@ public class Abilities : MonoBehaviour
 
     //fireaspect
     private float evilTimer;
+    private float burnTimer;
     private float dmgInterval = 0f;
     private Material originalMat;
     public bool fireActive = false;
@@ -203,7 +204,7 @@ public class Abilities : MonoBehaviour
         //burn Mode
         if (Skill2 == 1)
         {
-            if (evilTimer > 0)
+            if (burnTimer > 0)
             {
                 if (dmgInterval > 0)
                 {
@@ -216,11 +217,12 @@ public class Abilities : MonoBehaviour
                     dmgInterval = 0.35f;
                 }
             }
-            else{
+            if (evilTimer < 0){
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
+            burnTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
@@ -287,6 +289,6 @@ public class Abilities : MonoBehaviour
 
     public void burnDmgActivate (){
         burned = true;
-        evilTimer = 10f * speedMultiplier;
+        burnTimer = 10f * speedMultiplier;
     }
 }
