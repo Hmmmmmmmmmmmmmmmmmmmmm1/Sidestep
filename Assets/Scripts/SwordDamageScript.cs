@@ -42,6 +42,7 @@ namespace Assets.Scripts.CharacterControl
                     Debug.Log(other);
                     //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
                     other.gameObject.GetComponent<Abilities>().burnDmgActivate();
+                    Debug.Log("hehoohoohahahhega");
                 }
 
                 Debug.Log(velocity * damage);
