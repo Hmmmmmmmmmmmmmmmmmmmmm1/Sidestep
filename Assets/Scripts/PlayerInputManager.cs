@@ -47,9 +47,21 @@ namespace Assets.Scripts.CharacterControl
                 Dash.Add(DashKey.RightPush);
                 Debug.Log("right");
             }
-            if(Input.GetKeyDown(KeyCode.W))
+            if(Input.GetKeyUp(KeyCode.W))
             {
-                //KeyUp.Add(KeyUp.UpUp);
+                KeyUp.Add(KeyRelease.UpUp);
+            }
+            if(Input.GetKeyUp(KeyCode.A))
+            {
+                KeyUp.Add(KeyRelease.LeftUp);
+            }
+            if(Input.GetKeyUp(KeyCode.S))
+            {
+                KeyUp.Add(KeyRelease.DownUp);
+            }
+            if(Input.GetKeyUp(KeyCode.D))
+            {
+                KeyUp.Add(KeyRelease.RightUp);
             }
         }
 
