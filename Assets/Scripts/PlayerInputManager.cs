@@ -10,6 +10,8 @@ namespace Assets.Scripts.CharacterControl
         public Rigidbody rb;
         public Transform tra;
         public ArrayList Effects = new ArrayList();
+        public ArrayList Dash = new ArrayList();
+        public ArrayList KeyUp = new ArrayList();
         public bool lGrounded;
         public bool rGrounded;
         public bool lHit;
@@ -22,6 +24,50 @@ namespace Assets.Scripts.CharacterControl
         public GameObject SwordHolder;
         public bool swung;
         public bool waiter;
+
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                Dash.Add(DashKey.UpPush);
+                Debug.Log("forward");
+            }
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                Dash.Add(DashKey.LeftPush);
+                Debug.Log("left");
+            }
+            if(Input.GetKeyDown(KeyCode.S))
+            {
+                Dash.Add(DashKey.DownPush);
+                Debug.Log("down");
+            }
+            if(Input.GetKeyDown(KeyCode.D))
+            {
+                Dash.Add(DashKey.RightPush);
+                Debug.Log("right");
+            }
+            if(Input.GetKeyUp(KeyCode.W))
+            {
+                KeyUp.Add(KeyRelease.UpUp);
+                Debug.Log("up release");
+            }
+            if(Input.GetKeyUp(KeyCode.A))
+            {
+                KeyUp.Add(KeyRelease.LeftUp);
+                Debug.Log("left release");
+            }
+            if(Input.GetKeyUp(KeyCode.S))
+            {
+                KeyUp.Add(KeyRelease.DownUp);
+                Debug.Log("down release");
+            }
+            if(Input.GetKeyUp(KeyCode.D))
+            {
+                KeyUp.Add(KeyRelease.RightUp);
+                Debug.Log("right release");
+            }
+        }
 
         void FixedUpdate()
         {
@@ -44,14 +90,23 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.E),
                         Input.GetKey(KeyCode.LeftShift),
                         Input.GetKey(KeyCode.Space),
-                        Input.GetMouseButtonDown(0),
-                        Input.GetMouseButtonDown(1));
-                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit);
+                        Input.GetMouseButton(0),
+                        Input.GetMouseButton(1));
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit, Dash, KeyUp);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
                 swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
+                for (int i = 0; i < Dash.Count; i++)
+                {
+                    //Debug.Log(Dash[i]);
+                    Dash[i] = null;
+                }
+                for (int i = 0; i < KeyUp.Count; i++)
+                {
+                    KeyUp[i] = null;
+                }
             }
         }
 
@@ -66,10 +121,6 @@ namespace Assets.Scripts.CharacterControl
             Debug.Log("off");
             attack.Swing();
         }
-
-
-
-
     }
 
 
@@ -109,6 +160,21 @@ namespace Assets.Scripts.CharacterControl
         BackHeld,
         LeftHeld,
         RightHeld,
+    }
+    public enum DashKey
+    {
+        DownPush,
+        LeftPush,
+        RightPush,
+        UpPush,
+
+    }
+    public enum KeyRelease
+    {
+        UpUp,
+        DownUp,
+        RightUp,
+        LeftUp,
     }
     /*
 

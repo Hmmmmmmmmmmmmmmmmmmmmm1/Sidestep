@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class PlayerHP2 : MonoBehaviour
 {
     public Slider slider;
     public Text hpNum;
-    public static int hp = 100;
+    public int hp = 100;
 
     private int oldHp = 0;
     public float hpChangeTick = 0;
@@ -17,9 +18,12 @@ public class PlayerHP2 : MonoBehaviour
     private float dmgInterval = 0;
     private GameObject touchingObject;
 
+    PhotonView PV;
+
     void Start(){
         changeHealth(0);
         hpNum.text = hp + "";
+        PV = gameObject.GetComponent<PhotonView>();
     }
 
     void Update(){
@@ -57,5 +61,22 @@ public class PlayerHP2 : MonoBehaviour
 
         void OnCollisionExit(Collision other){
         touchingObject = null;
+    }
+
+    public void EnemyDamage(int dmg){
+        PV.RPC("EnemyDamageRPC",RpcTarget.All,dmg);
+    }
+
+    [PunRPC]
+    void EnemyDamageRPC(int dmg)
+    {
+        if (!PV.IsMine){
+        //gameObject.GetComponent<PlayerHP2>().changeHealth(-7);
+        }
+        else{
+            gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg/4);
+        }
+        //gameObject.GetComponent<PlayerHP2>().changeHealth(-7);
+        Debug.Log("skaboosh" + dmg);
     }
 }

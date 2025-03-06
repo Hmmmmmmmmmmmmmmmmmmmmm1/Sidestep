@@ -57,6 +57,7 @@ public class Abilities : MonoBehaviour
 
     //fireaspect
     private float evilTimer;
+    private float burnTimer;
     private float dmgInterval = 0f;
     private Material originalMat;
     public bool fireActive = false;
@@ -191,7 +192,7 @@ public class Abilities : MonoBehaviour
             timer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1)
             {
-                if (PlayerHP2.hp < 100)
+                if (gameObject.GetComponent<PlayerHP2>().hp < 100)
                 {
                     timer = 7.5f * speedMultiplier;
                     Skill1Cooldown = 9 * classRegen;
@@ -203,7 +204,7 @@ public class Abilities : MonoBehaviour
         //burn Mode
         if (Skill2 == 1)
         {
-            if (evilTimer > 0)
+            if (burnTimer > 0)
             {
                 if (dmgInterval > 0)
                 {
@@ -211,22 +212,24 @@ public class Abilities : MonoBehaviour
                 }
                 if (dmgInterval <= 0)
                 {
-                    //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
+                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
                     Debug.Log("how many times has this run");
                     dmgInterval = 0.35f;
                 }
             }
-            else{
+            if (evilTimer < 0){
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
+            burnTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 9;
+                Skill2Cooldown = 0;
+                //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
             }
             if (burned){
 
@@ -284,11 +287,8 @@ public class Abilities : MonoBehaviour
         }
     }
 
-    public GameObject burnDmgActivate (GameObject enemy){
+    public void burnDmgActivate (){
         burned = true;
-        return enemy;
-    }
-    public void burnDmg(){
-
+        burnTimer = 10f * speedMultiplier;
     }
 }

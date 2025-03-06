@@ -9,10 +9,11 @@ public class Dead : MonoBehaviour
 {
     public Text text;
     public float timer = 5;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,13 +21,17 @@ public class Dead : MonoBehaviour
     {
         Scene scene  = SceneManager.GetActiveScene();
         if (!scene.name.Equals("Casey's Scene")){
-            if (PlayerHP2.hp == 0){
-                SceneManager.LoadScene(4);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Debug.Log("you died");
+            if (gameObject.GetComponent<PlayerHP2>()){
+                if (gameObject.GetComponent<PlayerHP2>().hp == 0 && gameObject.name.Equals("Player 1")){
+                    SceneManager.LoadScene(4);
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    Debug.Log("you died" + gameObject.name);
+                }
             }
+
         }
+        /*
         timer -= Time.deltaTime;
         if (timer >= 0){
             if (text){
@@ -38,6 +43,7 @@ public class Dead : MonoBehaviour
                 text.text = "try again";
             }
         }
+        */
     }
 
     public void shut(){
@@ -45,5 +51,9 @@ public class Dead : MonoBehaviour
             UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
+    }
+
+    public static void kys(GameObject guy){
+        
     }
 }
