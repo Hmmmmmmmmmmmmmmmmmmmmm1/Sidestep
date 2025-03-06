@@ -74,7 +74,7 @@ public class PlayerHP2 : MonoBehaviour
         gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
         }
         else{
-            gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
+            //gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
         }
         Debug.Log("skaboosh");
     }
