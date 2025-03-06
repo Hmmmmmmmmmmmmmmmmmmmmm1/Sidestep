@@ -73,7 +73,7 @@ namespace Assets.Scripts.CharacterControl
 
         public void ResetRotation()
         {
-            tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 0);
+            tra.localEulerAngles = new Vector3(0, tra.localEulerAngles.y, 0);
         }
 
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
@@ -97,12 +97,12 @@ namespace Assets.Scripts.CharacterControl
             if (Effects.Contains(ActiveEffects.LeftHeld) && Dash.Contains(DashKey.LeftPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * (-5 * Mathf.Log((rb.velocity.magnitude + 1) + 20) * 2000);
+                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * -2000);
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Dash.Contains(DashKey.RightPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * -2000);
+                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * 2000);
             }
             if (Grounded && !Keys.SH)
             {

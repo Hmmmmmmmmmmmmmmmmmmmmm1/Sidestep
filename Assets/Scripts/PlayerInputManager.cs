@@ -90,8 +90,8 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.E),
                         Input.GetKey(KeyCode.LeftShift),
                         Input.GetKey(KeyCode.Space),
-                        Input.GetMouseButtonDown(0),
-                        Input.GetMouseButtonDown(1));
+                        Input.GetMouseButton(0),
+                        Input.GetMouseButton(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit, Dash, KeyUp);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);

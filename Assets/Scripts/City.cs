@@ -42,6 +42,13 @@ public class City : MonoBehaviour
         GameObject.Find("Ground").GetComponent<MeshCollider>().convex = false;
         GameObject.Find("Stairway").GetComponent<MeshCollider>().convex = false;
         GameObject.Find("Rail Lights").GetComponent<MeshCollider>().convex = false;
+        GameObject Blacons = GameObject.Find("Blacons");
+        GameObject[] blacons = new GameObject[Blacons.transform.childCount];
+        for (int i = 0; i < blacons.Length; i++)
+        {
+            blacons[i] = gameObject.transform.GetChild(i).gameObject;
+            blacons[i].GetComponent<MeshCollider>().convex = false;
+        }
     }
     // Update is called once per frame
     void Update()
