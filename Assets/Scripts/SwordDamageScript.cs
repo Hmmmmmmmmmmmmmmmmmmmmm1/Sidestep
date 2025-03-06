@@ -26,12 +26,6 @@ namespace Assets.Scripts.CharacterControl
         public void Update()
         {
             CheckClass();
-            if (Input.GetKeyDown(KeyCode.C) && 1 == 2){
-                if (gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>()){
-                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage(30);
-                    Debug.Log("cows");
-                }
-            }
         }
         public void CheckClass()
         {
