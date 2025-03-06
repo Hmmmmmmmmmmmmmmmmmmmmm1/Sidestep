@@ -43,6 +43,8 @@ MonoBehaviour:
   - PlayerSpawn
   - RPC_BeamOff
   - RPC_BeamOn
+  - enemyDamage
+  - EnemyDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

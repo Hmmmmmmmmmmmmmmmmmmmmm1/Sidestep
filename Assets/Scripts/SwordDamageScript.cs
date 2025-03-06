@@ -20,10 +20,18 @@ namespace Assets.Scripts.CharacterControl
         {
             damage = .2f;
             damageMultiplier = 1f;
+
+                        PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
         }
         public void Update()
         {
             CheckClass();
+            if (Input.GetKeyDown(KeyCode.C) && 1 == 2){
+                if (gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>()){
+                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage(30);
+                    Debug.Log("cows");
+                }
+            }
         }
         public void CheckClass()
         {
@@ -46,24 +54,12 @@ namespace Assets.Scripts.CharacterControl
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
-                    Debug.Log(other);
-                    //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-100);
-                    //other.gameObject.GetComponent<Abilities>().burnDmgActivate();
-                    other.gameObject.GetComponent<PlayerHP2>().changeHealth(-25);
-                    Debug.Log("hehoohoohahahhega");
+                    other.GetComponent<PlayerHP2>().EnemyDamage(30);
                 }
 
-                PV.RPC("EnemyDamage",RpcTarget.All,30);
+                //PV.RPC("EnemyDamage",RpcTarget.All,30);
                 Debug.Log(velocity * damage);
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
-            }
-        }
-
-        [PunRPC]
-        void EnemyDamage(int dmg)
-        {
-            if (!PV.IsMine){
-            gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
             }
         }
     }
