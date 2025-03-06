@@ -13,6 +13,11 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         private Classism classism;
         public Vector3 velocity;
+
+        private float burnTimer;
+        private float burnInterval;
+        private GameObject burnTarget;
+        private bool burnBool = false;
         
         PhotonView PV;
 
@@ -26,6 +31,7 @@ namespace Assets.Scripts.CharacterControl
         public void Update()
         {
             CheckClass();
+            burnDamage();
         }
         public void CheckClass()
         {
@@ -35,6 +41,24 @@ namespace Assets.Scripts.CharacterControl
             {
                 damageMultiplier = 1.25f;
                 //Debug.Log("tank or fighter");
+            }
+        }
+
+        public void burnDamage(){
+            if (burnBool){
+                if (burnTimer > 0)
+                    {
+                        if (burnInterval > 0)
+                        {
+                            burnInterval -= Time.deltaTime;
+                        }
+                        if (burnInterval <= 0)
+                        {
+                            burnTarget.GetComponent<PlayerHP2>().EnemyDamage(-1);
+                            burnInterval = 0.35f;
+                        }
+                    }
+                burnTimer -= Time.deltaTime;
             }
         }
 
@@ -48,7 +72,8 @@ namespace Assets.Scripts.CharacterControl
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
-                    other.GetComponent<PlayerHP2>().EnemyDamage(-1);
+                    burnTarget = other.gameObject; 
+                    burnTimer = 6f;
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
