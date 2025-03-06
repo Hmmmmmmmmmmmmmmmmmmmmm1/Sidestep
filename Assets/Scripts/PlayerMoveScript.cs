@@ -97,12 +97,12 @@ namespace Assets.Scripts.CharacterControl
             if (Effects.Contains(ActiveEffects.LeftHeld) && Dash.Contains(DashKey.LeftPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * (-5 * Mathf.Log((rb.velocity.magnitude + 1) + 20) * 2000);
+                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * -2000);
             }
             if (Effects.Contains(ActiveEffects.RightHeld) && Dash.Contains(DashKey.RightPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * -2000);
+                return (tra.right) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * 2000);
             }
             if (Grounded && !Keys.SH)
             {
