@@ -48,12 +48,12 @@ namespace Assets.Scripts.CharacterControl
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
-                    other.GetComponent<PlayerHP2>().EnemyDamage(1);
+                    other.GetComponent<PlayerHP2>().EnemyDamage(-1);
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
                 Debug.Log(velocity * damage);
-                other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude * damage * damageMultiplier)));
+                other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude * damage * damageMultiplier) + 1));
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
         }
