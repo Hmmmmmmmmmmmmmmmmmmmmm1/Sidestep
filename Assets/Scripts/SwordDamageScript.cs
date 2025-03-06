@@ -15,9 +15,8 @@ namespace Assets.Scripts.CharacterControl
         public Vector3 velocity;
 
         private float burnTimer;
-        private float burnInterval;
+        private float burnInterval = 0f;
         private GameObject burnTarget;
-        private bool burnBool = false;
         
         PhotonView PV;
 
@@ -45,22 +44,19 @@ namespace Assets.Scripts.CharacterControl
         }
 
         public void burnDamage(){
-            if (burnBool){
-                if (burnTimer > 0)
+            if (burnTimer > 0)
+                {
+                    if (burnInterval > 0)
                     {
-                        if (burnInterval > 0)
-                        {
-                            burnInterval -= Time.deltaTime;
-                        }
-                        if (burnInterval <= 0)
-                        {
-                            burnTarget.GetComponent<PlayerHP2>().EnemyDamage(-1);
-                            burnInterval = 0.35f;
-                        }
+                        burnInterval -= Time.deltaTime;
                     }
-                burnTimer -= Time.deltaTime;
-                burnBool = false;
-            }
+                    if (burnInterval <= 0)
+                    {
+                        burnTarget.GetComponent<PlayerHP2>().EnemyDamage(-1);
+                        burnInterval = 0.35f;
+                    }
+                }
+            burnTimer -= Time.deltaTime;
         }
 
 
@@ -73,7 +69,6 @@ namespace Assets.Scripts.CharacterControl
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
-                    burnBool = true;
                     burnTarget = other.gameObject;
                     burnTimer = 6f;
                 }
