@@ -54,6 +54,10 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
+        if(PlayerAttackScript.swung)
+        {
+            grappling = false;
+        }
         //canGrapple();
         if (Input.GetKeyDown(grappleKey))
         {
