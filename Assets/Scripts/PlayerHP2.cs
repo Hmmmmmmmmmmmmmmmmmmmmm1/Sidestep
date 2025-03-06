@@ -71,12 +71,12 @@ public class PlayerHP2 : MonoBehaviour
     void EnemyDamageRPC(int dmg)
     {
         if (!PV.IsMine){
-        //gameObject.GetComponent<PlayerHP2>().changeHealth(-3);
+        gameObject.GetComponent<PlayerHP2>().changeHealth(-7);
         }
         else{
             //gameObject.GetComponent<PlayerHP2>().changeHealth(-dmg);
         }
-        gameObject.GetComponent<PlayerHP2>().changeHealth(-7);
+        //gameObject.GetComponent<PlayerHP2>().changeHealth(-7);
         Debug.Log("skaboosh" + dmg);
     }
 }
