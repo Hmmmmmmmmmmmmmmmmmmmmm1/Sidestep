@@ -59,6 +59,7 @@ namespace Assets.Scripts.CharacterControl
                         }
                     }
                 burnTimer -= Time.deltaTime;
+                burnBool = false;
             }
         }
 
@@ -72,7 +73,8 @@ namespace Assets.Scripts.CharacterControl
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
-                    burnTarget = other.gameObject; 
+                    burnBool = true;
+                    burnTarget = other.gameObject;
                     burnTimer = 6f;
                 }
 
