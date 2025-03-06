@@ -3,7 +3,12 @@ guid: ffc3dae5ba0da40118057dc11929c680
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedLining
+    second: {fileID: 2100000, guid: 39d00d2a6a0bc46bca409013e6aad7b7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

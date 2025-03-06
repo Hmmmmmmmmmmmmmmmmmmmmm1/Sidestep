@@ -69,7 +69,7 @@ namespace Assets.Scripts.CharacterControl
 
         public void ResetRotation()
         {
-            tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 0);
+            tra.localEulerAngles = new Vector3(0, tra.localEulerAngles.y, 0);
         }
 
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
