@@ -232,7 +232,7 @@ public class Abilities : MonoBehaviour
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
             {
                 knockActive = true;
-                Skill2Cooldown = 3;
+                Skill2Cooldown = 4;
             }
         }
     
@@ -300,6 +300,6 @@ public class Abilities : MonoBehaviour
     [PunRPC]
     void knockedBackRPC(Vector3 velocityFromHit)
     {
-        gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit;
+        gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit / 2;
     }
 }
