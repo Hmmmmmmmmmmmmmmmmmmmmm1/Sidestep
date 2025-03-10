@@ -75,6 +75,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().knockActive){
                     other.GetComponent<Abilities>().knockedBack(gameObject.transform.parent.parent.gameObject.GetComponent<Rigidbody>().velocity);
+                    gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().knockActive = false;
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);

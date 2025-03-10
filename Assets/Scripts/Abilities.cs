@@ -298,13 +298,11 @@ public class Abilities : MonoBehaviour
 
     public void knockedBack (Vector3 velocityFromHit){
         PV.RPC("knockedBackRPC",RpcTarget.All,velocityFromHit);
-        knockActive = false;
     }
 
     [PunRPC]
     void knockedBackRPC(Vector3 velocityFromHit)
     {
         gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit / 2;
-        knockActive = false;
     }
 }
