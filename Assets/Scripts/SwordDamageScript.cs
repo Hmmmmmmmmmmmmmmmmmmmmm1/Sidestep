@@ -62,7 +62,7 @@ namespace Assets.Scripts.CharacterControl
 
         private void OnTriggerEnter(Collider other)
         {
-            Vector3 velocity = gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().rb.velocity;
+            Vector3 velocity = gameObject.GetComponent<Rigidbody>().velocity;
 
             PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
 
