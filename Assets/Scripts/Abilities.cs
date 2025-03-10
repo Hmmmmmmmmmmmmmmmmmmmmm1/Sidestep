@@ -301,5 +301,6 @@ public class Abilities : MonoBehaviour
     void knockedBackRPC(Vector3 velocityFromHit)
     {
         gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit / 2;
+        knockActive = false;
     }
 }
