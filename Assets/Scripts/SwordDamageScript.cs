@@ -13,7 +13,7 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         private Classism classism;
         public Vector3 velocity;
-        
+
         PhotonView PV;
 
         public void Start()
@@ -21,7 +21,7 @@ namespace Assets.Scripts.CharacterControl
             damage = .2f;
             damageMultiplier = 1f;
 
-                        PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
+            PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
         }
         public void Update()
         {
@@ -47,7 +47,8 @@ namespace Assets.Scripts.CharacterControl
 
             if (other.gameObject.GetComponent<PlayerHP2>() != null)
             {
-                if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive){
+                if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().fireActive)
+                {
                     other.GetComponent<PlayerHP2>().EnemyDamage(1);
                 }
 
