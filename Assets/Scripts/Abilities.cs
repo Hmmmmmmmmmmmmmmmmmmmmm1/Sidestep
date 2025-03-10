@@ -211,14 +211,14 @@ public class Abilities : MonoBehaviour
         }
 
         //burn Mode
-        if (Skill2 == 1)
+        if (Skill2 == 1 && gameObject.name.Equals("Player 1"))
         {
             if (evilTimer < 0){
                 PV.RPC("combatAbilityOn",RpcTarget.All,true);
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
-            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
                 fireActive = true;
@@ -227,12 +227,12 @@ public class Abilities : MonoBehaviour
             }
         }
     
-        if (Skill2 == 2)
+        if (Skill2 == 2 && gameObject.name.Equals("Player 1"))
         {
             if (!knockActive){
                 PV.RPC("combatAbilityOn",RpcTarget.All,true);
             }
-            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
                 knockActive = true;
                 Skill2Cooldown = 4;
