@@ -303,6 +303,6 @@ public class Abilities : MonoBehaviour
     [PunRPC]
     void knockedBackRPC(Vector3 velocityFromHit)
     {
-        gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit / 2;
+        gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit * 20;
     }
 }
