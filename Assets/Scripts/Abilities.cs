@@ -69,6 +69,9 @@ public class Abilities : MonoBehaviour
     //knockback
     public bool knockActive = false;
 
+    //lifesteal
+    public bool vampirism = false;
+
     //general
     private float speedMultiplier;
 
@@ -227,6 +230,7 @@ public class Abilities : MonoBehaviour
             }
         }
     
+        //punch II bow mode
         if (Skill2 == 2 && gameObject.name.Equals("Player 1"))
         {
             if (!knockActive){
@@ -236,6 +240,20 @@ public class Abilities : MonoBehaviour
             {
                 knockActive = true;
                 Skill2Cooldown = 4;
+                PV.RPC("combatAbilityOn",RpcTarget.All,false);
+            }
+        }
+   
+        //Lifesteal bow mode
+        if (Skill2 == 3 && gameObject.name.Equals("Player 1"))
+        {
+            if (!vampirism){
+                PV.RPC("combatAbilityOn",RpcTarget.All,true);
+            }
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                vampirism = true;
+                Skill2Cooldown = 8;
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
             }
         }
