@@ -200,48 +200,22 @@ public class Abilities : MonoBehaviour
             }
         }
 
-
         //burn Mode
         if (Skill2 == 1)
         {
-            if (burnTimer > 0)
-            {
-                if (dmgInterval > 0)
-                {
-                    dmgInterval -= Time.deltaTime;
-                }
-                if (dmgInterval <= 0)
-                {
-                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
-                    Debug.Log("how many times has this run");
-                    dmgInterval = 0.35f;
-                }
-            }
             if (evilTimer < 0){
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
-            burnTimer -= Time.deltaTime;
-            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
             {
                 transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 0;
-                //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
-            }
-            if (burned){
-
+                Skill2Cooldown = 10;
             }
         }
-
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log(Skill2 + " oogde");
-        }
-
     }
 
     public void Cooldown()
@@ -285,10 +259,5 @@ public class Abilities : MonoBehaviour
             classRegen = 1f;
             classPower = 1f;
         }
-    }
-
-    public void burnDmgActivate (){
-        burned = true;
-        burnTimer = 10f * speedMultiplier;
     }
 }
