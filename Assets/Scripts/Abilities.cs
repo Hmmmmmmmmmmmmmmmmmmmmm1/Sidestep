@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Numerics;
+using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion;
 
 public class Abilities : MonoBehaviour
 {
@@ -63,8 +66,14 @@ public class Abilities : MonoBehaviour
     public bool fireActive = false;
     public bool burned = false;
 
+    //knockback
+    public bool knockActive = false;
+
     //general
     private float speedMultiplier;
+
+    private PhotonView PV;
+
     public float classRegen;
     public float classPower;
     public GameObject ClassObject;
@@ -76,6 +85,7 @@ public class Abilities : MonoBehaviour
         legos = Resources.Load<GameObject>("Wall");
         boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
         originalMat = GetComponent<Renderer>().material;
+        PV = gameObject.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -204,18 +214,28 @@ public class Abilities : MonoBehaviour
         if (Skill2 == 1)
         {
             if (evilTimer < 0){
-                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
+                PV.RPC("FireSwordBurn",RpcTarget.All,true);
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
             {
-                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
+                PV.RPC("FireSwordBurn",RpcTarget.All,false);
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 10;
             }
         }
+    
+        if (Skill2 == 2)
+        {
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
+            {
+                knockActive = true;
+                Skill2Cooldown = 3;
+            }
+        }
+    
     }
 
     public void Cooldown()
@@ -259,5 +279,27 @@ public class Abilities : MonoBehaviour
             classRegen = 1f;
             classPower = 1f;
         }
+    }
+
+    [PunRPC]
+    void FireSwordBurn(bool changeToOld)
+    {
+        if (changeToOld){
+            transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
+        }
+        else{
+            transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
+        }
+    }
+
+    public void knockedBack (Vector3 velocityFromHit){
+        PV.RPC("knockedBackRPC",RpcTarget.All,velocityFromHit);
+        knockActive = false;
+    }
+
+    [PunRPC]
+    void knockedBackRPC(Vector3 velocityFromHit)
+    {
+        gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit;
     }
 }

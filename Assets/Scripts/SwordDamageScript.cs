@@ -73,6 +73,10 @@ namespace Assets.Scripts.CharacterControl
                     burnTimer = 6f;
                 }
 
+                if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().knockActive){
+                    other.GetComponent<Abilities>().knockedBack(gameObject.transform.parent.parent.gameObject.GetComponent<Rigidbody>().velocity);
+                }
+
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
                 other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude * damage * damageMultiplier) + 1));
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
