@@ -214,13 +214,13 @@ public class Abilities : MonoBehaviour
         if (Skill2 == 1)
         {
             if (evilTimer < 0){
-                PV.RPC("FireSwordBurn",RpcTarget.All,true);
+                PV.RPC("combatAbilityOn",RpcTarget.All,true);
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
             {
-                PV.RPC("FireSwordBurn",RpcTarget.All,false);
+                PV.RPC("combatAbilityOn",RpcTarget.All,false);
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 10;
@@ -229,10 +229,14 @@ public class Abilities : MonoBehaviour
     
         if (Skill2 == 2)
         {
+            if (!knockActive){
+                PV.RPC("combatAbilityOn",RpcTarget.All,true);
+            }
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1 && gameObject.name.Equals("Player 1"))
             {
                 knockActive = true;
                 Skill2Cooldown = 4;
+                PV.RPC("combatAbilityOn",RpcTarget.All,false);
             }
         }
     
@@ -282,7 +286,7 @@ public class Abilities : MonoBehaviour
     }
 
     [PunRPC]
-    void FireSwordBurn(bool changeToOld)
+    void combatAbilityOn(bool changeToOld)
     {
         if (changeToOld){
             transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
