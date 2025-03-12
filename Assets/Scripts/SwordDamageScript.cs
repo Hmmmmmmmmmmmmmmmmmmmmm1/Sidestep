@@ -73,6 +73,15 @@ namespace Assets.Scripts.CharacterControl
                     burnTimer = 6f;
                 }
 
+                if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().knockActive){
+                    other.GetComponent<Abilities>().knockedBack(gameObject.transform.parent.parent.gameObject.GetComponent<Rigidbody>().velocity);
+                    gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().knockActive = false;
+                }
+
+                if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().vampActive){
+                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage((int)((velocity.magnitude * damage * damageMultiplier / 2) + 1));
+                }
+
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
                 other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude * damage * damageMultiplier) + 1));
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));

@@ -23,9 +23,9 @@ public class theresClassAndThenTheresRace : MonoBehaviour
     [PunRPC]
     void PlayerSpawn()
     {
-        GameObject grumb = GameObject.Find("Ian 1(Clone)");
-        grumb.name = "Player " + seeingPeopleOnlyBasedOnTheirColor.playerCount;
-        grumb.transform.Find("Marker").GetComponent<MeshRenderer>().material = PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().glows[seeingPeopleOnlyBasedOnTheirColor.playerCount - 1];
+        GameObject target = GameObject.Find("Ian 1(Clone)");
+        target.name = "Player " + seeingPeopleOnlyBasedOnTheirColor.playerCount;
+        target.transform.Find("Marker").GetComponent<MeshRenderer>().material = PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().glows[seeingPeopleOnlyBasedOnTheirColor.playerCount - 1];
         PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().newPlayerJoin();
         //Debug.Log(gameObject.transform.Find("Marker").GetComponent<MeshRenderer>().material.name);
     }
