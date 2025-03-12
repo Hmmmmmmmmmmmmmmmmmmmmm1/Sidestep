@@ -70,7 +70,9 @@ public class Abilities : MonoBehaviour
     public bool knockActive = false;
 
     //lifesteal
-    public bool vampirism = false;
+    private float evilerTimer;
+    private float vampTimer;
+    public bool vampActive = false;
 
     //general
     private float speedMultiplier;
@@ -244,17 +246,20 @@ public class Abilities : MonoBehaviour
             }
         }
    
-        //Lifesteal bow mode
+        //bite Mode
         if (Skill2 == 3 && gameObject.name.Equals("Player 1"))
         {
-            if (!vampirism){
+            if (evilerTimer < 0){
                 PV.RPC("combatAbilityOn",RpcTarget.All,true);
+                vampActive = false;
             }
+            evilerTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                vampirism = true;
-                Skill2Cooldown = 8;
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
+                vampActive = true;
+                evilerTimer = 10f * speedMultiplier;
+                Skill2Cooldown = 10;
             }
         }
     
