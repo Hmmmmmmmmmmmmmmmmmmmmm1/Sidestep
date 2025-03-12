@@ -259,7 +259,7 @@ public class Abilities : MonoBehaviour
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
                 vampActive = true;
                 evilerTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 10;
+                Skill2Cooldown = 100;
             }
         }
     

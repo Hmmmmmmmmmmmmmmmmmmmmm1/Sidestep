@@ -71,15 +71,15 @@ public class AbilitySelection : MonoBehaviour
         }
         if (fortnite ==3){
             Skill2 = "Lifesteal";
-            Select2 = 2;
+            Select2 = 3;
         }
         if (fortnite ==4){
             Skill2 = "Immobilize";
-            Select2 = 2;
+            Select2 = 4;
         }
         if (fortnite ==5){
             Skill2 = "DDOS";
-            Select2 = 2;
+            Select2 = 5;
         }
         Skill2Text.text = Skill2;
         Abilities.Skill2 = Select2;
