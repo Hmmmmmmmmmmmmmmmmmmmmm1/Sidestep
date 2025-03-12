@@ -12,8 +12,7 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Effects = new ArrayList();
         public ArrayList Dash = new ArrayList();
         public ArrayList KeyUp = new ArrayList();
-        public bool lGrounded;
-        public bool rGrounded;
+        (bool, RaycastHit) GroundChecker;
         public bool lHit;
         public bool rHit;
         public PlayerMoveScript move;
@@ -72,12 +71,12 @@ namespace Assets.Scripts.CharacterControl
         void FixedUpdate()
         {
             ClassObject = GameObject.Find("Classes");
-            Grounded = lGrounded && rGrounded;
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
             if (GetComponent<PhotonView>().IsMine == true)
             {
-                lGrounded = tra.Find("GroundCheckers/LeftGroundChecker").gameObject.GetComponent<LeftGroundCheckerScript>().lGrounded;
-                rGrounded = tra.Find("GroundCheckers/RightGroundChecker").gameObject.GetComponent<RightGroundCheckerScript>().rGrounded;
+                GroundCheckerScript GroundCheckerOb = tra.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>();
+                GroundChecker.Item1 = GroundCheckerOb.Grounded;
+                GroundChecker.Item2 = GroundCheckerOb.HitData;
                 lHit = tra.Find("WallCheckers/LeftWallChecker").gameObject.GetComponent<LeftWallCheckerScript>().lHit;
                 rHit = tra.Find("WallCheckers/RightWallChecker").gameObject.GetComponent<RightWallCheckerScript>().rHit;
                 KeysPressed keys =
@@ -92,7 +91,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetKey(KeyCode.Space),
                         Input.GetMouseButton(0),
                         Input.GetMouseButton(1));
-                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, lGrounded, rGrounded, ClassObject, lHit, rHit, Dash, KeyUp);
+                PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
                 swung = attack.Begin();
