@@ -21,7 +21,7 @@ public class FreezeRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Quaternion temp = transform.rotation;
+        /*Quaternion temp = transform.rotation;
         if (x){
             temp = new Quaternion (temp.x,rotation.y,rotation.z,rotation.w);
         }
@@ -35,5 +35,6 @@ public class FreezeRotation : MonoBehaviour
             temp = new Quaternion (rotation.x,rotation.y,rotation.z,temp.w);
         }
         transform.rotation = temp;
+        */
     }
 }

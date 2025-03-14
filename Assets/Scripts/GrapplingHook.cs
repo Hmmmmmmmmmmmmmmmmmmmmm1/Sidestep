@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System;
 namespace Assets.Scripts.CharacterControl
 {
 
@@ -106,6 +107,10 @@ namespace Assets.Scripts.CharacterControl
             if (Input.GetKey(KeyCode.L))
             {
                 //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
+            }
+
+            if (!gameObject.GetComponent<GroundCheckerScript>().Grounded){
+                gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             }
         }
 
