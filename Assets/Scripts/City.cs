@@ -46,10 +46,11 @@ public class City : MonoBehaviour
         GameObject[] blacons = new GameObject[Blacons.transform.childCount];
         for (int i = 0; i < blacons.Length; i++)
         {
-            blacons[i] = gameObject.transform.GetChild(i).gameObject;
+            blacons[i] = GameObject.Find("Blacons").transform.GetChild(i).gameObject;
             blacons[i].GetComponent<MeshCollider>().convex = false;
+            Debug.Log("Blacon is" + blacons[i].name);
         }
-    }
+    }   
     // Update is called once per frame
     void Update()
     {

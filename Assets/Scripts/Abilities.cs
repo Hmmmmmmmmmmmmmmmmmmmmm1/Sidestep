@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Numerics;
+using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion;
 
 public class Abilities : MonoBehaviour
 {
@@ -63,8 +66,19 @@ public class Abilities : MonoBehaviour
     public bool fireActive = false;
     public bool burned = false;
 
+    //knockback
+    public bool knockActive = false;
+
+    //lifesteal
+    private float evilerTimer;
+    private float vampTimer;
+    public bool vampActive = false;
+
     //general
     private float speedMultiplier;
+
+    private PhotonView PV;
+
     public float classRegen;
     public float classPower;
     public GameObject ClassObject;
@@ -76,6 +90,7 @@ public class Abilities : MonoBehaviour
         legos = Resources.Load<GameObject>("Wall");
         boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
         originalMat = GetComponent<Renderer>().material;
+        PV = gameObject.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -200,48 +215,54 @@ public class Abilities : MonoBehaviour
             }
         }
 
-
         //burn Mode
-        if (Skill2 == 1)
+        if (Skill2 == 1 && gameObject.name.Equals("Player 1"))
         {
-            if (burnTimer > 0)
-            {
-                if (dmgInterval > 0)
-                {
-                    dmgInterval -= Time.deltaTime;
-                }
-                if (dmgInterval <= 0)
-                {
-                    gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
-                    Debug.Log("how many times has this run");
-                    dmgInterval = 0.35f;
-                }
-            }
             if (evilTimer < 0){
-                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
+                PV.RPC("combatAbilityOn",RpcTarget.All,true);
                 fireActive = false;
             }
             evilTimer -= Time.deltaTime;
-            burnTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
+                PV.RPC("combatAbilityOn",RpcTarget.All,false);
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 0;
-                //gameObject.GetComponent<PlayerHP2>().changeHealth(-1);
-            }
-            if (burned){
-
+                Skill2Cooldown = 10;
             }
         }
-
-
-        if (Input.GetKeyDown(KeyCode.P))
+    
+        //punch II bow mode
+        if (Skill2 == 2 && gameObject.name.Equals("Player 1"))
         {
-            Debug.Log(Skill2 + " oogde");
+            if (!knockActive){
+                PV.RPC("combatAbilityOn",RpcTarget.All,true);
+            }
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                knockActive = true;
+                Skill2Cooldown = 4;
+                PV.RPC("combatAbilityOn",RpcTarget.All,false);
+            }
         }
-
+   
+        //bite Mode
+        if (Skill2 == 3 && gameObject.name.Equals("Player 1"))
+        {
+            if (evilerTimer < 0){
+                PV.RPC("combatAbilityOn",RpcTarget.All,true);
+                vampActive = false;
+            }
+            evilerTimer -= Time.deltaTime;
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                PV.RPC("combatAbilityOn",RpcTarget.All,false);
+                vampActive = true;
+                evilerTimer = 10f * speedMultiplier;
+                Skill2Cooldown = 100;
+            }
+        }
+    
     }
 
     public void Cooldown()
@@ -287,8 +308,24 @@ public class Abilities : MonoBehaviour
         }
     }
 
-    public void burnDmgActivate (){
-        burned = true;
-        burnTimer = 10f * speedMultiplier;
+    [PunRPC]
+    void combatAbilityOn(bool changeToOld)
+    {
+        if (changeToOld){
+            transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = originalMat;
+        }
+        else{
+            transform.Find("Sword Holder/Sword").GetComponent<MeshRenderer>().material = transform.Find("Marker").GetComponent<MeshRenderer>().material;
+        }
+    }
+
+    public void knockedBack (Vector3 velocityFromHit){
+        PV.RPC("knockedBackRPC",RpcTarget.All,velocityFromHit);
+    }
+
+    [PunRPC]
+    void knockedBackRPC(Vector3 velocityFromHit)
+    {
+        gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit * 2;
     }
 }

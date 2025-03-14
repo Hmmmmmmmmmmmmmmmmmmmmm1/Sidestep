@@ -23,6 +23,7 @@ public class Dead : MonoBehaviour
         if (!scene.name.Equals("Casey's Scene")){
             if (gameObject.GetComponent<PlayerHP2>()){
                 if (gameObject.GetComponent<PlayerHP2>().hp == 0 && gameObject.name.Equals("Player 1")){
+                    Destroy(gameObject);
                     SceneManager.LoadScene(4);
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;

@@ -12,8 +12,7 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Effects;
         public Vector3 minVec = new Vector3(0.2f, 0.2f, 0.2f);
         public bool Grounded;
-        public bool lGrounded;
-        public bool rGrounded;
+        (bool, RaycastHit) GroundChecker;
         public GameObject ClassObject;
         private Classism classism;
         public float Class;
@@ -45,14 +44,13 @@ namespace Assets.Scripts.CharacterControl
 
         }
 
-        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, bool lGrounded, bool rGrounded, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash, ArrayList KeyUp)
+        public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, (bool, RaycastHit) GroundChecker, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash, ArrayList KeyUp)
         {
             this.Keys = Keys;
             this.Effects = Effects;
             this.rb = rb;
             this.tra = tra;
-            this.lGrounded = lGrounded;
-            this.rGrounded = rGrounded;
+            this.GroundChecker = GroundChecker;
             this.ClassObject = ClassObject;
             this.lHit = lHit;
             this.rHit = rHit;
@@ -71,9 +69,9 @@ namespace Assets.Scripts.CharacterControl
                 Effects.Remove(effect);
         }
 
-        public void ResetRotation()
+        public void GroundedRotation()
         {
-            tra.localEulerAngles = new Vector3(0, tra.localEulerAngles.y, 0);
+            tra.localEulerAngles = new Vector3(GroundChecker.Item2.normal.x, tra.localEulerAngles.y,GroundChecker.Item2.normal.z);
         }
 
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
@@ -81,7 +79,7 @@ namespace Assets.Scripts.CharacterControl
 
         public Vector3 UpdateVelocity()
         {
-            Grounded = lGrounded & rGrounded;
+            Grounded = GroundChecker.Item1;
 
             Vector3 vec = Vector3.zero;
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Dash.Contains(DashKey.UpPush))
@@ -173,6 +171,7 @@ namespace Assets.Scripts.CharacterControl
             {
                 vec += new Vector3(0, Mathf.Max(GetVelocity().magnitude * 900f, 9000), 0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
+            /*
             if ((lGrounded || rGrounded) && !Grounded)
             {
                 if (!Keys.SH)
@@ -202,9 +201,10 @@ namespace Assets.Scripts.CharacterControl
 
 
             }
+            */
             if (Grounded)
             {
-                ResetRotation();
+                GroundedRotation();
             } else 
             {
                 if (lHit)
@@ -216,10 +216,7 @@ namespace Assets.Scripts.CharacterControl
                 } else if (rHit)
                 {
                     tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 45);
-                } else if (!(lGrounded || rGrounded))
-                {
-                    ResetRotation();
-                }
+                } 
             }
             //if grounded
             // reset
