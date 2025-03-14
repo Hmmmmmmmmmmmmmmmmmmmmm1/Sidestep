@@ -25,7 +25,7 @@ namespace Assets.Scripts.CharacterControl
             damage = .2f;
             damageMultiplier = 1f;
 
-                        PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
+            PV = gameObject.transform.parent.parent.gameObject.GetComponent<PhotonView>();
         }
         public void Update()
         {
