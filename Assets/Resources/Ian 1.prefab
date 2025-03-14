@@ -815,6 +815,9 @@ MonoBehaviour:
   damper: 5.5
   massScale: 4.5
   crosshair: {fileID: 5570487051907634531}
+  grappling: 0
+  playerObject: {fileID: 0}
+  playerInputManager: {fileID: 0}
 --- !u!114 &7200904037037588082
 MonoBehaviour:
   m_ObjectHideFlags: 0
