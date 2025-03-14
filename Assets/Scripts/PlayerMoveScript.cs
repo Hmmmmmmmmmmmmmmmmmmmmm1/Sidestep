@@ -72,6 +72,7 @@ namespace Assets.Scripts.CharacterControl
         public void GroundedRotation()
         {
             tra.localEulerAngles = new Vector3(GroundChecker.Item2.normal.x, tra.localEulerAngles.y,GroundChecker.Item2.normal.z);
+            rb.angularVelocity = Vector3.zero;
         }
 
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
