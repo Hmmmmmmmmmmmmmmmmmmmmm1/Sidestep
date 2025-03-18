@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using System;
+using System.Data;
 namespace Assets.Scripts.CharacterControl
 {
 
@@ -74,6 +75,7 @@ namespace Assets.Scripts.CharacterControl
                 StartGrapple();
 
                 grappling = true;
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
             }
 
             else if (Input.GetKeyUp(grappleKey))
@@ -81,6 +83,7 @@ namespace Assets.Scripts.CharacterControl
                 grappling = false;
                 StopGrapple();
                 PV.RPC("RPC_BeamOff", RpcTarget.All);
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse2) && grappling)
@@ -109,8 +112,17 @@ namespace Assets.Scripts.CharacterControl
                 //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
             }
 
-            if (!gameObject.GetComponent<GroundCheckerScript>().Grounded){
+            if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded){
                 gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+                if (Mathf.Abs(transform.rotation.eulerAngles.z) > 45){
+                    Debug.Log("joey " + transform.rotation.eulerAngles);
+                    if (transform.rotation.eulerAngles.z > 45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z > 0){
+                        //Debug.Log("joey was here");
+                    }
+                    if (transform.rotation.eulerAngles.z < -45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z < 0){
+                        //Debug.Log("joey wasnt here");
+                    }
+                }
             }
         }
 
