@@ -38,6 +38,13 @@ namespace Assets.Scripts.CharacterControl
         public GameObject playerObject;
         public PlayerInputManager playerInputManager;
 
+        [Header("OdmGear")]
+        public Transform orientation;
+        public Rigidbody rb;
+        public float horizontalThrustForce;
+        public float forwardThrustForce;
+        public float extendCableSpeed;
+
         void Awake()
         {
             PV = gameObject.GetComponent<PhotonView>();
@@ -115,7 +122,7 @@ namespace Assets.Scripts.CharacterControl
             if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded){
                 gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
                 if (Mathf.Abs(transform.rotation.eulerAngles.z) > 45){
-                    Debug.Log("joey " + transform.rotation.eulerAngles);
+                    //Debug.Log("joey " + transform.rotation.eulerAngles);
                     if (transform.rotation.eulerAngles.z > 45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z > 0){
                         //Debug.Log("joey was here");
                     }
@@ -123,6 +130,10 @@ namespace Assets.Scripts.CharacterControl
                         //Debug.Log("joey wasnt here");
                     }
                 }
+            }
+
+            if (joint != null){
+                OdmGearMovement();
             }
         }
 
@@ -137,6 +148,7 @@ namespace Assets.Scripts.CharacterControl
         void StartGrapple()
         {
             RaycastHit hit;
+            //maybe do spherecast
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
             {
                 Transform parentCheck = hit.transform;
@@ -219,6 +231,40 @@ namespace Assets.Scripts.CharacterControl
                 {
                     crosshair.color = Color.black;
                 }
+            }
+        }
+
+        private void OdmGearMovement()
+        {
+            // right
+            if (Input.GetKey(KeyCode.D)){
+                rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
+                Debug.Log("gam");
+            } 
+            // left
+            if (Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
+
+            // forward
+            if (Input.GetKey(KeyCode.W)) rb.AddForce(orientation.forward * horizontalThrustForce * Time.deltaTime);
+
+            // shorten cable
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Vector3 directionToPoint = grapplePoint.transform.position - transform.position;
+                rb.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
+
+                float distanceFromPoint = Vector3.Distance(transform.position, grapplePoint.transform.position);
+
+                joint.maxDistance = distanceFromPoint * 0.8f;
+                joint.minDistance = distanceFromPoint * 0.25f;
+            }
+            // extend cable
+            if (Input.GetKey(KeyCode.S))
+            {
+                float extendedDistanceFromPoint = Vector3.Distance(transform.position, grapplePoint.transform.position) + extendCableSpeed;
+
+                joint.maxDistance = extendedDistanceFromPoint * 0.8f;
+                joint.minDistance = extendedDistanceFromPoint * 0.25f;
             }
         }
 
