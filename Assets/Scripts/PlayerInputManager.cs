@@ -118,8 +118,6 @@ namespace Assets.Scripts.CharacterControl
         public void SetFalse()
         {
             swung = false;
-            Debug.Log("off");
-            attack.Swing();
         }
     }
 
