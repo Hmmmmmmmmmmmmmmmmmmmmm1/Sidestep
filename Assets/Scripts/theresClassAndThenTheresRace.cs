@@ -22,7 +22,7 @@ public class theresClassAndThenTheresRace : MonoBehaviour
     void PlayerSpawn()
     {
         GameObject target = GameObject.Find("Ian 1(Clone)");
-        if (PlayerManager){
+        if (PlayerManager && target){
             target.name = "Player " + seeingPeopleOnlyBasedOnTheirColor.playerCount;
             target.transform.Find("Marker").GetComponent<MeshRenderer>().material = PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().glows[seeingPeopleOnlyBasedOnTheirColor.playerCount - 1];
             PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().newPlayerJoin();

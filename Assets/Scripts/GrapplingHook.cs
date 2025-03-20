@@ -123,7 +123,7 @@ namespace Assets.Scripts.CharacterControl
                 //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
             }
 
-            if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded){
+            if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded && gameObject.name.Equals("Player 1")){
                 //gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
                 gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 if (Mathf.Abs(transform.rotation.eulerAngles.z) > 45){
