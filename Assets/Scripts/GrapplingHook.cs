@@ -237,15 +237,9 @@ namespace Assets.Scripts.CharacterControl
         private void OdmGearMovement()
         {
             // right
-            if (Input.GetKey(KeyCode.D)){
-                rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
-                Debug.Log("gam");
-            } 
+            if (Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
             // left
             if (Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
-
-            // forward
-            if (Input.GetKey(KeyCode.W)) rb.AddForce(orientation.forward * horizontalThrustForce * Time.deltaTime);
         }
 
         [PunRPC]
