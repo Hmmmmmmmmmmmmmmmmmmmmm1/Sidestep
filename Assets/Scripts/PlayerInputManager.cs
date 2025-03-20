@@ -13,11 +13,11 @@ namespace Assets.Scripts.CharacterControl
         public ArrayList Dash = new ArrayList();
         public ArrayList KeyUp = new ArrayList();
         (bool, RaycastHit) GroundChecker;
+        public bool Grounded;
         public bool lHit;
         public bool rHit;
         public PlayerMoveScript move;
         public PlayerAttackScript attack;
-        public bool Grounded;
         public GameObject ClassObject;
         public bool pluh;
         public GameObject SwordHolder;
@@ -76,6 +76,7 @@ namespace Assets.Scripts.CharacterControl
             {
                 GroundCheckerScript GroundCheckerOb = tra.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>();
                 GroundChecker.Item1 = GroundCheckerOb.Grounded;
+                Grounded =GroundChecker.Item1;
                 GroundChecker.Item2 = GroundCheckerOb.HitData;
                 Debug.Log(GroundChecker.Item2.normal);
                 lHit = tra.Find("WallCheckers/LeftWallChecker").gameObject.GetComponent<LeftWallCheckerScript>().lHit;
@@ -118,8 +119,6 @@ namespace Assets.Scripts.CharacterControl
         public void SetFalse()
         {
             swung = false;
-            Debug.Log("off");
-            attack.Swing();
         }
     }
 
