@@ -172,6 +172,7 @@ namespace Assets.Scripts.CharacterControl
             {
                 vec += new Vector3(0, Mathf.Max(GetVelocity().magnitude * 900f, 9000), 0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
+            
             /*
             if ((lGrounded || rGrounded) && !Grounded)
             {
@@ -210,13 +211,14 @@ namespace Assets.Scripts.CharacterControl
             {
                 if (lHit)
                 {
-                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -45);
+                    tra.RotateAround(rb.gameObject.GetComponent<Collider>().bounds.min, tra.forward, -60);
+                    //tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
-                    //Debug.Break(); 
+                    Debug.Break(); 
 
                 } else if (rHit)
                 {
-                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 45);
+                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 90);
                 } 
             }
             //if grounded
@@ -239,6 +241,10 @@ namespace Assets.Scripts.CharacterControl
             return vec;
 
         }
+        void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(GroundChecker.Item2.point, GroundChecker.Item2.normal);//gizmos normal line that could be the prob
+    }
 
 
 
