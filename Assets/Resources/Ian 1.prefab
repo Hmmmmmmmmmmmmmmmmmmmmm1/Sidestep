@@ -547,7 +547,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -972,6 +972,9 @@ MonoBehaviour:
   grappling: 0
   playerObject: {fileID: 0}
   playerInputManager: {fileID: 0}
+  orientation: {fileID: 7618334235654252660}
+  rb: {fileID: 296296924525269716}
+  horizontalThrustForce: 100
 --- !u!114 &7200904037037588082
 MonoBehaviour:
   m_ObjectHideFlags: 0

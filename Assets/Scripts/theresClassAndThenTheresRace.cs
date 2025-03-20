@@ -10,8 +10,6 @@ public class theresClassAndThenTheresRace : MonoBehaviour
     void Awake()
     {
         PlayerManager = GameObject.Find("PlayerCounter");
-
-
     }
 
     void Start()
@@ -24,9 +22,11 @@ public class theresClassAndThenTheresRace : MonoBehaviour
     void PlayerSpawn()
     {
         GameObject target = GameObject.Find("Ian 1(Clone)");
-        target.name = "Player " + seeingPeopleOnlyBasedOnTheirColor.playerCount;
-        target.transform.Find("Marker").GetComponent<MeshRenderer>().material = PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().glows[seeingPeopleOnlyBasedOnTheirColor.playerCount - 1];
-        PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().newPlayerJoin();
+        if (PlayerManager && target){
+            target.name = "Player " + seeingPeopleOnlyBasedOnTheirColor.playerCount;
+            target.transform.Find("Marker").GetComponent<MeshRenderer>().material = PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().glows[seeingPeopleOnlyBasedOnTheirColor.playerCount - 1];
+            PlayerManager.GetComponent<seeingPeopleOnlyBasedOnTheirColor>().newPlayerJoin();
         //Debug.Log(gameObject.transform.Find("Marker").GetComponent<MeshRenderer>().material.name);
+        }
     }
 }

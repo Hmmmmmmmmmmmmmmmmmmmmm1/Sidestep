@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System;
+using System.Data;
 namespace Assets.Scripts.CharacterControl
 {
 
@@ -36,6 +38,11 @@ namespace Assets.Scripts.CharacterControl
         public GameObject playerObject;
         public PlayerInputManager playerInputManager;
 
+        [Header("OdmGear")]
+        public Transform orientation;
+        public Rigidbody rb;
+        public float horizontalThrustForce = 2000;
+
         void Awake()
         {
             PV = gameObject.GetComponent<PhotonView>();
@@ -60,11 +67,13 @@ namespace Assets.Scripts.CharacterControl
         void Update()
         {
             playerObject = GameObject.Find("Player 1");
-            playerInputManager = playerObject.GetComponent<PlayerInputManager>();
-            if(playerInputManager.swung)
-            {
-                grappling = false;
-                StopGrapple();
+            if (playerObject){
+                playerInputManager = playerObject.GetComponent<PlayerInputManager>();
+                if(playerInputManager.swung)
+                {
+                    grappling = false;
+                    StopGrapple();
+                }
             }
             //canGrapple();
             if (Input.GetKeyDown(grappleKey))
@@ -73,6 +82,7 @@ namespace Assets.Scripts.CharacterControl
                 StartGrapple();
 
                 grappling = true;
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
             }
 
             else if (Input.GetKeyUp(grappleKey))
@@ -80,6 +90,9 @@ namespace Assets.Scripts.CharacterControl
                 grappling = false;
                 StopGrapple();
                 PV.RPC("RPC_BeamOff", RpcTarget.All);
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x / 2, transform.localEulerAngles.y,transform.localEulerAngles.x / 2);
+                rb.angularVelocity = Vector3.zero;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse2) && grappling)
@@ -92,9 +105,11 @@ namespace Assets.Scripts.CharacterControl
             }
             if (grappling)
             {
-                PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+                if (gunTip && grapplePoint){
+                    PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+                    float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
+                }
                 //PV.RPC("RPC_Beam", RpcTarget.All, new Vector3(5,5,5), new Vector3(15,15,15));
-                float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
                 if (joint)
                 {
                     joint.connectedAnchor = grapplePoint.transform.position;
@@ -106,6 +121,24 @@ namespace Assets.Scripts.CharacterControl
             if (Input.GetKey(KeyCode.L))
             {
                 //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
+            }
+
+            if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded && gameObject.name.Equals("Player 1")){
+                //gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+                gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                if (Mathf.Abs(transform.rotation.eulerAngles.z) > 45){
+                    //Debug.Log("joey " + transform.rotation.eulerAngles);
+                    if (transform.rotation.eulerAngles.z > 45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z > 0){
+                        //Debug.Log("joey was here");
+                    }
+                    if (transform.rotation.eulerAngles.z < -45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z < 0){
+                        //Debug.Log("joey wasnt here");
+                    }
+                }
+            }
+
+            if (joint != null){
+                OdmGearMovement();
             }
         }
 
@@ -120,6 +153,7 @@ namespace Assets.Scripts.CharacterControl
         void StartGrapple()
         {
             RaycastHit hit;
+            //maybe do spherecast
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance))
             {
                 Transform parentCheck = hit.transform;
@@ -203,6 +237,14 @@ namespace Assets.Scripts.CharacterControl
                     crosshair.color = Color.black;
                 }
             }
+        }
+
+        private void OdmGearMovement()
+        {
+            // right
+            if (Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
+            // left
+            if (Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
         }
 
         [PunRPC]
