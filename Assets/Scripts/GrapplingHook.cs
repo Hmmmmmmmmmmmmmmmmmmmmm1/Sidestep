@@ -67,11 +67,13 @@ namespace Assets.Scripts.CharacterControl
         void Update()
         {
             playerObject = GameObject.Find("Player 1");
-            playerInputManager = playerObject.GetComponent<PlayerInputManager>();
-            if(playerInputManager.swung)
-            {
-                grappling = false;
-                StopGrapple();
+            if (playerObject){
+                playerInputManager = playerObject.GetComponent<PlayerInputManager>();
+                if(playerInputManager.swung)
+                {
+                    grappling = false;
+                    StopGrapple();
+                }
             }
             //canGrapple();
             if (Input.GetKeyDown(grappleKey))
@@ -103,9 +105,11 @@ namespace Assets.Scripts.CharacterControl
             }
             if (grappling)
             {
-                PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+                if (gunTip && grapplePoint){
+                    PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
+                    float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
+                }
                 //PV.RPC("RPC_Beam", RpcTarget.All, new Vector3(5,5,5), new Vector3(15,15,15));
-                float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
                 if (joint)
                 {
                     joint.connectedAnchor = grapplePoint.transform.position;
@@ -120,7 +124,8 @@ namespace Assets.Scripts.CharacterControl
             }
 
             if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded){
-                gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+                //gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+                gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 if (Mathf.Abs(transform.rotation.eulerAngles.z) > 45){
                     //Debug.Log("joey " + transform.rotation.eulerAngles);
                     if (transform.rotation.eulerAngles.z > 45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z > 0){
