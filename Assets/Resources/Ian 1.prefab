@@ -975,8 +975,6 @@ MonoBehaviour:
   orientation: {fileID: 7618334235654252660}
   rb: {fileID: 296296924525269716}
   horizontalThrustForce: 100
-  forwardThrustForce: 100
-  extendCableSpeed: 100
 --- !u!114 &7200904037037588082
 MonoBehaviour:
   m_ObjectHideFlags: 0

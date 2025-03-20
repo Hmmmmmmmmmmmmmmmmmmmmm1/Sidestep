@@ -41,9 +41,7 @@ namespace Assets.Scripts.CharacterControl
         [Header("OdmGear")]
         public Transform orientation;
         public Rigidbody rb;
-        public float horizontalThrustForce;
-        public float forwardThrustForce;
-        public float extendCableSpeed;
+        public float horizontalThrustForce = 2000;
 
         void Awake()
         {
@@ -91,6 +89,8 @@ namespace Assets.Scripts.CharacterControl
                 StopGrapple();
                 PV.RPC("RPC_BeamOff", RpcTarget.All);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x / 2, transform.localEulerAngles.y,transform.localEulerAngles.x / 2);
+                rb.angularVelocity = Vector3.zero;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse2) && grappling)
@@ -246,26 +246,6 @@ namespace Assets.Scripts.CharacterControl
 
             // forward
             if (Input.GetKey(KeyCode.W)) rb.AddForce(orientation.forward * horizontalThrustForce * Time.deltaTime);
-
-            // shorten cable
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Vector3 directionToPoint = grapplePoint.transform.position - transform.position;
-                rb.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
-
-                float distanceFromPoint = Vector3.Distance(transform.position, grapplePoint.transform.position);
-
-                joint.maxDistance = distanceFromPoint * 0.8f;
-                joint.minDistance = distanceFromPoint * 0.25f;
-            }
-            // extend cable
-            if (Input.GetKey(KeyCode.S))
-            {
-                float extendedDistanceFromPoint = Vector3.Distance(transform.position, grapplePoint.transform.position) + extendCableSpeed;
-
-                joint.maxDistance = extendedDistanceFromPoint * 0.8f;
-                joint.minDistance = extendedDistanceFromPoint * 0.25f;
-            }
         }
 
         [PunRPC]
