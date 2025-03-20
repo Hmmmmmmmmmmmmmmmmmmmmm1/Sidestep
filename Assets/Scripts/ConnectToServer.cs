@@ -9,7 +9,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        Debug.Log("Joined");
+        //Debug.Log("Joined");
     }
 
     public override void OnConnectedToMaster()

@@ -91,7 +91,7 @@ namespace Assets.Scripts.CharacterControl
                 StopGrapple();
                 PV.RPC("RPC_BeamOff", RpcTarget.All);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x / 2, transform.localEulerAngles.y,transform.localEulerAngles.x / 2);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x / 2, transform.eulerAngles.y,transform.eulerAngles.x / 2);
                 rb.angularVelocity = Vector3.zero;
             }
 
