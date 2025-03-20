@@ -71,8 +71,13 @@ namespace Assets.Scripts.CharacterControl
 
         public void GroundedRotation()
         {
-            tra.localEulerAngles = new Vector3(GroundChecker.Item2.normal.x, tra.localEulerAngles.y,GroundChecker.Item2.normal.z);
-            rb.angularVelocity = Vector3.zero;
+            if (Grounded)
+            {
+                tra.localEulerAngles = new Vector3(-GroundChecker.Item2.normal.z * 90,tra.localEulerAngles.y ,-GroundChecker.Item2.normal.x * 90);
+                Debug.Log("Normal line is " + GroundChecker.Item2.normal); 
+                rb.angularVelocity = Vector3.zero;
+            }
+            
         }
 
         //                if (vec.x <= minVec.x && vec.y <= minVec.y && vec.z <= minVec.z)
@@ -211,10 +216,10 @@ namespace Assets.Scripts.CharacterControl
             {
                 if (lHit)
                 {
-                    tra.RotateAround(rb.gameObject.GetComponent<Collider>().bounds.min, tra.forward, -60);
+                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
                     //tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
-                    Debug.Break(); 
+                    //Debug.Break(); 
 
                 } else if (rHit)
                 {

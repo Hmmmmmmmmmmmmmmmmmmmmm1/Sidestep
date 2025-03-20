@@ -78,7 +78,6 @@ namespace Assets.Scripts.CharacterControl
                 GroundChecker.Item1 = GroundCheckerOb.Grounded;
                 Grounded =GroundChecker.Item1;
                 GroundChecker.Item2 = GroundCheckerOb.HitData;
-                Debug.Log(GroundChecker.Item2.normal);
                 lHit = tra.Find("WallCheckers/LeftWallChecker").gameObject.GetComponent<LeftWallCheckerScript>().lHit;
                 rHit = tra.Find("WallCheckers/RightWallChecker").gameObject.GetComponent<RightWallCheckerScript>().rHit;
                 KeysPressed keys =
