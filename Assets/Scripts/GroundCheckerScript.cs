@@ -16,6 +16,7 @@ public class GroundCheckerScript : MonoBehaviour
     {
         Ray groundcheck = new Ray(transform.position, (-1*transform.up));
         Grounded = Physics.Raycast(groundcheck, out HitData, 1f);
+        
 
 
 
@@ -23,6 +24,11 @@ public class GroundCheckerScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, HitData.point);
     }
 }
 }
