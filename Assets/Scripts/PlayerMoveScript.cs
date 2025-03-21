@@ -216,14 +216,14 @@ namespace Assets.Scripts.CharacterControl
             {
                 if (lHit)
                 {
-                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
+                    tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
                     //tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
                     //Debug.Break(); 
 
                 } else if (rHit)
                 {
-                    tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, 90);
+                    tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
                 } 
             }
             //if grounded
