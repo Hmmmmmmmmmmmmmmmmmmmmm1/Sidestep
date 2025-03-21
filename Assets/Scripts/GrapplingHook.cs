@@ -91,7 +91,7 @@ namespace Assets.Scripts.CharacterControl
                 StopGrapple();
                 PV.RPC("RPC_BeamOff", RpcTarget.All);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x / 2, transform.eulerAngles.y,transform.eulerAngles.x / 2);
+                //transform.localEulerAngles = new Vector3(transform.eulerAngles.x / 2, transform.eulerAngles.y,transform.eulerAngles.x / 2);
                 rb.angularVelocity = Vector3.zero;
             }
 
@@ -242,9 +242,25 @@ namespace Assets.Scripts.CharacterControl
         private void OdmGearMovement()
         {
             // right
-            if (Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
+            if (Input.GetKey(KeyCode.D)){
+                rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
+                transform.Rotate(new Vector3(0,0,0.1f));
+            }
             // left
-            if (Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
+            if (Input.GetKey(KeyCode.A)){
+                rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
+                transform.Rotate(new Vector3(0,0,-0.1f));
+            }
+
+            //forwards
+            if (Input.GetKey(KeyCode.W)){ 
+                transform.Rotate(new Vector3(0.1f,0,0));
+            }
+
+            //backwards
+            if (Input.GetKey(KeyCode.S)){ 
+                transform.Rotate(new Vector3(-0.1f,0,0));
+            }
         }
 
         [PunRPC]
