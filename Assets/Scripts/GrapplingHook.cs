@@ -244,22 +244,25 @@ namespace Assets.Scripts.CharacterControl
             // right
             if (Input.GetKey(KeyCode.D)){
                 rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
-                transform.Rotate(new Vector3(0,0,0.1f));
+                //transform.Rotate(new Vector3(0,0,0.1f));
+                transform.RotateAround(transform.position,transform.forward,-0.1f);
             }
             // left
             if (Input.GetKey(KeyCode.A)){
                 rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
-                transform.Rotate(new Vector3(0,0,-0.1f));
+                transform.RotateAround(transform.position,transform.forward,0.1f);
             }
 
             //forwards
             if (Input.GetKey(KeyCode.W)){ 
-                transform.Rotate(new Vector3(0.1f,0,0));
+                //transform.Rotate(new Vector3(0.1f,0,0));
+                //transform.Rotate(transform.forward * 0.1f);
+                transform.RotateAround(transform.position,transform.right,0.1f);
             }
 
             //backwards
             if (Input.GetKey(KeyCode.S)){ 
-                transform.Rotate(new Vector3(-0.1f,0,0));
+                transform.RotateAround(transform.position,transform.right,-0.1f);
             }
         }
 
