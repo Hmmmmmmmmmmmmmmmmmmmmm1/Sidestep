@@ -29,42 +29,42 @@ namespace Assets.Scripts.CharacterControl
             if(Input.GetKeyDown(KeyCode.W))
             {
                 Dash.Add(DashKey.UpPush);
-                Debug.Log("forward");
+                //Debug.Log("forward");
             }
             if(Input.GetKeyDown(KeyCode.A))
             {
                 Dash.Add(DashKey.LeftPush);
-                Debug.Log("left");
+                //Debug.Log("left");
             }
             if(Input.GetKeyDown(KeyCode.S))
             {
                 Dash.Add(DashKey.DownPush);
-                Debug.Log("down");
+                //Debug.Log("down");
             }
             if(Input.GetKeyDown(KeyCode.D))
             {
                 Dash.Add(DashKey.RightPush);
-                Debug.Log("right");
+                //Debug.Log("right");
             }
             if(Input.GetKeyUp(KeyCode.W))
             {
                 KeyUp.Add(KeyRelease.UpUp);
-                Debug.Log("up release");
+                //Debug.Log("up release");
             }
             if(Input.GetKeyUp(KeyCode.A))
             {
                 KeyUp.Add(KeyRelease.LeftUp);
-                Debug.Log("left release");
+                //Debug.Log("left release");
             }
             if(Input.GetKeyUp(KeyCode.S))
             {
                 KeyUp.Add(KeyRelease.DownUp);
-                Debug.Log("down release");
+                //Debug.Log("down release");
             }
             if(Input.GetKeyUp(KeyCode.D))
             {
                 KeyUp.Add(KeyRelease.RightUp);
-                Debug.Log("right release");
+                //Debug.Log("right release");
             }
         }
 
