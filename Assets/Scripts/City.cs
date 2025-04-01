@@ -48,7 +48,7 @@ public class City : MonoBehaviour
         {
             blacons[i] = GameObject.Find("Blacons").transform.GetChild(i).gameObject;
             blacons[i].GetComponent<MeshCollider>().convex = false;
-            Debug.Log("Blacon is" + blacons[i].name);
+            //Debug.Log("Blacon is" + blacons[i].name);
         }
     }   
     // Update is called once per frame
