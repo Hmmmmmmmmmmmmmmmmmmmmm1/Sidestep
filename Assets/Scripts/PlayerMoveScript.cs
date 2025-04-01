@@ -42,6 +42,7 @@ namespace Assets.Scripts.CharacterControl
                 //Debug.Log("hopefully fighter");
             }
 
+
         }
 
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, (bool, RaycastHit) GroundChecker, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash, ArrayList KeyUp)
@@ -219,13 +220,13 @@ namespace Assets.Scripts.CharacterControl
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
                     //tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
-                    Debug.Break(); 
+                    //Debug.Break(); 
                     //set y to normal and x to y
 
                 } else if (rHit)
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
-                    Debug.Break();
+                    //Debug.Break();
                 } 
             }
             //if grounded

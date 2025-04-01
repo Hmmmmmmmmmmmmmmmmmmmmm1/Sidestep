@@ -965,7 +965,7 @@ MonoBehaviour:
   gunTip: {fileID: 7618334235654252660}
   maxDistance: 300
   grappleKey: 324
-  spring: 1.25
+  spring: 1.15
   damper: 5.5
   massScale: 4.5
   crosshair: {fileID: 5570487051907634531}
