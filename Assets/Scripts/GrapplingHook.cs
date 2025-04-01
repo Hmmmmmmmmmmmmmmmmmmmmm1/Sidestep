@@ -54,14 +54,6 @@ namespace Assets.Scripts.CharacterControl
             {
                 cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
             }
-            /*
-            if (transform.Find("Camera(Clone)/Grapple Gun")){
-            lr = transform.Find("Camera(Clone)/Grapple Gun").GetComponent<LineRenderer>();
-            }
-            if (transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip")){
-            gunTip = transform.Find("Camera(Clone)/Grapple Gun/Grapple Tip");
-            }
-            */
         }
 
         void Update()
@@ -91,50 +83,23 @@ namespace Assets.Scripts.CharacterControl
                 StopGrapple();
                 PV.RPC("RPC_BeamOff", RpcTarget.All);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                //transform.localEulerAngles = new Vector3(transform.eulerAngles.x / 2, transform.eulerAngles.y,transform.eulerAngles.x / 2);
                 rb.angularVelocity = Vector3.zero;
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse2) && grappling)
-            {
-                //gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,gameObject.GetComponent<Rigidbody>().velocity.y,0);
-                /*
-                joint.spring = 4.5f;
-                joint.damper = 10f;
-                */
-            }
             if (grappling)
             {
                 if (gunTip && grapplePoint){
                     PV.RPC("RPC_BeamOn", RpcTarget.All, gunTip.position, grapplePoint.transform.position);
                     float distanceFromPoint = Vector3.Distance(gameObject.transform.position, grapplePoint.transform.position);
                 }
-                //PV.RPC("RPC_Beam", RpcTarget.All, new Vector3(5,5,5), new Vector3(15,15,15));
                 if (joint)
                 {
                     joint.connectedAnchor = grapplePoint.transform.position;
                 }
-
-                //joint.maxDistance = distanceFromPoint * 0.08f;
-            }
-
-            if (Input.GetKey(KeyCode.L))
-            {
-                //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
             }
 
             if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded && gameObject.name.Equals("Player 1")){
-                //gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
                 gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-                if (Mathf.Abs(transform.rotation.eulerAngles.z) > 45){
-                    //Debug.Log("joey " + transform.rotation.eulerAngles);
-                    if (transform.rotation.eulerAngles.z > 45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z > 0){
-                        //Debug.Log("joey was here");
-                    }
-                    if (transform.rotation.eulerAngles.z < -45 && gameObject.GetComponent<Rigidbody>().angularVelocity.z < 0){
-                        //Debug.Log("joey wasnt here");
-                    }
-                }
             }
 
             if (joint != null){
@@ -160,7 +125,6 @@ namespace Assets.Scripts.CharacterControl
                 bool touchingYourself = true;
                 if (parentCheck)
                 {
-                    //Debug.Log(doug.name + "juah" + doug.parent);
                     while (parentCheck.parent)
                     {
                         parentCheck = parentCheck.parent;
@@ -173,13 +137,10 @@ namespace Assets.Scripts.CharacterControl
                 if (touchingYourself)
                 {
                     gameObject.GetComponent<Rigidbody>().velocity *= 0.75f;
-                    //GameObject ooog = Instantiate(Resources.Load("crud").GetComponent<Transform>().gameObject,hit.point,hit.transform.rotation,hit.transform);
                     grapplePoint = new GameObject("hit");
                     grapplePoint.transform.parent = hit.transform;
-                    //ooog.transform.localPosition = Vector3.zero;
                     grapplePoint.transform.position = hit.point;
 
-                    //ooog.transform.position = hit.point;
                     joint = gameObject.AddComponent<SpringJoint>();
                     joint.autoConfigureConnectedAnchor = false;
                     joint.connectedAnchor = grapplePoint.transform.position;
@@ -215,7 +176,8 @@ namespace Assets.Scripts.CharacterControl
                 //lr.positionCount = 0;
                 lr.enabled = false;
                 Destroy(joint);
-                grapplePoint = null;
+                //grapplePoint = null;
+                Destroy(grapplePoint);
             }
 
             //Destroy(grapplePoint);
@@ -244,25 +206,22 @@ namespace Assets.Scripts.CharacterControl
             // right
             if (Input.GetKey(KeyCode.D)){
                 rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
-                //transform.Rotate(new Vector3(0,0,0.1f));
-                transform.RotateAround(transform.position,transform.forward,0.1f);
+                transform.RotateAround(transform.position,transform.forward,0.03f);
             }
             // left
             if (Input.GetKey(KeyCode.A)){
                 rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
-                transform.RotateAround(transform.position,transform.forward,-0.1f);
+                transform.RotateAround(transform.position,transform.forward,-0.03f);
             }
 
             //forwards
             if (Input.GetKey(KeyCode.W)){ 
-                //transform.Rotate(new Vector3(0.1f,0,0));
-                //transform.Rotate(transform.forward * 0.1f);
-                transform.RotateAround(transform.position,transform.right,0.1f);
+                transform.RotateAround(transform.position,transform.right,0.03f);
             }
 
             //backwards
             if (Input.GetKey(KeyCode.S)){ 
-                transform.RotateAround(transform.position,transform.right,-0.1f);
+                transform.RotateAround(transform.position,transform.right,-0.03f);
             }
         }
 

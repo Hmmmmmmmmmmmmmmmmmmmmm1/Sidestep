@@ -49,6 +49,7 @@ MonoBehaviour:
   - FireSwordBurn
   - knockedBackRPC
   - combatAbilityOn
+  - slowDownRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

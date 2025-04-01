@@ -9,6 +9,7 @@ using Photon.Pun;
 using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
 using Quaternion = UnityEngine.Quaternion;
+using Assets.Scripts.CharacterControl;
 
 public class Abilities : MonoBehaviour
 {
@@ -74,6 +75,11 @@ public class Abilities : MonoBehaviour
     private float vampTimer;
     public bool vampActive = false;
 
+    //slow
+    private Camera cam;
+    private float slowTimer;
+    //This timer is identical to a regular timer, but you need to doulbe the time because it stores time at 1/2x speed. (1/2)x not 1/(2x). x/2.
+
     //general
     private float speedMultiplier;
 
@@ -91,6 +97,10 @@ public class Abilities : MonoBehaviour
         boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
         originalMat = GetComponent<Renderer>().material;
         PV = gameObject.GetComponent<PhotonView>();
+
+        if (transform.Find("Camera(Clone)")){
+            cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
+        }
     }
 
     // Update is called once per frame
@@ -99,8 +109,7 @@ public class Abilities : MonoBehaviour
         Cooldown();
         CheckClass();
         SpeedCheck();
-    
-
+        slowDHigh();
 
         //Lunch Mode
         if (Skill1 == 1)
@@ -231,7 +240,6 @@ public class Abilities : MonoBehaviour
                 Skill2Cooldown = 10;
             }
         }
-    
         //punch II bow mode
         if (Skill2 == 2 && gameObject.name.Equals("Player 1"))
         {
@@ -245,7 +253,6 @@ public class Abilities : MonoBehaviour
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
             }
         }
-   
         //bite Mode
         if (Skill2 == 3 && gameObject.name.Equals("Player 1"))
         {
@@ -260,6 +267,23 @@ public class Abilities : MonoBehaviour
                 vampActive = true;
                 evilerTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 100;
+            }
+        }
+         //slow Mode
+        if (Skill2 == 4 && gameObject.name.Equals("Player 1"))
+        {
+            RaycastHit hit;
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100))
+                {
+                    Debug.Log(hit.transform);
+                    if(hit.transform.GetComponent<Abilities>()){
+                        Debug.Log("Go! My Super Attack Beam!! Attack!!!");
+                        slowDown();
+                    }
+                    Skill2Cooldown = 2;
+                }
             }
         }
     
@@ -327,5 +351,26 @@ public class Abilities : MonoBehaviour
     void knockedBackRPC(Vector3 velocityFromHit)
     {
         gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit * 2;
+    }
+
+    public void slowDHigh(){
+        if (slowTimer < 0)
+            {
+                gameObject.GetComponent<Rigidbody>().mass = 1;
+                gameObject.GetComponent<GrapplingHook>().enabled = true;
+            }
+        slowTimer -= Time.deltaTime;
+    }
+
+    public void slowDown (){
+        gameObject.GetComponent<Rigidbody>().mass = 2.5f;
+        gameObject.GetComponent<GrapplingHook>().enabled = false;
+        slowTimer = 10;
+    }
+
+    [PunRPC]
+    void slowDownRPC()
+    {
+        
     }
 }
