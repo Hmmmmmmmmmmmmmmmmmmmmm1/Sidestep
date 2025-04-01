@@ -219,11 +219,13 @@ namespace Assets.Scripts.CharacterControl
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
                     //tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
-                    //Debug.Break(); 
+                    Debug.Break(); 
+                    //set y to normal and x to y
 
                 } else if (rHit)
                 {
-                    tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
+                    tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
+                    Debug.Break();
                 } 
             }
             //if grounded
