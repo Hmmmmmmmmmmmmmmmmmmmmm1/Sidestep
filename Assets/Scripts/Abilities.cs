@@ -383,11 +383,13 @@ public class Abilities : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().mass = 2.5f;
         gameObject.GetComponent<GrapplingHook>().enabled = false;
 
-        cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out vignette);
-        vignette.intensity.value = 0.4f;
+        if (cam){
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out vignette);
+            vignette.intensity.value = 0.4f;
 
-        cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
-        colorGrading.saturation.value = -60;
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.saturation.value = -60;
+        }
 
         slowTimer = 10;
     }
