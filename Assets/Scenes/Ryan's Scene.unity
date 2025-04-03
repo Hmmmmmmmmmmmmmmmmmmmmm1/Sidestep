@@ -431,6 +431,14 @@ PrefabInstance:
       propertyPath: crosshair
       value: 
       objectReference: {fileID: 1058973467}
+    - target: {fileID: 4251144971378302568, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620134337783355869, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7200904037037588082, guid: 948a140a5e62a48f0acd60edf6c3ce7d, type: 3}
       propertyPath: hpNum
       value: 

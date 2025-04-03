@@ -10,6 +10,7 @@ using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
 using Quaternion = UnityEngine.Quaternion;
 using Assets.Scripts.CharacterControl;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Abilities : MonoBehaviour
 {
@@ -79,6 +80,8 @@ public class Abilities : MonoBehaviour
     private Camera cam;
     private float slowTimer;
     //This timer is identical to a regular timer, but you need to doulbe the time because it stores time at 1/2x speed. (1/2)x not 1/(2x). x/2.
+    private Vignette vignette;
+    private ColorGrading colorGrading;
 
     //general
     private float speedMultiplier;
@@ -100,6 +103,7 @@ public class Abilities : MonoBehaviour
 
         if (transform.Find("Camera(Clone)")){
             cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
+            //vignette = cam.gameObject.GetComponent<PostProcessVolume>().profile.GetComponent<Vignette>();
         }
     }
 
@@ -280,7 +284,7 @@ public class Abilities : MonoBehaviour
                     Debug.Log(hit.transform);
                     if(hit.transform.GetComponent<Abilities>()){
                         Debug.Log("Go! My Super Attack Beam!! Attack!!!");
-                        slowDown();
+                        hit.transform.GetComponent<Abilities>().slowDown();
                     }
                     Skill2Cooldown = 2;
                 }
@@ -358,13 +362,27 @@ public class Abilities : MonoBehaviour
             {
                 gameObject.GetComponent<Rigidbody>().mass = 1;
                 gameObject.GetComponent<GrapplingHook>().enabled = true;
+
+                if (vignette) vignette.intensity.value = 0;
+                if (colorGrading) colorGrading.saturation.value = 0;
             }
+            else{
+                if (colorGrading) colorGrading.saturation.value = 4 * (10-slowTimer) - 60;
+            }
+
         slowTimer -= Time.deltaTime;
     }
 
     public void slowDown (){
         gameObject.GetComponent<Rigidbody>().mass = 2.5f;
         gameObject.GetComponent<GrapplingHook>().enabled = false;
+
+        cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out vignette);
+        vignette.intensity.value = 0.4f;
+
+        cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+        colorGrading.saturation.value = -60;
+
         slowTimer = 10;
     }
 
