@@ -374,6 +374,12 @@ public class Abilities : MonoBehaviour
     }
 
     public void slowDown (){
+        PV.RPC("slowDownRPC",RpcTarget.All);
+    }
+
+    [PunRPC]
+    void slowDownRPC()
+    {
         gameObject.GetComponent<Rigidbody>().mass = 2.5f;
         gameObject.GetComponent<GrapplingHook>().enabled = false;
 
@@ -384,11 +390,5 @@ public class Abilities : MonoBehaviour
         colorGrading.saturation.value = -60;
 
         slowTimer = 10;
-    }
-
-    [PunRPC]
-    void slowDownRPC()
-    {
-        
     }
 }
