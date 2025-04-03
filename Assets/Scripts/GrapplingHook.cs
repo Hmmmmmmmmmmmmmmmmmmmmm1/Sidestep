@@ -216,6 +216,7 @@ namespace Assets.Scripts.CharacterControl
 
             //forwards
             if (Input.GetKey(KeyCode.W)){ 
+                rb.AddForce(-orientation.forward * horizontalThrustForce * Time.deltaTime);
                 transform.RotateAround(transform.position,transform.right,0.03f);
             }
 
