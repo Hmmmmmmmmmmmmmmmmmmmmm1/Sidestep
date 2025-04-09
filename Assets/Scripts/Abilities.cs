@@ -279,14 +279,22 @@ public class Abilities : MonoBehaviour
             RaycastHit hit;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100))
+                /*if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100))
                 {
                     Debug.Log(hit.transform);
                     if(hit.transform.GetComponent<Abilities>()){
                         Debug.Log("Go! My Super Attack Beam!! Attack!!!");
                         hit.transform.GetComponent<Abilities>().slowDown();
                     }
-                    Skill2Cooldown = 2;
+                    //Skill2Cooldown = 2;
+                }*/
+
+                Collider[] gems = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
+                foreach (Collider gog in gems){
+                    if (gog.gameObject.GetComponent<Abilities>()){
+                        Debug.Log("Let's rock; guy playing rps beam");
+                        //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
+                    }
                 }
             }
         }
