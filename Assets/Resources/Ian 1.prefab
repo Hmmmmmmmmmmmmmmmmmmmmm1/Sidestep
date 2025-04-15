@@ -1244,7 +1244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
       propertyPath: m_Text
-      value: v
+      value: +
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6464119922171516199, guid: df860c0922ec144329e73aa275df4946, type: 3}
       propertyPath: m_Pivot.x

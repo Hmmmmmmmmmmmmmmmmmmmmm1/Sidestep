@@ -251,6 +251,7 @@ namespace Assets.Scripts.CharacterControl
                 if (lHit)
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
+                    rb.velocity=Vector3.zero;
                     //tra.localEulerAngles = new Vector3(tra.localEulerAngles.y, GroundChecker.Item2.normal.y, tra.localEulerAngles.z);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
                     //Debug.Break(); 
@@ -259,6 +260,7 @@ namespace Assets.Scripts.CharacterControl
                 } else if (rHit)
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
+                    rb.velocity=Vector3.zero;
                     //Debug.Break();
                 } 
             }
