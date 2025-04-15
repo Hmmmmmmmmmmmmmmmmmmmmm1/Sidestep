@@ -179,13 +179,13 @@ public class Abilities : MonoBehaviour
                 ray = transform.Find("Camera(Clone)").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 
                 //Debug.DrawLine(ray.origin,ray.GetPoint(grub),Color.cyan,100f);
-                Collider[] gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
-                //Debug.Log(gems.Length);
-                while (gems.Length > 0)
+                Collider[] slowTargets = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
+                //Debug.Log(slowTargets.Length);
+                while (slowTargets.Length > 0)
                 {
                     blinkDistance -= 1;
-                    gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
-                    //Debug.Log(gems.Length);
+                    slowTargets = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
+                    //Debug.Log(slowTargets.Length);
                 }
                 gameObject.transform.position = ray.GetPoint(blinkDistance);
                 blinkDistance = 20 * speedMultiplier;
@@ -276,21 +276,20 @@ public class Abilities : MonoBehaviour
          //slow Mode
         if (Skill2 == 4 && gameObject.name.Equals("Player 1"))
         {
-            RaycastHit hit;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100))
-                {
-                    Debug.Log(hit.transform);
-                    if(hit.transform.GetComponent<Abilities>()){
-                        Debug.Log("Go! My Super Attack Beam!! Attack!!!");
-                        hit.transform.GetComponent<Abilities>().slowDown();
+                Skill2Cooldown  = 3f;
+
+                Collider[] slowTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
+                foreach (Collider x in slowTargets){
+                    if (x.gameObject.GetComponent<Abilities>()){
+                        Skill2Cooldown = 9;
+                        x.transform.GetComponent<Abilities>().slowDown();
+                        //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
                     }
-                    Skill2Cooldown = 2;
                 }
             }
         }
-    
     }
 
     public void Cooldown()
@@ -391,6 +390,6 @@ public class Abilities : MonoBehaviour
             colorGrading.saturation.value = -60;
         }
 
-        slowTimer = 10;
+        slowTimer = 6;
     }
 }
