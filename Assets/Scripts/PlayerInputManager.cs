@@ -23,6 +23,7 @@ namespace Assets.Scripts.CharacterControl
         public GameObject SwordHolder;
         public bool swung;
         public bool waiter;
+        public Transform swordHolder;
 
         void Update()
         {
@@ -100,12 +101,12 @@ namespace Assets.Scripts.CharacterControl
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
                 for (int i = 0; i < Dash.Count; i++)
                 {
-                    //Debug.Log(Dash[i]);
-                    Dash[i] = null;
+                    Debug.Log(Dash[i]);
+                    Dash.Remove(Dash[i]);
                 }
                 for (int i = 0; i < KeyUp.Count; i++)
                 {
-                    KeyUp[i] = null;
+                    KeyUp.Remove(KeyUp[i]);
                 }
             }
         }

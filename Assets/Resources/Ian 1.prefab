@@ -949,6 +949,7 @@ MonoBehaviour:
   SwordHolder: {fileID: 89268987429800015}
   swung: 0
   waiter: 0
+  swordHolder: {fileID: 0}
 --- !u!114 &2796052627906695059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,7 +1700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab68d67aa58d456680a716eeaf03435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 1
+  x: 0
   y: 0
   z: 0
   w: 0

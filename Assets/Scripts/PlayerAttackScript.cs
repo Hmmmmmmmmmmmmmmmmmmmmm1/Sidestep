@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Photon.Realtime;
 namespace Assets.Scripts.CharacterControl
 {
     public class PlayerAttackScript
@@ -36,7 +37,6 @@ namespace Assets.Scripts.CharacterControl
 
         public bool Begin()
         {
-            
             if ((Keys.ML) && (!swung))
             {
 
