@@ -9,6 +9,8 @@ using Photon.Pun;
 using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
 using Quaternion = UnityEngine.Quaternion;
+using Assets.Scripts.CharacterControl;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Abilities : MonoBehaviour
 {
@@ -74,6 +76,13 @@ public class Abilities : MonoBehaviour
     private float vampTimer;
     public bool vampActive = false;
 
+    //slow
+    private Camera cam;
+    private float slowTimer;
+    //This timer is identical to a regular timer, but you need to doulbe the time because it stores time at 1/2x speed. (1/2)x not 1/(2x). x/2.
+    private Vignette vignette;
+    private ColorGrading colorGrading;
+
     //general
     private float speedMultiplier;
 
@@ -91,6 +100,11 @@ public class Abilities : MonoBehaviour
         boxSize = gameObject.GetComponent<Collider>().bounds.size / 1.75f;
         originalMat = GetComponent<Renderer>().material;
         PV = gameObject.GetComponent<PhotonView>();
+
+        if (transform.Find("Camera(Clone)")){
+            cam = transform.Find("Camera(Clone)").GetComponent<Camera>();
+            //vignette = cam.gameObject.GetComponent<PostProcessVolume>().profile.GetComponent<Vignette>();
+        }
     }
 
     // Update is called once per frame
@@ -99,8 +113,7 @@ public class Abilities : MonoBehaviour
         Cooldown();
         CheckClass();
         SpeedCheck();
-    
-
+        slowDHigh();
 
         //Lunch Mode
         if (Skill1 == 1)
@@ -166,13 +179,13 @@ public class Abilities : MonoBehaviour
                 ray = transform.Find("Camera(Clone)").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 
                 //Debug.DrawLine(ray.origin,ray.GetPoint(grub),Color.cyan,100f);
-                Collider[] gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
-                //Debug.Log(gems.Length);
-                while (gems.Length > 0)
+                Collider[] slowTargets = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
+                //Debug.Log(slowTargets.Length);
+                while (slowTargets.Length > 0)
                 {
                     blinkDistance -= 1;
-                    gems = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
-                    //Debug.Log(gems.Length);
+                    slowTargets = Physics.OverlapBox(ray.GetPoint(blinkDistance), boxSize, Quaternion.identity);
+                    //Debug.Log(slowTargets.Length);
                 }
                 gameObject.transform.position = ray.GetPoint(blinkDistance);
                 blinkDistance = 20 * speedMultiplier;
@@ -231,7 +244,6 @@ public class Abilities : MonoBehaviour
                 Skill2Cooldown = 10;
             }
         }
-    
         //punch II bow mode
         if (Skill2 == 2 && gameObject.name.Equals("Player 1"))
         {
@@ -245,7 +257,6 @@ public class Abilities : MonoBehaviour
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
             }
         }
-   
         //bite Mode
         if (Skill2 == 3 && gameObject.name.Equals("Player 1"))
         {
@@ -262,7 +273,23 @@ public class Abilities : MonoBehaviour
                 Skill2Cooldown = 100;
             }
         }
-    
+         //slow Mode
+        if (Skill2 == 4 && gameObject.name.Equals("Player 1"))
+        {
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                Skill2Cooldown  = 3f;
+
+                Collider[] slowTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
+                foreach (Collider x in slowTargets){
+                    if (x.gameObject.GetComponent<Abilities>()){
+                        Skill2Cooldown = 9;
+                        x.transform.GetComponent<Abilities>().slowDown();
+                        //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
+                    }
+                }
+            }
+        }
     }
 
     public void Cooldown()
@@ -327,5 +354,42 @@ public class Abilities : MonoBehaviour
     void knockedBackRPC(Vector3 velocityFromHit)
     {
         gameObject.GetComponent<Rigidbody>().velocity += velocityFromHit * 2;
+    }
+
+    public void slowDHigh(){
+        if (slowTimer < 0)
+            {
+                gameObject.GetComponent<Rigidbody>().mass = 1;
+                gameObject.GetComponent<GrapplingHook>().enabled = true;
+
+                if (vignette) vignette.intensity.value = 0;
+                if (colorGrading) colorGrading.saturation.value = 0;
+            }
+            else{
+                if (colorGrading) colorGrading.saturation.value = 4 * (10-slowTimer) - 60;
+            }
+
+        slowTimer -= Time.deltaTime;
+    }
+
+    public void slowDown (){
+        PV.RPC("slowDownRPC",RpcTarget.All);
+    }
+
+    [PunRPC]
+    void slowDownRPC()
+    {
+        gameObject.GetComponent<Rigidbody>().mass = 2.5f;
+        gameObject.GetComponent<GrapplingHook>().enabled = false;
+
+        if (cam){
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out vignette);
+            vignette.intensity.value = 0.4f;
+
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.saturation.value = -60;
+        }
+
+        slowTimer = 6;
     }
 }

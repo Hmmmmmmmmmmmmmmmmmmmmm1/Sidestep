@@ -1242,6 +1242,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
+      propertyPath: m_Text
+      value: +
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146188852004150152, guid: df860c0922ec144329e73aa275df4946, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6464119922171516199, guid: df860c0922ec144329e73aa275df4946, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1608,6 +1620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1219251913074337111, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
+    - {fileID: 5474561575633239227, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1645,8 +1658,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.33765835, y: 0.115597025, z: 1.1449932}
-  m_Center: {x: 0.0026294542, y: 0, z: -0.07861099}
+  m_Size: {x: 0.1, y: 0.1, z: 3.2378464}
+  m_Center: {x: 0, y: 0, z: 0.98}
 --- !u!54 &6935495977415388248
 Rigidbody:
   m_ObjectHideFlags: 0

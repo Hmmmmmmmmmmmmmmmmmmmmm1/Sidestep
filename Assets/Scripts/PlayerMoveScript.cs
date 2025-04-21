@@ -74,7 +74,41 @@ namespace Assets.Scripts.CharacterControl
         {
             if (Grounded)
             {
-                tra.localEulerAngles = new Vector3(-GroundChecker.Item2.normal.z * 90,tra.localEulerAngles.y ,-GroundChecker.Item2.normal.x * 90);
+                //tra.localEulerAngles = new Vector3(GroundChecker.Item2.normal.x * 90,tra.localEulerAngles.y ,GroundChecker.Item2.normal.z * 90);//relative the y part
+                /*
+                ang = normal exept around axis of normal
+
+                normal exept greatest in normal - x and z swapped
+                if normal.x > all
+                    x = 0
+                if normal.y> all
+                    y=0
+                if normal.z>all
+                    z=0
+
+
+
+                
+
+                //(abs(normal) - max(abs(normal)))  ------ nope
+                
+                X ======   normal z *90   *x    ||| Y========  normal y   *90   *y  ||||      Z=========== normal  *90   *z
+                */
+                tra.rotation = Quaternion.Euler(
+                    /*
+                (Mathf.Abs(GroundChecker.Item2.normal.z) > GroundChecker.Item2.normal.y && Mathf.Abs(GroundChecker.Item2.normal.z) > GroundChecker.Item2.normal.x) ? 
+                            new Vector3(
+                            tra.localEulerAngles.x,
+                            (GroundChecker.Item2.normal.y)+90,
+                            (GroundChecker.Item2.normal.z * -90)+90
+                            )
+                            :*/
+                            new Vector3(
+                            (Mathf.Abs(GroundChecker.Item2.normal.x) > GroundChecker.Item2.normal.z && Mathf.Abs(GroundChecker.Item2.normal.x) > GroundChecker.Item2.normal.y) ? tra.localEulerAngles.x : GroundChecker.Item2.normal.z * 90,
+                            (Mathf.Abs(GroundChecker.Item2.normal.y) > GroundChecker.Item2.normal.z && Mathf.Abs(GroundChecker.Item2.normal.y) > GroundChecker.Item2.normal.x) ? tra.localEulerAngles.y : GroundChecker.Item2.normal.y,
+                            (Mathf.Abs(GroundChecker.Item2.normal.z) > GroundChecker.Item2.normal.y && Mathf.Abs(GroundChecker.Item2.normal.z) > GroundChecker.Item2.normal.x) ? tra.localEulerAngles.z : GroundChecker.Item2.normal.x * -90
+                            )
+                );
                 Debug.Log("Normal line is " + GroundChecker.Item2.normal); 
                 rb.angularVelocity = Vector3.zero;
             }
@@ -218,7 +252,8 @@ namespace Assets.Scripts.CharacterControl
                 if (lHit)
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, -90);
-                    //tra.localEulerAngles = new Vector3(tra.localEulerAngles.x, tra.localEulerAngles.y, -90);
+                    rb.velocity=Vector3.zero;
+                    //tra.localEulerAngles = new Vector3(tra.localEulerAngles.y, GroundChecker.Item2.normal.y, tra.localEulerAngles.z);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
                     //Debug.Break(); 
                     //set y to normal and x to y
@@ -226,6 +261,7 @@ namespace Assets.Scripts.CharacterControl
                 } else if (rHit)
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
+                    rb.velocity=Vector3.zero;
                     //Debug.Break();
                 } 
             }
