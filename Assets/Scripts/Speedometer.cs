@@ -37,7 +37,7 @@ public class Speedometer : MonoBehaviour
             needle.transform.eulerAngles = new Vector3(0,0,-90);
             speed.color = Color.red;
             speed.text = "Too FAST!";
-            currentSpeed = 110;
+            currentSpeed = 70;
         }
     }
 }
