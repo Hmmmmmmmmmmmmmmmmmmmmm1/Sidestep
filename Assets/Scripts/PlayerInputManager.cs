@@ -72,6 +72,7 @@ namespace Assets.Scripts.CharacterControl
         {
             ClassObject = GameObject.Find("Classes");
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
+            gameObject.GetComponent<Collider>().hasModifiableContacts = true;
             if (GetComponent<PhotonView>().IsMine == true)
             {
                 GroundCheckerScript GroundCheckerOb = tra.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>();
