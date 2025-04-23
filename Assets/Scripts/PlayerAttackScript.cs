@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Photon.Pun;
+
 namespace Assets.Scripts.CharacterControl
 {
     public class PlayerAttackScript
@@ -34,7 +36,7 @@ namespace Assets.Scripts.CharacterControl
             this.input = input;
         }
 
-        public bool Begin()
+        public bool Begin(PhotonView PV)
         {
             
             if ((Keys.ML) && (!swung))
@@ -48,6 +50,7 @@ namespace Assets.Scripts.CharacterControl
             } else if (swung)
             {
                 Swing();
+                SwingVisibility(PV);
             }   
             return swung;
         }
@@ -55,6 +58,20 @@ namespace Assets.Scripts.CharacterControl
         
 
         public void Swing()
+        {   
+            time += Time.deltaTime;
+            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            //Debug.Log(pos);
+        }
+
+
+        public void SwingVisibility(PhotonView PV)
+        {   
+            PV.RPC("SwingVisibilityRPC",RpcTarget.All,false);
+        }
+
+        [PunRPC]
+        public void SwingVisibilityRPC()
         {   
             time += Time.deltaTime;
             SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Unity.Properties;
 namespace Assets.Scripts.CharacterControl
 
 {
@@ -23,6 +24,14 @@ namespace Assets.Scripts.CharacterControl
         public GameObject SwordHolder;
         public bool swung;
         public bool waiter;
+
+        private PhotonView PV;
+
+
+        void Start()
+        {
+            PV = gameObject.GetComponent<PhotonView>();
+        }
 
         void Update()
         {
@@ -96,7 +105,7 @@ namespace Assets.Scripts.CharacterControl
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
-                swung = attack.Begin();
+                swung = attack.Begin(PV);
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
                 for (int i = 0; i < Dash.Count; i++)
@@ -175,6 +184,7 @@ namespace Assets.Scripts.CharacterControl
         RightUp,
         LeftUp,
     }
+
     /*
 
     MAPING OUT THE INPUT MANAGEMENT
