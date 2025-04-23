@@ -71,13 +71,13 @@ namespace Assets.Scripts.CharacterControl
                 gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * speed - 0.1));
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * speed + 0.207),(float)(0.14 * speed + 1.15));
 
-                gameObject.GetComponent<TrailRenderer>().enabled = true;
+                //gameObject.GetComponent<TrailRenderer>().enabled = true;
             }
             else{
-                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * 50 - 0.1));
-                gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * 50 + 0.207),(float)(0.14 * 50 + 1.15));
+                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * 0 - 0.1));
+                gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * 0 + 0.207),(float)(0.14 * 0 + 1.15));
 
-                gameObject.GetComponent<TrailRenderer>().enabled = false;
+                //gameObject.GetComponent<TrailRenderer>().enabled = false;
             }
         }
 

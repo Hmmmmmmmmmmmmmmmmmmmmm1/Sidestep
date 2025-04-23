@@ -70,7 +70,7 @@ namespace Assets.Scripts.CharacterControl
 
         public void SwingVisibility()
         {   
-            PV.RPC("SwingVisibilityRPC",RpcTarget.All);
+            //PV.RPC("SwingVisibilityRPC",RpcTarget.All);
         }
 
         [PunRPC]

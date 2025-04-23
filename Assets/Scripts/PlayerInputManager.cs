@@ -104,7 +104,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButton(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this,PV);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this, PV);
                 swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
