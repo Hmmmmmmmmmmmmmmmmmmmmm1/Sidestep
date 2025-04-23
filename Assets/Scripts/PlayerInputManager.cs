@@ -105,7 +105,7 @@ namespace Assets.Scripts.CharacterControl
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
                 PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this,PV);
-                swung = attack.Begin(PV);
+                swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
                 for (int i = 0; i < Dash.Count; i++)

@@ -25,6 +25,8 @@ namespace Assets.Scripts.CharacterControl
         private static Vector3 oriental;
         private static float time;
 
+        private PhotonView PV;
+
         public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input, PhotonView PV)
         {
             this.Keys = Keys;
@@ -34,9 +36,10 @@ namespace Assets.Scripts.CharacterControl
             this.swung = swung;
             this.waiter = waiter;
             this.input = input;
+            this.PV = PV;
         }
 
-        public bool Begin(PhotonView PV)
+        public bool Begin()
         {
             
             if ((Keys.ML) && (!swung))
@@ -50,7 +53,7 @@ namespace Assets.Scripts.CharacterControl
             } else if (swung)
             {
                 Swing();
-                SwingVisibility(PV);
+                SwingVisibility();
             }   
             return swung;
         }
@@ -65,7 +68,7 @@ namespace Assets.Scripts.CharacterControl
         }
 
 
-        public void SwingVisibility(PhotonView PV)
+        public void SwingVisibility()
         {   
             PV.RPC("SwingVisibilityRPC",RpcTarget.All);
         }
