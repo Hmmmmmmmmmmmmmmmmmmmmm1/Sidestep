@@ -25,7 +25,7 @@ namespace Assets.Scripts.CharacterControl
         private static Vector3 oriental;
         private static float time;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input)
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input, PhotonView PV)
         {
             this.Keys = Keys;
 //            this.move = move;
@@ -67,7 +67,7 @@ namespace Assets.Scripts.CharacterControl
 
         public void SwingVisibility(PhotonView PV)
         {   
-            PV.RPC("SwingVisibilityRPC",RpcTarget.All,false);
+            PV.RPC("SwingVisibilityRPC",RpcTarget.All);
         }
 
         [PunRPC]

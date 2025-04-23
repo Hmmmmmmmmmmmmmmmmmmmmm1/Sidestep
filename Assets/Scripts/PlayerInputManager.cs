@@ -86,7 +86,7 @@ namespace Assets.Scripts.CharacterControl
             {
                 GroundCheckerScript GroundCheckerOb = tra.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>();
                 GroundChecker.Item1 = GroundCheckerOb.Grounded;
-                Grounded =GroundChecker.Item1;
+                Grounded = GroundChecker.Item1;
                 GroundChecker.Item2 = GroundCheckerOb.HitData;
                 lHit = tra.Find("WallCheckers/LeftWallChecker").gameObject.GetComponent<LeftWallCheckerScript>().lHit;
                 rHit = tra.Find("WallCheckers/RightWallChecker").gameObject.GetComponent<RightWallCheckerScript>().rHit;
@@ -104,7 +104,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButton(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this,PV);
                 swung = attack.Begin(PV);
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
