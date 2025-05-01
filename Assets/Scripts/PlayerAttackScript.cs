@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using Photon.Realtime;
+using Photon.Pun;
 namespace Assets.Scripts.CharacterControl
 {
     public class PlayerAttackScript
