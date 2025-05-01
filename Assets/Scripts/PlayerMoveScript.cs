@@ -265,7 +265,7 @@ namespace Assets.Scripts.CharacterControl
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
                     rb.velocity=Vector3.zero;
-                    Debug.Break();
+                    //Debug.Break();
                 } 
             }
             //if grounded
