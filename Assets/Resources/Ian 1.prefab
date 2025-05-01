@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7118482796436887582}
+  - component: {fileID: 7226346424280596103}
   m_Layer: 0
   m_Name: Sword Holder
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   - {fileID: 5545812329097303659}
   m_Father: {fileID: 7618334235654252660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7226346424280596103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89268987429800015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab68d67aa58d456680a716eeaf03435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  child: {fileID: 5545812329097303659}
+  x: 0
+  y: 0
+  z: 0
+  w: 0
 --- !u!1 &544358217667697085
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab68d67aa58d456680a716eeaf03435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  child: {fileID: 0}
   x: 1
   y: 1
   z: 1
@@ -1636,9 +1655,6 @@ PrefabInstance:
       addedObject: {fileID: 6935495977415388248}
     - targetCorrespondingSourceObject: {fileID: 1648175923905533457, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6069864492435098905}
-    - targetCorrespondingSourceObject: {fileID: 1648175923905533457, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4895797319681722572}
   m_SourcePrefab: {fileID: 100100000, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
 --- !u!1 &5169426772183469265 stripped
@@ -1694,22 +1710,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &6069864492435098905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5169426772183469265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab68d67aa58d456680a716eeaf03435, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  z: 0
-  w: 0
 --- !u!96 &4895797319681722572
 TrailRenderer:
   serializedVersion: 3

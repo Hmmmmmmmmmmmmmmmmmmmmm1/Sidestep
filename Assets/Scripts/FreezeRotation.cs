@@ -5,6 +5,8 @@ using UnityEngine;
 public class FreezeRotation : MonoBehaviour
 {
     [Header("Freeze Rotation")]
+    public Transform child;
+    private float temp;
     public bool x;
     public bool y;
     public bool z;
@@ -17,9 +19,14 @@ public class FreezeRotation : MonoBehaviour
         //transform.localPosition = new Vector3(0, 0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
+
+        child.transform.localRotation = Quaternion.Euler (0,90,0);
+
+
+
+
         /*Quaternion temp = transform.rotation;
         if (x){
             temp = new Quaternion (temp.x,rotation.y,rotation.z,rotation.w);
