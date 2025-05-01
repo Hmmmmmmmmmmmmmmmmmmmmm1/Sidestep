@@ -11,11 +11,10 @@ public class FreezeRotation : MonoBehaviour
     public bool w;
 
     private Quaternion rotation;
-
-    // Start is called before the first frame update
     void Start()
     {
-        rotation = transform.rotation;
+        //rotation = transform.rotation;
+        //transform.localPosition = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame

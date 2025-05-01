@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Photon.Realtime;
+using Photon.Pun;
 namespace Assets.Scripts.CharacterControl
 {
     public class PlayerAttackScript
@@ -23,7 +25,9 @@ namespace Assets.Scripts.CharacterControl
         private static Vector3 oriental;
         private static float time;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input)
+        private PhotonView PV;
+
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input, PhotonView PV)
         {
             this.Keys = Keys;
 //            this.move = move;
@@ -32,11 +36,11 @@ namespace Assets.Scripts.CharacterControl
             this.swung = swung;
             this.waiter = waiter;
             this.input = input;
+            this.PV = PV;
         }
 
         public bool Begin()
         {
-            
             if ((Keys.ML) && (!swung))
             {
 
@@ -48,6 +52,7 @@ namespace Assets.Scripts.CharacterControl
             } else if (swung)
             {
                 Swing();
+                SwingVisibility();
             }   
             return swung;
         }
@@ -55,6 +60,20 @@ namespace Assets.Scripts.CharacterControl
         
 
         public void Swing()
+        {   
+            time += Time.deltaTime;
+            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            //Debug.Log(pos);
+        }
+
+
+        public void SwingVisibility()
+        {   
+            PV.RPC("SwingVisibilityRPC",RpcTarget.All);
+        }
+
+        [PunRPC]
+        public void SwingVisibilityRPC()
         {   
             time += Time.deltaTime;
             SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);

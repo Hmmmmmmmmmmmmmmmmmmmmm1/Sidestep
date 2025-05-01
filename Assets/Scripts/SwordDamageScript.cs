@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 namespace Assets.Scripts.CharacterControl
 
@@ -17,6 +18,8 @@ namespace Assets.Scripts.CharacterControl
         private float burnTimer;
         private float burnInterval = 0f;
         private GameObject burnTarget;
+
+        private float speed;
         
         PhotonView PV;
 
@@ -33,6 +36,7 @@ namespace Assets.Scripts.CharacterControl
         {
             CheckClass();
             burnDamage();
+            speedCheck();
         }
         public void CheckClass()
         {
@@ -61,6 +65,21 @@ namespace Assets.Scripts.CharacterControl
             burnTimer -= Time.deltaTime;
         }
 
+        public void speedCheck(){
+            if (transform.parent.parent.GetComponent<PlayerInputManager>().swung){
+                speed = Speedometer.currentSpeed;
+                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * speed - 0.1));
+                gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * speed + 0.207),(float)(0.14 * speed + 1.15));
+
+                gameObject.GetComponent<TrailRenderer>().enabled = true;
+            }
+            else{
+                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * 50 - 0.1));
+                gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * 50 + 0.207),(float)(0.14 * 50 + 1.15));
+
+                gameObject.GetComponent<TrailRenderer>().enabled = false;
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
