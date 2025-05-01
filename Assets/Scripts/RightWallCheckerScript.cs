@@ -6,7 +6,10 @@ public class RightWallCheckerScript : WallCheckerScript
 {
     public void OnTriggerEnter(Collider collider)
     {
-        rHit = true;
+        if (collider.CompareTag("NotWall"))
+        {
+            rHit = true;
+        }
     }
     public void OnTriggerExit(Collider collider)
     {
