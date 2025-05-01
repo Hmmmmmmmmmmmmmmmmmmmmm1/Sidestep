@@ -62,7 +62,7 @@ public class AbilitySelection : MonoBehaviour
             Select2 = 0;
         }
         if (fortnite ==1){
-            Skill2 = "Fire Aspect II";
+            Skill2 = "just regular aids";
             Select2 = 1;
         }
         if (fortnite ==2){

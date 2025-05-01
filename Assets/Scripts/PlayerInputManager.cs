@@ -22,6 +22,9 @@ namespace Assets.Scripts.CharacterControl
         public GameObject ClassObject;
         public bool pluh;
         public GameObject SwordHolder;
+        public GameObject Sword;
+        public GameObject Trail;
+        public Vector2 rotations = new Vector3(120,60);
         public bool swung;
         public bool waiter;
 
@@ -104,7 +107,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButton(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this, PV);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform, Sword.transform, Trail, rotations/*, move, SwordHolder.transform*/, swung, this, PV);
                 swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
