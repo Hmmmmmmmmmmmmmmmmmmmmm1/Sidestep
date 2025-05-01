@@ -7,7 +7,7 @@ public class LeftWallCheckerScript : WallCheckerScript
     public void OnTriggerEnter(Collider collider)
     {
         lHit = true;
-        Debug.Log("ENTERING");
+        //Debug.Log("ENTERING");
     }
     public void OnTriggerExit(Collider collider)
     {

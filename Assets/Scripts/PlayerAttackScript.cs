@@ -24,7 +24,9 @@ namespace Assets.Scripts.CharacterControl
         private static Vector3 oriental;
         private static float time;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input)
+        private PhotonView PV;
+
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input, PhotonView PV)
         {
             this.Keys = Keys;
 //            this.move = move;
@@ -33,6 +35,7 @@ namespace Assets.Scripts.CharacterControl
             this.swung = swung;
             this.waiter = waiter;
             this.input = input;
+            this.PV = PV;
         }
 
         public bool Begin()
@@ -48,6 +51,7 @@ namespace Assets.Scripts.CharacterControl
             } else if (swung)
             {
                 Swing();
+                SwingVisibility();
             }   
             return swung;
         }
@@ -58,7 +62,21 @@ namespace Assets.Scripts.CharacterControl
         {   
             time += Time.deltaTime;
             SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
-            Debug.Log(pos);
+            //Debug.Log(pos);
+        }
+
+
+        public void SwingVisibility()
+        {   
+            PV.RPC("SwingVisibilityRPC",RpcTarget.All);
+        }
+
+        [PunRPC]
+        public void SwingVisibilityRPC()
+        {   
+            time += Time.deltaTime;
+            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            //Debug.Log(pos);
         }
 //        public float side = 1f;
 //        //mouse input

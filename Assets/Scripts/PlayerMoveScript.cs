@@ -108,7 +108,9 @@ namespace Assets.Scripts.CharacterControl
                             (Mathf.Abs(GroundChecker.Item2.normal.y) > GroundChecker.Item2.normal.z && Mathf.Abs(GroundChecker.Item2.normal.y) > GroundChecker.Item2.normal.x) ? tra.localEulerAngles.y : GroundChecker.Item2.normal.y,
                             (Mathf.Abs(GroundChecker.Item2.normal.z) > GroundChecker.Item2.normal.y && Mathf.Abs(GroundChecker.Item2.normal.z) > GroundChecker.Item2.normal.x) ? tra.localEulerAngles.z : GroundChecker.Item2.normal.x * -90
                             )
+                            
                 );
+                Debug.Log("Normal - Y: "+GroundChecker.Item2.normal.y+", Abs of Normal - Y: "+Mathf.Abs(GroundChecker.Item2.normal.y)+", Normal - Z: "+GroundChecker.Item2.normal.z+", Abs of Normal - Z: "+Mathf.Abs(GroundChecker.Item2.normal.z)+", Normal - X: "+GroundChecker.Item2.normal.x+", Abs of Normal - X: "+Mathf.Abs(GroundChecker.Item2.normal.x));
                 Debug.Log("Normal line is " + GroundChecker.Item2.normal); 
                 rb.angularVelocity = Vector3.zero;
             }
@@ -256,13 +258,14 @@ namespace Assets.Scripts.CharacterControl
                     //tra.localEulerAngles = new Vector3(tra.localEulerAngles.y, GroundChecker.Item2.normal.y, tra.localEulerAngles.z);
                     //tra.position = tra.position + (tra.up*Time.deltaTime);
                     //Debug.Break(); 
+                    //Time.timeScale = 0.2f;
                     //set y to normal and x to y
 
                 } else if (rHit)
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
                     rb.velocity=Vector3.zero;
-                    //Debug.Break();
+                    Debug.Break();
                 } 
             }
             //if grounded

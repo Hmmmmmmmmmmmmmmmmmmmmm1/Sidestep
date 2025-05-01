@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Unity.Properties;
 namespace Assets.Scripts.CharacterControl
 
 {
@@ -24,6 +25,14 @@ namespace Assets.Scripts.CharacterControl
         public bool swung;
         public bool waiter;
         public Transform swordHolder;
+
+        private PhotonView PV;
+
+
+        void Start()
+        {
+            PV = gameObject.GetComponent<PhotonView>();
+        }
 
         void Update()
         {
@@ -73,11 +82,12 @@ namespace Assets.Scripts.CharacterControl
         {
             ClassObject = GameObject.Find("Classes");
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
+            gameObject.GetComponent<Collider>().hasModifiableContacts = true;
             if (GetComponent<PhotonView>().IsMine == true)
             {
                 GroundCheckerScript GroundCheckerOb = tra.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>();
                 GroundChecker.Item1 = GroundCheckerOb.Grounded;
-                Grounded =GroundChecker.Item1;
+                Grounded = GroundChecker.Item1;
                 GroundChecker.Item2 = GroundCheckerOb.HitData;
                 lHit = tra.Find("WallCheckers/LeftWallChecker").gameObject.GetComponent<LeftWallCheckerScript>().lHit;
                 rHit = tra.Find("WallCheckers/RightWallChecker").gameObject.GetComponent<RightWallCheckerScript>().rHit;
@@ -95,7 +105,7 @@ namespace Assets.Scripts.CharacterControl
                         Input.GetMouseButton(1));
                 PlayerMoveScript move = new PlayerMoveScript(keys, ref Effects, rb, tra, GroundChecker, ClassObject, lHit, rHit, Dash, KeyUp);
 
-                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this);
+                PlayerAttackScript attack = new PlayerAttackScript(keys, SwordHolder.transform/*, move, SwordHolder.transform*/, swung, this,PV);
                 swung = attack.Begin();
                 move.CheckClass();
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
@@ -175,6 +185,7 @@ namespace Assets.Scripts.CharacterControl
         RightUp,
         LeftUp,
     }
+
     /*
 
     MAPING OUT THE INPUT MANAGEMENT
