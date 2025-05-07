@@ -83,6 +83,9 @@ public class Abilities : MonoBehaviour
     private Vignette vignette;
     private ColorGrading colorGrading;
 
+    //slow
+    private float blindTimer;
+
     //general
     private float speedMultiplier;
 
@@ -114,6 +117,7 @@ public class Abilities : MonoBehaviour
         CheckClass();
         SpeedCheck();
         slowDHigh();
+        blindDHigh();
 
         //Lunch Mode
         if (Skill1 == 1)
@@ -290,6 +294,23 @@ public class Abilities : MonoBehaviour
                 }
             }
         }
+         //blind Mode
+        if (Skill2 == 5 && gameObject.name.Equals("Player 1"))
+        {
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                Skill2Cooldown  = 3f;
+
+                Collider[] blindTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
+                foreach (Collider x in blindTargets){
+                    if (x.gameObject.GetComponent<Abilities>()){
+                        Skill2Cooldown = 9;
+                        x.transform.GetComponent<Abilities>().blindDown();
+                        //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
+                    }
+                }
+            }
+        }
     }
 
     public void Cooldown()
@@ -391,5 +412,31 @@ public class Abilities : MonoBehaviour
         }
 
         slowTimer = 6;
+    }
+
+    public void blindDHigh(){
+        if (blindTimer < 0)
+            {
+                if (colorGrading) colorGrading.postExposure.value = 0;
+            }
+        else{
+            if (colorGrading) colorGrading.postExposure.value = -1/2 * (10 - blindTimer) + 5;
+        }
+
+        blindTimer -= Time.deltaTime;
+    }
+
+    public void blindDown (){
+        PV.RPC("blindDownRPC",RpcTarget.All);
+    }
+
+    [PunRPC]
+    void blindDownRPC()
+    {
+        if (cam){
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.postExposure.value = 5;
+        }
+        blindTimer = 10;
     }
 }
