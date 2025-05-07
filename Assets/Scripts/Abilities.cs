@@ -307,7 +307,7 @@ public class Abilities : MonoBehaviour
                 foreach (Collider x in blindTargets){
                     if (x.gameObject.GetComponent<Abilities>()){
                         Skill2Cooldown = 9;
-                        x.transform.GetComponent<Abilities>().slowDown();
+                        x.transform.GetComponent<Abilities>().blindDown();
                         //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
                     }
                 }
