@@ -2809,9 +2809,9 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: freaky vampire stuff
       m_Image: {fileID: 0}
-    - m_Text: stop sign
+    - m_Text: Yield sign
       m_Image: {fileID: 0}
-    - m_Text: SWAT them
+    - m_Text: flash them
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

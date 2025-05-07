@@ -78,7 +78,7 @@ public class AbilitySelection : MonoBehaviour
             Select2 = 4;
         }
         if (fortnite ==5){
-            Skill2 = "DDOS";
+            Skill2 = "Like the weird flashing. Yeah you freak. Pick it. I dare you.";
             Select2 = 5;
         }
         Skill2Text.text = Skill2;

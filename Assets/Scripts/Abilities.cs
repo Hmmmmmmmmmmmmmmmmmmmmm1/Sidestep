@@ -83,6 +83,11 @@ public class Abilities : MonoBehaviour
     private Vignette vignette;
     private ColorGrading colorGrading;
 
+    //slow
+    private float blindTimer;
+    //This timer is identical to a regular timer, but you need to doulbe the time because it stores time at 1/2x speed. (1/2)x not 1/(2x). x/2.
+    private DepthOfField depthOfField;
+
     //general
     private float speedMultiplier;
 
@@ -114,6 +119,7 @@ public class Abilities : MonoBehaviour
         CheckClass();
         SpeedCheck();
         slowDHigh();
+        blindDHigh();
 
         //Lunch Mode
         if (Skill1 == 1)
@@ -290,6 +296,23 @@ public class Abilities : MonoBehaviour
                 }
             }
         }
+         //blind Mode
+        if (Skill2 == 4 && gameObject.name.Equals("Player 1"))
+        {
+            if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
+            {
+                Skill2Cooldown  = 3f;
+
+                Collider[] blindTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
+                foreach (Collider x in blindTargets){
+                    if (x.gameObject.GetComponent<Abilities>()){
+                        Skill2Cooldown = 9;
+                        x.transform.GetComponent<Abilities>().slowDown();
+                        //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
+                    }
+                }
+            }
+        }
     }
 
     public void Cooldown()
@@ -391,5 +414,29 @@ public class Abilities : MonoBehaviour
         }
 
         slowTimer = 6;
+    }
+
+    public void blindDHigh(){
+        if (blindTimer < 0)
+            {
+                if (depthOfField) depthOfField.active = false;
+                if (colorGrading) colorGrading.saturation.value = 0;
+            }
+
+        blindTimer -= Time.deltaTime;
+    }
+
+    public void blindDown (){
+        PV.RPC("blindDownRPC",RpcTarget.All);
+    }
+
+    [PunRPC]
+    void blindDownRPC()
+    {
+        if (cam){
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out depthOfField);
+            depthOfField.active = true;
+        }
+        blindTimer = 6;
     }
 }
