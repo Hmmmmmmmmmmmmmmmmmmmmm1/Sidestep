@@ -85,8 +85,6 @@ public class Abilities : MonoBehaviour
 
     //slow
     private float blindTimer;
-    //This timer is identical to a regular timer, but you need to doulbe the time because it stores time at 1/2x speed. (1/2)x not 1/(2x). x/2.
-    private LensDistortion lensDistortion;
 
     //general
     private float speedMultiplier;
@@ -419,10 +417,10 @@ public class Abilities : MonoBehaviour
     public void blindDHigh(){
         if (blindTimer < 0)
             {
-                if (lensDistortion) lensDistortion.intensity.value = 0;
+                if (colorGrading) colorGrading.postExposure.value = 0;
             }
         else{
-            if (lensDistortion) lensDistortion.intensity.value = -5 * (10 - blindTimer) + 100;
+            if (colorGrading) colorGrading.postExposure.value = -1/2 * (10 - blindTimer) + 5;
         }
 
         blindTimer -= Time.deltaTime;
@@ -436,8 +434,8 @@ public class Abilities : MonoBehaviour
     void blindDownRPC()
     {
         if (cam){
-            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out lensDistortion);
-            lensDistortion.intensity.value = 100;
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.postExposure.value = 5;
         }
         blindTimer = 10;
     }
