@@ -297,7 +297,7 @@ public class Abilities : MonoBehaviour
             }
         }
          //blind Mode
-        if (Skill2 == 4 && gameObject.name.Equals("Player 1"))
+        if (Skill2 == 5 && gameObject.name.Equals("Player 1"))
         {
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
