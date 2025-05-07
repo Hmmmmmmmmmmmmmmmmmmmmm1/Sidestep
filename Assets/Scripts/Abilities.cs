@@ -81,11 +81,10 @@ public class Abilities : MonoBehaviour
     private float slowTimer;
     //This timer is identical to a regular timer, but you need to doulbe the time because it stores time at 1/2x speed. (1/2)x not 1/(2x). x/2.
     private Vignette vignette;
-    private ColorGrading colorGrading1;
+    private ColorGrading colorGrading;
 
     //slow
     private float blindTimer;
-    private ColorGrading colorGrading2;
 
     //general
     private float speedMultiplier;
@@ -385,10 +384,10 @@ public class Abilities : MonoBehaviour
                 gameObject.GetComponent<GrapplingHook>().enabled = true;
 
                 if (vignette) vignette.intensity.value = 0;
-                if (colorGrading1) colorGrading1.saturation.value = 0;
+                if (colorGrading) colorGrading.saturation.value = 0;
             }
             else{
-                if (colorGrading1) colorGrading1.saturation.value = 4 * (10-slowTimer) - 60;
+                if (colorGrading) colorGrading.saturation.value = 4 * (10-slowTimer) - 60;
             }
 
         slowTimer -= Time.deltaTime;
@@ -408,8 +407,8 @@ public class Abilities : MonoBehaviour
             cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out vignette);
             vignette.intensity.value = 0.4f;
 
-            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading1);
-            colorGrading1.saturation.value = -60;
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.saturation.value = -60;
         }
 
         slowTimer = 6;
@@ -418,10 +417,10 @@ public class Abilities : MonoBehaviour
     public void blindDHigh(){
         if (blindTimer < 0)
             {
-                //if (colorGrading2) colorGrading2.postExposure.value = 0;
+                if (colorGrading) colorGrading.postExposure.value = 0;
             }
         else{
-            // /if (colorGrading2) colorGrading2.postExposure.value = -1/2 * (10 - blindTimer) + 5;
+            if (colorGrading) colorGrading.postExposure.value = -1/2 * (10 - blindTimer) + 5;
         }
 
         blindTimer -= Time.deltaTime;
@@ -435,8 +434,8 @@ public class Abilities : MonoBehaviour
     void blindDownRPC()
     {
         if (cam){
-            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading2);
-            colorGrading2.postExposure.value = 5;
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.postExposure.value = 5;
         }
         blindTimer = 10;
     }
