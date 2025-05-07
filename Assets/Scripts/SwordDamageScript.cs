@@ -20,6 +20,7 @@ namespace Assets.Scripts.CharacterControl
         private GameObject burnTarget;
 
         private float speed;
+        public GameObject trail;
         
         PhotonView PV;
 
@@ -67,15 +68,24 @@ namespace Assets.Scripts.CharacterControl
 
         public void speedCheck(){
             if (transform.parent.parent.GetComponent<PlayerInputManager>().swung){
+                Debug.Log("this is the peak of my combat");
+                Debug.Log(speed);
                 speed = Speedometer.currentSpeed;
                 gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * speed - 0.1));
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * speed + 0.207),(float)(0.14 * speed + 1.15));
+
+                trail.transform.localScale = new Vector3((float)(0.14 * speed + 1.15), 1, 1);
+                trail.transform.localPosition = new Vector3(0,0,(float)(0.07 * speed - 0.1));
 
                 //gameObject.GetComponent<TrailRenderer>().enabled = true;
             }
             else{
                 gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * 0 - 0.1));
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * 0 + 0.207),(float)(0.14 * 0 + 1.15));
+
+                trail.transform.localScale = new Vector3((float)(0.14 * 0 + 1.15), 1, 1);
+                trail.transform.localPosition = new Vector3(0,0,(float)(0.07 * 0 - 0.1));
+
 
                 //gameObject.GetComponent<TrailRenderer>().enabled = false;
             }
