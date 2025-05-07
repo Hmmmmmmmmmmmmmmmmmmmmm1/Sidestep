@@ -422,7 +422,7 @@ public class Abilities : MonoBehaviour
                 if (lensDistortion) lensDistortion.intensity.value = 0;
             }
         else{
-            if (lensDistortion) lensDistortion.intensity.value = -10 * blindTimer + 60;
+            if (lensDistortion) lensDistortion.intensity.value = -10 * (10 - blindTimer) + 100;
         }
 
         blindTimer -= Time.deltaTime;
