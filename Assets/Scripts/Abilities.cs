@@ -418,10 +418,10 @@ public class Abilities : MonoBehaviour
     public void blindDHigh(){
         if (blindTimer < 0)
             {
-                if (colorGrading2) colorGrading2.postExposure.value = 0;
+                //if (colorGrading2) colorGrading2.postExposure.value = 0;
             }
         else{
-            if (colorGrading2) colorGrading2.postExposure.value = -1/2 * (10 - blindTimer) + 5;
+            // /if (colorGrading2) colorGrading2.postExposure.value = -1/2 * (10 - blindTimer) + 5;
         }
 
         blindTimer -= Time.deltaTime;
