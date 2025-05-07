@@ -42,6 +42,7 @@ namespace Assets.Scripts.CharacterControl
                 //Debug.Log("hopefully fighter");
             }
 
+
         }
 
         public PlayerMoveScript(KeysPressed Keys, ref ArrayList Effects, Rigidbody rb, Transform tra, (bool, RaycastHit) GroundChecker, GameObject ClassObject, bool lHit, bool rHit, ArrayList Dash, ArrayList KeyUp)
@@ -264,7 +265,7 @@ namespace Assets.Scripts.CharacterControl
                 {
                     tra.RotateAround(tra.GetComponent<Collider>().bounds.center, tra.forward, 90);
                     rb.velocity=Vector3.zero;
-                    Debug.Break();
+                    //Debug.Break();
                 } 
             }
             //if grounded

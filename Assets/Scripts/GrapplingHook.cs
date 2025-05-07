@@ -98,7 +98,13 @@ namespace Assets.Scripts.CharacterControl
                 }
             }
 
-            if (!transform.Find("GroundChecker").GetComponent<GroundCheckerScript>().Grounded && gameObject.name.Equals("Player 1")){
+            if (Input.GetKey(KeyCode.L))
+            {
+                //PV.RPC("RPC_Beam", RpcTarget.All, transform.position, gunTip.position, grapplePoint.transform.position);
+            }
+
+            if (!transform.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>().Grounded){
+                //gameObject.GetComponent<Rigidbody>().angularVelocity /= gameObject.GetComponent<Rigidbody>().velocity.magnitude;
                 gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             }
 
