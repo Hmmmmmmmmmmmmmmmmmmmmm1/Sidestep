@@ -420,7 +420,7 @@ public class Abilities : MonoBehaviour
                 if (colorGrading) colorGrading.postExposure.value = 0;
             }
         else{
-            if (colorGrading) colorGrading.postExposure.value = -1/4 * (10 - blindTimer) + 2.5f;
+            if (colorGrading) colorGrading.postExposure.value = -0.45f * (10 - blindTimer) + 4.5f;
         }
 
         blindTimer -= Time.deltaTime;
