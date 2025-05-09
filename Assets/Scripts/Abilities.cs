@@ -420,7 +420,7 @@ public class Abilities : MonoBehaviour
                 if (colorGrading) colorGrading.postExposure.value = 0;
             }
         else{
-            if (colorGrading) colorGrading.postExposure.value = -1/2 * (10 - blindTimer) + 5;
+            if (colorGrading) colorGrading.postExposure.value = -1/4 * (10 - blindTimer) + 2.5f;
         }
 
         blindTimer -= Time.deltaTime;
@@ -435,7 +435,6 @@ public class Abilities : MonoBehaviour
     {
         if (cam){
             cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
-            colorGrading.saturation.value = 100;
         }
         blindTimer = 10;
     }
