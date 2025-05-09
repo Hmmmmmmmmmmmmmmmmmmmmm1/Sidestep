@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Ryan's Scene.unity
     guid: e00c32361db554368abdfd751d223530
   - enabled: 1
+    path: Assets/Scenes/Death Screen.unity
+    guid: 5a9b9fb94fc7240cbac1e79743ec71f8
+  - enabled: 1
     path: Assets/Scenes/Casey's Scene.unity
     guid: a4051a7dec232497d89a95803832a507
   - enabled: 1
@@ -29,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu Rough Draft.unity
     guid: 791078be774384526915589a708d1150
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 1256dcaeb35264542addad824a2e5964
   m_configObjects: {}
