@@ -428,16 +428,15 @@ public class Abilities : MonoBehaviour
 
     public void blindDown (){
         PV.RPC("blindDownRPC",RpcTarget.All);
-                if (cam){
-            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
-            colorGrading.saturation.value = 5;
-        }
-        blindTimer = 10;
     }
 
     [PunRPC]
     void blindDownRPC()
     {
-
+        if (cam){
+            cam.gameObject.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+            colorGrading.saturation.value = 100;
+        }
+        blindTimer = 10;
     }
 }
