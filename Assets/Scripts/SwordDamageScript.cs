@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 
 namespace Assets.Scripts.CharacterControl
 
@@ -115,6 +116,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
                     damageMultiplier += 9;
+                    Error get fucked idiot;
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
