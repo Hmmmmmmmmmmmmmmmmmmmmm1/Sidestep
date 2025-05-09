@@ -113,6 +113,10 @@ namespace Assets.Scripts.CharacterControl
                     gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage((int)((velocity.magnitude * damage * damageMultiplier / 2) + 1));
                 }
 
+                if (transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
+                    damageMultiplier += 9;
+                }
+
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
                 other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude * damage * damageMultiplier) + 1));
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
