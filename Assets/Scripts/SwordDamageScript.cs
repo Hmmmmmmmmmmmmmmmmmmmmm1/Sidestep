@@ -69,7 +69,7 @@ namespace Assets.Scripts.CharacterControl
 
         public void speedCheck(){
             if (transform.parent.parent.GetComponent<PlayerInputManager>().swung){
-                damage += 0.001f;
+                damage += 0.03f;
 
                 Debug.Log("this is the peak of my combat");
                 speed = Speedometer.currentSpeed;
@@ -116,8 +116,8 @@ namespace Assets.Scripts.CharacterControl
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
-                other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude + 1) * damage * damageMultiplier));
-                Debug.Log(-(int)((velocity.magnitude + 1) * damage * damageMultiplier) + " guah " + velocity.magnitude + " " + damage + " " + damageMultiplier + " " + 1);
+                other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1));
+                Debug.Log(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1) + " guah " + velocity.magnitude + " " + damage + " " + damageMultiplier + " " + 1);
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
         }
