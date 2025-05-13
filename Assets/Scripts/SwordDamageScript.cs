@@ -116,7 +116,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
                     damageMultiplier += 9;
-                    Error get fucked idiot;
+                    Debug.Log(damageMultiplier);
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
