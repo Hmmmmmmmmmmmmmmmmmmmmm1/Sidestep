@@ -212,7 +212,7 @@ namespace Assets.Scripts.CharacterControl
 
             if (Keys.SP && Grounded)
             {
-                vec += new Vector3(0, Mathf.Max(GetVelocity().magnitude * 900f, 9000), 0);//or if get velocity is less than a certain ammount, just apply a set ammount
+                vec += new Vector3(0, Mathf.Max(GetVelocity().magnitude * 700f, 9000), 0);//or if get velocity is less than a certain ammount, just apply a set ammount
             }
             
             /*

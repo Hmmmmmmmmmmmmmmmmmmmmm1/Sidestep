@@ -11,5 +11,6 @@ public class Respawn : MonoBehaviour
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene(9);
         PhotonNetwork.ConnectUsingSettings();
+        seeingPeopleOnlyBasedOnTheirColor.playerCount = 1; 
     }
 }

@@ -1241,6 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   timer: 5
+  counter: {fileID: 0}
 --- !u!1001 &1731069215591517931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1712,6 +1713,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -172.902
       objectReference: {fileID: 0}
+    - target: {fileID: 7512053768975879141, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
+      propertyPath: trail
+      value: 
+      objectReference: {fileID: 1993372207101279033}
     m_RemovedComponents:
     - {fileID: 1219251913074337111, guid: 81284eba69cf4455e9bfa0f82b9293dd, type: 3}
     m_RemovedGameObjects: []
