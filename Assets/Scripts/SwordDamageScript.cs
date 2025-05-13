@@ -70,7 +70,6 @@ namespace Assets.Scripts.CharacterControl
         public void speedCheck(){
             if (transform.parent.parent.GetComponent<PlayerInputManager>().swung){
                 Debug.Log("this is the peak of my combat");
-                Debug.Log(speed);
                 speed = Speedometer.currentSpeed;
                 gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * speed - 0.1));
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * speed + 0.207),(float)(0.14 * speed + 1.15));
@@ -114,7 +113,7 @@ namespace Assets.Scripts.CharacterControl
                     gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage((int)((velocity.magnitude * damage * damageMultiplier / 2) + 1));
                 }
 
-                if (gameObject.transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
+                if (transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
                     damageMultiplier += 9;
                     Debug.Log(damageMultiplier);
                 }
