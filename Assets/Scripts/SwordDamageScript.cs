@@ -69,6 +69,8 @@ namespace Assets.Scripts.CharacterControl
 
         public void speedCheck(){
             if (transform.parent.parent.GetComponent<PlayerInputManager>().swung){
+                damage += 3;
+
                 Debug.Log("this is the peak of my combat");
                 speed = Speedometer.currentSpeed;
                 gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * speed - 0.1));
@@ -86,7 +88,7 @@ namespace Assets.Scripts.CharacterControl
                 trail.transform.localScale = new Vector3((float)(0.14 * 0 + 1.15), 1, 1);
                 trail.transform.localPosition = new Vector3(0,0,(float)(0.07 * 0 - 0.1));
 
-
+                damage = 0.2f;
                 //gameObject.GetComponent<TrailRenderer>().enabled = false;
             }
         }
@@ -111,11 +113,6 @@ namespace Assets.Scripts.CharacterControl
 
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().vampActive){
                     gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage((int)((velocity.magnitude * damage * damageMultiplier / 2) + 1));
-                }
-
-                if (transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
-                    damageMultiplier += 9;
-                    Debug.Log(damageMultiplier);
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
