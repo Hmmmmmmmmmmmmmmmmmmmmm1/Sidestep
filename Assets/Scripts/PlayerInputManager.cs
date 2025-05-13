@@ -24,7 +24,7 @@ namespace Assets.Scripts.CharacterControl
         public GameObject SwordHolder;
         public GameObject Sword;
         public GameObject Trail;
-        public Vector2 rotations = new Vector3(120,60);
+        private Vector2 rotations = new Vector3(120,60);
         public bool swung;
         public bool waiter;
         public Transform swordHolder;

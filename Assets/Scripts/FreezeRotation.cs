@@ -22,7 +22,7 @@ public class FreezeRotation : MonoBehaviour
     void Update()
     {
 
-        child.transform.localRotation = Quaternion.Euler (0,90,0);
+        child.transform.localRotation = Quaternion.Euler (0,child.transform.localEulerAngles.y,0);
 
 
 
