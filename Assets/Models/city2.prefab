@@ -1238,7 +1238,8 @@ PrefabInstance:
       value: city2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7985974569186381559, guid: 1ce1549a00e8a4bfaa2227e422572fe3, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1ce1549a00e8a4bfaa2227e422572fe3, type: 3}
       insertIndex: 0
@@ -1307,6 +1308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   timer: 5
+  counter: {fileID: 0}
 --- !u!4 &5640667410007222756 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1ce1549a00e8a4bfaa2227e422572fe3, type: 3}

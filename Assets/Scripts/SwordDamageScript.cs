@@ -117,7 +117,7 @@ namespace Assets.Scripts.CharacterControl
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
                 other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1));
-                Debug.Log(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1) + " guah " + velocity.magnitude + " " + damage + " " + damageMultiplier + " " + 1);
+                //Debug.Log(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1) + " guah " + velocity.magnitude + " " + damage + " " + damageMultiplier + " " + 1);
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
         }
