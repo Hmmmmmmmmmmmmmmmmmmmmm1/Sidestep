@@ -1240,6 +1240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   timer: 5
+  counter: {fileID: 0}
 --- !u!1001 &1731069215591517931
 PrefabInstance:
   m_ObjectHideFlags: 0
