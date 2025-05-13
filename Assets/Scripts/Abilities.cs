@@ -91,6 +91,7 @@ public class Abilities : MonoBehaviour
 
     private PhotonView PV;
 
+    //Classism
     public float classRegen;
     public float classPower;
     public GameObject ClassObject;
@@ -245,7 +246,7 @@ public class Abilities : MonoBehaviour
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 10;
+                Skill2Cooldown = 10 * classRegen;
             }
         }
         //punch II bow mode
@@ -257,7 +258,7 @@ public class Abilities : MonoBehaviour
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
                 knockActive = true;
-                Skill2Cooldown = 4;
+                Skill2Cooldown = 4 * classRegen;
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
             }
         }
@@ -274,7 +275,7 @@ public class Abilities : MonoBehaviour
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
                 vampActive = true;
                 evilerTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 100;
+                Skill2Cooldown = 100 * classRegen;
             }
         }
          //slow Mode
@@ -282,12 +283,12 @@ public class Abilities : MonoBehaviour
         {
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                Skill2Cooldown  = 3f;
+                Skill2Cooldown  = 3f * classRegen;
 
                 Collider[] slowTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
                 foreach (Collider x in slowTargets){
                     if (x.gameObject.GetComponent<Abilities>()){
-                        Skill2Cooldown = 9;
+                        Skill2Cooldown = 9 * classRegen;
                         x.transform.GetComponent<Abilities>().slowDown();
                         //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
                     }
@@ -299,12 +300,12 @@ public class Abilities : MonoBehaviour
         {
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                Skill2Cooldown  = 3f;
+                Skill2Cooldown  = 3f * classRegen;
 
                 Collider[] blindTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
                 foreach (Collider x in blindTargets){
                     if (x.gameObject.GetComponent<Abilities>()){
-                        Skill2Cooldown = 9;
+                        Skill2Cooldown = 9 * classRegen;
                         x.transform.GetComponent<Abilities>().blindDown();
                         //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
                     }

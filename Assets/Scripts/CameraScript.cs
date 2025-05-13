@@ -11,7 +11,6 @@ public class CameraScript : MonoBehaviour
 
     void Awake()
     {
-        //get transform
         //Lock and hide Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,7 +28,6 @@ public class CameraScript : MonoBehaviour
         transform.localEulerAngles = Vector3.right * VerticalRotation;
 
         //rotate player around y
-        
         if(1+1 == 2){
             if(!GetComponent<PhotonView>().IsMine)
             {
