@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 
 namespace Assets.Scripts.CharacterControl
 
@@ -111,6 +112,11 @@ namespace Assets.Scripts.CharacterControl
 
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().vampActive){
                     gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage((int)((velocity.magnitude * damage * damageMultiplier / 2) + 1));
+                }
+
+                if (transform.parent.parent.gameObject.GetComponent<PlayerInputManager>().swung){
+                    damageMultiplier += 9;
+                    Debug.Log(damageMultiplier);
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
