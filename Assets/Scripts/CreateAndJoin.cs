@@ -70,5 +70,7 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
         Casey = false;
     }
 
-
+    public void loadTutorial(){
+        PhotonNetwork.LoadLevel(10);
+    }
 }
