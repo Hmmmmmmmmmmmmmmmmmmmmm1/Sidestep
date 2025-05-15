@@ -34,13 +34,13 @@ public class ClassicRyanShenanigans : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetMouseButtonDown(0) && timer > 1){
             Debug.Log("devil may cry type gameplay");
             //transform.position += new Vector3(-10,0,0);
-            transform.position += transform.right * 5;
+            transform.position += transform.right * -5;
             timer = 0;
         }
 
         if (Input.GetKey(KeyCode.D) && Input.GetMouseButtonDown(0) && timer > 1){
             Debug.Log("devil may cry type gameplay");
-            transform.position += transform.right * -5;
+            transform.position += transform.right * 5;
             timer = 0;
         }
 
