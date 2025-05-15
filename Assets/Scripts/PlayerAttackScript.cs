@@ -15,6 +15,11 @@ namespace Assets.Scripts.CharacterControl
         public PlayerMoveScript move;
         //sword holder transform
         public Transform SwordHolder;
+
+        //For whatever shitty things Ryan has cooking up in his head
+        public Transform Sword;
+        //bool for trail on/off
+        public GameObject Trail;
         //if swung recently
         public bool swung;
         //waiter for swung
@@ -22,17 +27,24 @@ namespace Assets.Scripts.CharacterControl
         private Vector3 pos;
         private bool t;
         PlayerInputManager input;
-        private static Vector3 oriental;
+        private static Vector3 orientation;
         private static float time;
 
         private PhotonView PV;
+        private int guy = 120;
+        private int guyNegative = 60;
+        private int guyTemp;
 
-        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, bool swung, PlayerInputManager input, PhotonView PV)
+        private static Vector2 rotations = new Vector2(60,120);
+
+        public PlayerAttackScript(KeysPressed Keys, /*PlayerMoveScript move, */Transform SwordHolder, Transform Sword, GameObject Trail, Vector2 rotations, bool swung, PlayerInputManager input, PhotonView PV)
         {
             this.Keys = Keys;
 //            this.move = move;
             this.SwordHolder = SwordHolder;
-            this.pos = oriental * -1;
+            this.Sword = Sword;
+            this.Trail = Trail;
+            this.pos = orientation * -1;
             this.swung = swung;
             this.waiter = waiter;
             this.input = input;
@@ -47,13 +59,17 @@ namespace Assets.Scripts.CharacterControl
                 swung = true;
                 time = 0f;
                 input.Invoke("SetFalse", .45f);
-                oriental = SwordHolder.localPosition;
+                orientation = SwordHolder.localPosition;
+                rotations = new Vector2(rotations.y,rotations.x);
                 
             } else if (swung)
             {
                 Swing();
                 SwingVisibility();
             }   
+            else{
+                Trail.SetActive(false);
+            }
             return swung;
         }
 
@@ -62,21 +78,23 @@ namespace Assets.Scripts.CharacterControl
         public void Swing()
         {   
             time += Time.deltaTime;
-            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            SwordHolder.localPosition = Vector3.Lerp (orientation, pos, time/0.4f);
+            Sword.localEulerAngles = Vector3.Lerp (new Vector3(0,rotations.x,0), new Vector3(0, rotations.y, 0), time / 0.4f);
+            Trail.SetActive(true);
             //Debug.Log(pos);
         }
 
 
         public void SwingVisibility()
         {   
-            PV.RPC("SwingVisibilityRPC",RpcTarget.All);
+            //PV.RPC("SwingVisibilityRPC",RpcTarget.All);
         }
 
         [PunRPC]
         public void SwingVisibilityRPC()
         {   
             time += Time.deltaTime;
-            SwordHolder.localPosition = Vector3.Lerp (oriental, pos, time/0.4f);
+            SwordHolder.localPosition = Vector3.Lerp (orientation, pos, time/0.4f);
             //Debug.Log(pos);
         }
 //        public float side = 1f;

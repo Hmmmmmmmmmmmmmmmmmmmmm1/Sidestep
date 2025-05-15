@@ -9,6 +9,8 @@ public class Dead : MonoBehaviour
 {
     public Text text;
     public float timer = 5;
+    public GameObject counter;
+    public GameObject classism;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +21,15 @@ public class Dead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        counter = GameObject.Find("PlayerCounter");
+        classism = GameObject.Find("Classes");
         Scene scene  = SceneManager.GetActiveScene();
         if (!scene.name.Equals("Casey's Scene")){
             if (gameObject.GetComponent<PlayerHP2>()){
                 if (gameObject.GetComponent<PlayerHP2>().hp == 0 && gameObject.name.Equals("Player 1")){
                     Destroy(gameObject);
+                    Destroy(counter);
+                    Destroy(classism);
                     SceneManager.LoadScene(4);
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;

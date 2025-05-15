@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 
 namespace Assets.Scripts.CharacterControl
 
@@ -20,6 +21,7 @@ namespace Assets.Scripts.CharacterControl
         private GameObject burnTarget;
 
         private float speed;
+        public GameObject trail;
         
         PhotonView PV;
 
@@ -67,17 +69,27 @@ namespace Assets.Scripts.CharacterControl
 
         public void speedCheck(){
             if (transform.parent.parent.GetComponent<PlayerInputManager>().swung){
+                damage += 0.03f;
+
+                Debug.Log("this is the peak of my combat");
                 speed = Speedometer.currentSpeed;
                 gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * speed - 0.1));
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * speed + 0.207),(float)(0.14 * speed + 1.15));
 
-                gameObject.GetComponent<TrailRenderer>().enabled = true;
+                trail.transform.localScale = new Vector3((float)(0.14 * speed + 1.15), 1, 1);
+                trail.transform.localPosition = new Vector3(0,0,(float)(0.07 * speed - 0.1));
+
+                //gameObject.GetComponent<TrailRenderer>().enabled = true;
             }
             else{
-                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * 50 - 0.1));
-                gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * 50 + 0.207),(float)(0.14 * 50 + 1.15));
+                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,0,(float)(0.07 * 0 - 0.1));
+                gameObject.GetComponent<BoxCollider>().size = new Vector3(0.207f,(float)(0.0252 * 0 + 0.207),(float)(0.14 * 0 + 1.15));
 
-                gameObject.GetComponent<TrailRenderer>().enabled = false;
+                trail.transform.localScale = new Vector3((float)(0.14 * 0 + 1.15), 1, 1);
+                trail.transform.localPosition = new Vector3(0,0,(float)(0.07 * 0 - 0.1));
+
+                damage = 0.2f;
+                //gameObject.GetComponent<TrailRenderer>().enabled = false;
             }
         }
 
@@ -104,7 +116,8 @@ namespace Assets.Scripts.CharacterControl
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
-                other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude * damage * damageMultiplier) + 1));
+                other.GetComponent<PlayerHP2>().EnemyDamage(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1));
+                //Debug.Log(-(int)((velocity.magnitude + 1) * damage * damageMultiplier + 1) + " guah " + velocity.magnitude + " " + damage + " " + damageMultiplier + " " + 1);
                 //other.gameObject.GetComponent<PlayerHP2>().changeHealth(-(int)((velocity.magnitude * damage * damageMultiplier)));
             }
         }
