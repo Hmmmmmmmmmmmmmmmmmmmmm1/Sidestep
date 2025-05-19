@@ -99,6 +99,6 @@ public class TutorialScript : MonoBehaviour
 
     public void loadMenu(){
         SceneManager.LoadScene(8);
-        Get erroed idiot;
+        //Get erroed idiot;
     }
 }
