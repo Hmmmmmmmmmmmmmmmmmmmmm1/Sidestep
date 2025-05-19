@@ -87,7 +87,7 @@ public class Abilities : MonoBehaviour
     private float blindTimer;
 
     //general
-    private float speedMultiplier;
+    public float speedMultiplier;
 
     private PhotonView PV;
 

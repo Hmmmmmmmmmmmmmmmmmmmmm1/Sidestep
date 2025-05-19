@@ -4,6 +4,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Dead : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Dead : MonoBehaviour
                     Destroy(gameObject);
                     Destroy(counter);
                     Destroy(classism);
+                    PhotonNetwork.Disconnect();
                     SceneManager.LoadScene(4);
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
