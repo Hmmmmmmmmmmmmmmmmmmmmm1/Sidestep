@@ -35,6 +35,12 @@ namespace Assets.Scripts.CharacterControl
         void Start()
         {
             PV = gameObject.GetComponent<PhotonView>();
+            gameObject.GetComponent<Collider>().hasModifiableContacts = true;
+            var ContactManager = new ContactManager();
+            ContactManager.playerID = gameObject.GetComponent<Collider>().GetInstanceID();
+            ContactManager.B = 10;
+            ContactManager.Up = tra.up;
+            Physics.ContactModifyEvent += ContactManager.PreventRotation;
         }
 
         void Update()
@@ -85,7 +91,6 @@ namespace Assets.Scripts.CharacterControl
         {
             ClassObject = GameObject.Find("Classes");
             pluh = Effects.Contains(ActiveEffects.ForwardHeld);
-            gameObject.GetComponent<Collider>().hasModifiableContacts = true;
             if (GetComponent<PhotonView>().IsMine == true)
             {
                 GroundCheckerScript GroundCheckerOb = tra.Find("GroundChecker").gameObject.GetComponent<GroundCheckerScript>();
@@ -114,7 +119,7 @@ namespace Assets.Scripts.CharacterControl
                 rb.AddForce(move.UpdateVelocity() * Time.deltaTime);
                 for (int i = 0; i < Dash.Count; i++)
                 {
-                    Debug.Log(Dash[i]);
+                    //Debug.Log(Dash[i]);
                     Dash.Remove(Dash[i]);
                 }
                 for (int i = 0; i < KeyUp.Count; i++)

@@ -274,7 +274,7 @@ namespace Assets.Scripts.CharacterControl
             // wall hit 
             //rotate
 
-            //Vector3 friction;
+            //This is for debug remove Keys.SH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             if (Keys.SH || (!Grounded))
             {
                 rb.drag = 0f;
