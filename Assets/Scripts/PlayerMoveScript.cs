@@ -128,7 +128,7 @@ namespace Assets.Scripts.CharacterControl
             if (Effects.Contains(ActiveEffects.ForwardHeld) && Dash.Contains(DashKey.UpPush))
             {
                 rb.drag = 0.1f * Class;
-                return (tra.forward) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * 2000);
+                return (tra.forward) * ((-5 * Mathf.Log(rb.velocity.magnitude + 1) + 20) * 8000);
             }
             if (Effects.Contains(ActiveEffects.BackHeld) && Dash.Contains(DashKey.DownPush))
             {

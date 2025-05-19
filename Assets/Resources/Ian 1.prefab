@@ -996,6 +996,7 @@ MonoBehaviour:
   hpNum: {fileID: 4024967859900157581}
   hp: 100
   hpChangeTick: 0
+  speedMultiplier: 0
 --- !u!114 &789405301329346563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,6 +1017,7 @@ MonoBehaviour:
   burned: 0
   knockActive: 0
   vampActive: 0
+  speedMultiplier: 0
   classRegen: 0
   classPower: 0
   ClassObject: {fileID: 0}
