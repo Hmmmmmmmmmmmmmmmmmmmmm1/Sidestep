@@ -36,11 +36,11 @@ namespace Assets.Scripts.CharacterControl
         {
             PV = gameObject.GetComponent<PhotonView>();
             gameObject.GetComponent<Collider>().hasModifiableContacts = true;
-            var ContactManager = new ContactManager();
-            ContactManager.playerID = gameObject.GetComponent<Collider>().GetInstanceID();
-            ContactManager.B = 10;
-            ContactManager.Up = tra.up;
-            Physics.ContactModifyEvent += ContactManager.PreventRotation;
+            var playerContacts = new ContactManager();
+            playerContacts.playerID = gameObject.GetComponent<Collider>().GetInstanceID();
+            playerContacts.B = 10;
+            playerContacts.Up = tra.up;
+            Physics.ContactModifyEvent += playerContacts.PreventRotation;
         }
 
         void Update()
