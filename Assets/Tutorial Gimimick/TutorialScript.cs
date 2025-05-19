@@ -54,20 +54,22 @@ public class TutorialScript : MonoBehaviour
         }
 
         if (stepNo == 5){
-            circle.SetActive(true);
             circler.anchoredPosition = new Vector2(648,-348);
             circler.localScale = new Vector3(1f,1f,1f);
-            explainer.text = "  Unfortunately, we don't have the budget for more dialogue. Replace 'movement' with 'combat' and ''X'' with ''C''. Sorry for the inconvienence! This is your movement ability cooldown. Each ability has a different cooldown. You can press 'X' to use your movement ability.";
+            explainer.text = "  Unfortunately, we don't have the budget for more dialogue. Replace 'movement' with 'combat' and ''X'' with ''C''. Sorry for the inconvienence! \n   This is your movement ability cooldown. Each ability has a different cooldown. You can press 'X' to use your movement ability.";
         }
 
         //wasd
         if (stepNo == 6){
-            circle.SetActive(false);
-            explainer.text = "  You move around using WASD keys. Tap a key rapidly to dash in that direction.";
+            circle.SetActive(true);
+            circler.anchoredPosition = new Vector2(-310,80);
+            circler.localScale = new Vector3(11.5f,7.5f,1f);
+            explainer.text = "  You move around using WASD keys. Tap a key rapidly to dash in that direction. \n    The letters are a subtle reference to the fact that I can't read.";
         }
 
         //grapple 
         if (stepNo == 7){
+            circle.SetActive(false);
             explainer.text = "  Grapple around using Right Click. When you are grappling and in the air, you can rotate your body using WASD keys.";
         }
 
