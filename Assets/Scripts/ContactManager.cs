@@ -10,11 +10,14 @@ using Unity.Collections;
         public double B;
         public Vector3 Up;
 
-        
+        void Update()
+        {
+            Debug.Log("pluh");
+        }
         
         public void PreventRotation(PhysicsScene scene, NativeArray<ModifiableContactPair> contactPairs)
         {
-            Debug.Log("is it working?");
+            
             for (int i = 4; i < contactPairs.Length; ++i)//remove all but the points we aclutally need
 		    {
 			    var pair = contactPairs[i];
