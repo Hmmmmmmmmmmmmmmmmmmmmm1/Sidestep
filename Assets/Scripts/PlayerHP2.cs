@@ -47,7 +47,7 @@ public class PlayerHP2 : MonoBehaviour
         if (dmgInterval <= 0){
             if(touchingObject && touchingObject.tag == "damage"){
                 changeHealth(-3);
-                this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(this.gameObject.GetComponent<Rigidbody>().velocity.x * -1, this.gameObject.GetComponent<Rigidbody>().velocity.y * -(2/3), this.gameObject.GetComponent<Rigidbody>().velocity.z * -1);
+                this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(this.gameObject.GetComponent<Rigidbody>().velocity.x * -1, this.gameObject.GetComponent<Rigidbody>().velocity.y * -1, this.gameObject.GetComponent<Rigidbody>().velocity.z * -1);
             }
             else if(touchingObject && touchingObject.tag == "heal"){
                 changeHealth(6);
