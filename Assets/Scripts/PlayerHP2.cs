@@ -38,18 +38,22 @@ public class PlayerHP2 : MonoBehaviour
         slider.value = hp;
         hpNum.text = hp + "";
     }
-    
+
     public void dmgCheck()
     {
-        if (dmgInterval > 0){
+        if (dmgInterval > 0)
+        {
             dmgInterval -= Time.deltaTime;
         }
-        if (dmgInterval <= 0){
-            if(touchingObject && touchingObject.tag == "damage"){
+        if (dmgInterval <= 0)
+        {
+            if (touchingObject && touchingObject.tag == "damage")
+            {
                 changeHealth(-3);
                 this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(this.gameObject.GetComponent<Rigidbody>().velocity.x * -1, this.gameObject.GetComponent<Rigidbody>().velocity.y * -1, this.gameObject.GetComponent<Rigidbody>().velocity.z * -1);
             }
-            else if(touchingObject && touchingObject.tag == "heal"){
+            else if (touchingObject && touchingObject.tag == "heal")
+            {
                 changeHealth(6);
                 //playerStatusManager.AddEffect(atkUp);
             }
