@@ -8,7 +8,7 @@ public class Respawn : MonoBehaviour
 {
     public void respawn()
     {
-        PhotonNetwork.Disconnect();
+        
         SceneManager.LoadScene(9);
         PhotonNetwork.ConnectUsingSettings();
         seeingPeopleOnlyBasedOnTheirColor.playerCount = 1; 
