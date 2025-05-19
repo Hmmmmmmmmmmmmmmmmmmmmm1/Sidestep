@@ -6,7 +6,7 @@ public class LeftWallCheckerScript : WallCheckerScript
 {
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("NotWall"))
+        if (!collider.CompareTag("NotWall"))
         {
             lHit = true;
         }
@@ -17,6 +17,6 @@ public class LeftWallCheckerScript : WallCheckerScript
     public void OnTriggerExit(Collider collider)
     {
         lHit = false;
-        Debug.Log(collider);
+        //Debug.Log(collider);
     }
 }
