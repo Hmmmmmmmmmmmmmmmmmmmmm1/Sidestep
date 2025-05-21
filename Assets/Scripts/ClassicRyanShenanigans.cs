@@ -13,36 +13,49 @@ public class ClassicRyanShenanigans : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer > 1){
+        if (timer > 1)
+        {
             tell.GetComponent<Outline>().enabled = true;
         }
-        else{
+        else
+        {
             tell.GetComponent<Outline>().enabled = false;
         }
 
-        if (Input.GetKey(KeyCode.W) && Input.GetMouseButtonDown(0) && timer > 1){
+        if (Input.GetKey(KeyCode.W) && Input.GetMouseButtonDown(0) && timer > 1)
+        {
             Debug.Log("devil may cry type gameplay");
-            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000,ForceMode.Force);
+            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000, ForceMode.Force);
             timer = 0;
         }
 
-        if (Input.GetKey(KeyCode.A) && Input.GetMouseButtonDown(0) && timer > 1){
+        if (Input.GetKey(KeyCode.A) && Input.GetMouseButtonDown(0) && timer > 1)
+        {
             Debug.Log("devil may cry type gameplay");
             //transform.position += new Vector3(-10,0,0);
             transform.position += transform.right * -5;
             timer = 0;
         }
 
-        if (Input.GetKey(KeyCode.D) && Input.GetMouseButtonDown(0) && timer > 1){
+        if (Input.GetKey(KeyCode.D) && Input.GetMouseButtonDown(0) && timer > 1)
+        {
             Debug.Log("devil may cry type gameplay");
             transform.position += transform.right * 5;
             timer = 0;
         }
 
-        if (Input.GetKey(KeyCode.S) && Input.GetMouseButtonDown(0) && timer > 1){
+        if (Input.GetKey(KeyCode.S) && Input.GetMouseButtonDown(0) && timer > 1)
+        {
             Debug.Log("devil may cry type gameplay");
-            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 500,ForceMode.Force);
+            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 500, ForceMode.Force);
             timer = 0;
+        }
+    }
+
+    public void secret()
+    {
+        if (Input.GetKeyDown(KeyCode.Backspace)) {
+            
         }
     }
 }

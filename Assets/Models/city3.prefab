@@ -64,9 +64,25 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3711892989486749817, guid: 29f34b4d7d321407397c296e722d9efe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 707962268589971517, guid: 29f34b4d7d321407397c296e722d9efe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 29f34b4d7d321407397c296e722d9efe, type: 3}
       propertyPath: m_Name
       value: city3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734924890436614793, guid: 29f34b4d7d321407397c296e722d9efe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065678187660602040, guid: 29f34b4d7d321407397c296e722d9efe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
