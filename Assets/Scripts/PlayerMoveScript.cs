@@ -29,17 +29,14 @@ namespace Assets.Scripts.CharacterControl
             if (classism.tank == true || classism.wizard == true)
             {
                 Class = 1.5f;
-                //Debug.Log("tank or wizard");
             }
             else if (classism.assassin == true)
             {
                 Class = 0.75f;
-                //Debug.Log("Assassin");
             }
             else if (classism.fighter == true)
             {
                 Class = 1f;
-                //Debug.Log("hopefully fighter");
             }
 
 
@@ -160,7 +157,6 @@ namespace Assets.Scripts.CharacterControl
                 {
                     Task.Delay(100).ContinueWith(t => Effects.Remove(ActiveEffects.ForwardHeld));
                 }
-                //do that to all of them
                 if (Keys.S)
                 {
                     vec += (tra.forward * -900f);

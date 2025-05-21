@@ -14,13 +14,6 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
     public bool Casey = false;
     public bool Ryan = false;
 
-    //not sure which we want
-    /*
-    public void CreateOrJoinRoom()
-    {
-        PhotonNetwork.JoinOrCreateRoom(input_Create.text, new RoomOptions() {MaxPlayers = 2}, TypedLobby.Default, null);
-
-    */
 
     public void CreateRoom()
     {
@@ -51,25 +44,6 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel("Rough Draft");
         }
     }
-    public void setLucian()
-    {
-        Lucian = true;
-        Ryan = false;
-        Casey = false;
-    }
-    public void setCasey()
-    {
-        Lucian = false;
-        Ryan = false;
-        Casey = true;
-    }
-    public void setRyan()
-    {
-        Lucian = false;
-        Ryan = true;
-        Casey = false;
-    }
-
     public void loadTutorial(){
         PhotonNetwork.LoadLevel(10);
     }
