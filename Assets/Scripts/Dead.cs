@@ -12,25 +12,21 @@ public class Dead : MonoBehaviour
     public float timer = 5;
     public GameObject counter;
     public GameObject classism;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        //find gameobjects that need to be destroyed on death
         counter = GameObject.Find("PlayerCounter");
         classism = GameObject.Find("Classes");
+       //find current scene 
         Scene scene  = SceneManager.GetActiveScene();
         if (!scene.name.Equals("Casey's Scene")){
             if (gameObject.GetComponent<PlayerHP2>()){
                 if (gameObject.GetComponent<PlayerHP2>().hp == 0 && gameObject.name.Equals("Player 1")){
+                    //destroys game objects
                     Destroy(gameObject);
                     Destroy(counter);
                     Destroy(classism);
+                    //disconnects then brings you to respawn screen
                     PhotonNetwork.Disconnect();
                     SceneManager.LoadScene(4);
                     Cursor.lockState = CursorLockMode.None;
@@ -40,19 +36,6 @@ public class Dead : MonoBehaviour
             }
 
         }
-        /*
-        timer -= Time.deltaTime;
-        if (timer >= 0){
-            if (text){
-            text.text = timer.ToString().Substring(0,1);
-            }
-        }
-        else{
-            if (text){
-                text.text = "try again";
-            }
-        }
-        */
     }
 
     public void shut(){
@@ -60,9 +43,5 @@ public class Dead : MonoBehaviour
             UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
-    }
-
-    public static void kys(GameObject guy){
-        
     }
 }

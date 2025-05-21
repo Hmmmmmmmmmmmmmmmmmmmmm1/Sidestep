@@ -51,8 +51,4 @@ public class City : MonoBehaviour
             //Debug.Log("Blacon is" + blacons[i].name);
         }
     }   
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

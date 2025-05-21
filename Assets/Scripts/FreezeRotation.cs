@@ -13,34 +13,9 @@ public class FreezeRotation : MonoBehaviour
     public bool w;
 
     private Quaternion rotation;
-    void Start()
-    {
-        //rotation = transform.rotation;
-        //transform.localPosition = new Vector3(0, 0, 0);
-    }
 
     void Update()
     {
-
         child.transform.localRotation = Quaternion.Euler (0,child.transform.localEulerAngles.y,0);
-
-
-
-
-        /*Quaternion temp = transform.rotation;
-        if (x){
-            temp = new Quaternion (temp.x,rotation.y,rotation.z,rotation.w);
-        }
-        if (y){
-            temp = new Quaternion (rotation.x,temp.y,rotation.z,rotation.w);
-        }
-        if (z){
-            temp = new Quaternion (rotation.x,rotation.y,temp.z,rotation.w);
-        }
-        if (w){
-            temp = new Quaternion (rotation.x,rotation.y,rotation.z,temp.w);
-        }
-        transform.rotation = temp;
-        */
     }
 }
