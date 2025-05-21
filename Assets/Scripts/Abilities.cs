@@ -41,9 +41,13 @@ public class Abilities : MonoBehaviour
     private bool activated;
 
     public Text Skill1Text;
+    public Image Skill1Img;
     public Text Skill2Text;
+    public Image Skill2Img;
     private float Skill1Cooldown = 0;
+    private float Skill1Cooldown2 = 0;
     private float Skill2Cooldown = 0;
+    private float Skill2Cooldown2 = 0;
 
     //Lunch
 
@@ -142,6 +146,7 @@ public class Abilities : MonoBehaviour
                     gameObject.GetComponent<Rigidbody>().drag = 5;
                     activated = true;
                     Skill1Cooldown = 5 * classRegen;
+                    Skill1Cooldown2 = 5 * classRegen;
                 }
 
             }
@@ -172,6 +177,7 @@ public class Abilities : MonoBehaviour
                 {
                     legoesPerAbility = 0;
                     Skill1Cooldown = 10 * classRegen;
+                    Skill1Cooldown2 = 10 * classRegen;
                 }
             }
         }
@@ -195,6 +201,7 @@ public class Abilities : MonoBehaviour
                 gameObject.transform.position = ray.GetPoint(blinkDistance);
                 blinkDistance = 20 * speedMultiplier;
                 Skill1Cooldown = 3 * classRegen;
+                Skill1Cooldown2 = 3 * classRegen;
             }
         }
         //Lapse in Judgement Mode
@@ -203,8 +210,9 @@ public class Abilities : MonoBehaviour
             if (Input.GetKeyDown(Skill1Trigger) && Skill1Cooldown < 1)
             {
                 //gameObject.GetComponent<Rigidbody>().velocity *= -1;
-                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1) * speedMultiplier / 2;
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(gameObject.GetComponent<Rigidbody>().velocity.x * -1.5f, gameObject.GetComponent<Rigidbody>().velocity.y, gameObject.GetComponent<Rigidbody>().velocity.z * -1.5f) * speedMultiplier / 2;
                 Skill1Cooldown = 3 * classRegen;
+                Skill1Cooldown2 = 3 * classRegen;
             }
         }
         //Lymphoma Mode
@@ -229,6 +237,7 @@ public class Abilities : MonoBehaviour
                 {
                     timer = 7.5f * speedMultiplier;
                     Skill1Cooldown = 9 * classRegen;
+                    Skill1Cooldown2 = 9 * classRegen;
                 }
             }
         }
@@ -243,10 +252,11 @@ public class Abilities : MonoBehaviour
             evilTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                PV.RPC("combatAbilityOn",RpcTarget.All,false);
+                PV.RPC("combatAbilityOn", RpcTarget.All, false);
                 fireActive = true;
                 evilTimer = 10f * speedMultiplier;
                 Skill2Cooldown = 10 * classRegen;
+                Skill2Cooldown2 = 10 * classRegen;
             }
         }
         //punch II bow mode
@@ -259,6 +269,7 @@ public class Abilities : MonoBehaviour
             {
                 knockActive = true;
                 Skill2Cooldown = 4 * classRegen;
+                Skill2Cooldown2 = 4 * classRegen;
                 PV.RPC("combatAbilityOn",RpcTarget.All,false);
             }
         }
@@ -272,10 +283,11 @@ public class Abilities : MonoBehaviour
             evilerTimer -= Time.deltaTime;
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                PV.RPC("combatAbilityOn",RpcTarget.All,false);
+                PV.RPC("combatAbilityOn", RpcTarget.All, false);
                 vampActive = true;
                 evilerTimer = 10f * speedMultiplier;
-                Skill2Cooldown = 100 * classRegen;
+                Skill2Cooldown = 1 * classRegen;
+                Skill2Cooldown2 = 1 * classRegen;
             }
         }
          //slow Mode
@@ -283,12 +295,14 @@ public class Abilities : MonoBehaviour
         {
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
-                Skill2Cooldown  = 3f * classRegen;
+                Skill2Cooldown = 3f * classRegen;
+                Skill2Cooldown2 = 3f * classRegen;
 
                 Collider[] slowTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
                 foreach (Collider x in slowTargets){
                     if (x.gameObject.GetComponent<Abilities>()){
                         Skill2Cooldown = 9 * classRegen;
+                        Skill2Cooldown2 = 9 * classRegen;
                         x.transform.GetComponent<Abilities>().slowDown();
                         //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
                     }
@@ -301,11 +315,13 @@ public class Abilities : MonoBehaviour
             if (Input.GetKeyDown(Skill2Trigger) && Skill2Cooldown < 1)
             {
                 Skill2Cooldown  = 3f * classRegen;
+                Skill2Cooldown2  = 3f * classRegen;
 
                 Collider[] blindTargets = Physics.OverlapCapsule(transform.position + (transform.forward * 10), transform.position + (transform.forward * 100), 2f);
                 foreach (Collider x in blindTargets){
                     if (x.gameObject.GetComponent<Abilities>()){
                         Skill2Cooldown = 9 * classRegen;
+                        Skill2Cooldown2 = 9 * classRegen;
                         x.transform.GetComponent<Abilities>().blindDown();
                         //Debug.Log((transform.position + (transform.forward * 10)) + "   and    " + (transform.position + (transform.forward * 100)) + "    beam");
                     }
@@ -319,17 +335,20 @@ public class Abilities : MonoBehaviour
         Skill1Cooldown -= Time.deltaTime;
         Skill2Cooldown -= Time.deltaTime;
 
-        Skill1Text.text = Skill1Cooldown.ToString().Substring(0, 1);
-        Skill2Text.text = Skill2Cooldown.ToString().Substring(0, 1);
+        //Skill1Text.text = Skill1Cooldown.ToString().Substring(0, 1);
+        //Skill2Text.text = Skill2Cooldown.ToString().Substring(0, 1);
 
         if (Skill1Text.text.Equals("0"))
         {
-            Skill1Text.text = "-";
+            //Skill1Text.text = "-";
         }
         if (Skill2Text.text.Equals("0"))
         {
-            Skill2Text.text = "-";
+            //Skill2Text.text = "-";
         }
+
+        Skill1Img.GetComponent<RectMask2D>().padding = new UnityEngine.Vector4(0, 0, 0, Skill1Cooldown / Skill1Cooldown2 * 60);
+        Skill2Img.GetComponent<RectMask2D>().padding = new UnityEngine.Vector4(0, 0, 0, Skill2Cooldown / Skill2Cooldown2 * 60);
     }
     public void SpeedCheck()
     {
