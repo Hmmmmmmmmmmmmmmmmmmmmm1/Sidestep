@@ -12,8 +12,8 @@ public class PlayerHP2 : MonoBehaviour
     public Text hpNum;
     public int hp = 100;
 
-    private int oldHp = 0;
-    public float hpChangeTick = 0;
+    //private int oldHp = 0;
+    //public float hpChangeTick = 0;
 
     private float dmgInterval = 0;
     private GameObject touchingObject;
