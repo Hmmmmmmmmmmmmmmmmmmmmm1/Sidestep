@@ -113,7 +113,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().vampActive)
                 {
-                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage(10);
+                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage(1);
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
