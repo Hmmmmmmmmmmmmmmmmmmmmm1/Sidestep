@@ -264,23 +264,6 @@ namespace Assets.Scripts.CharacterControl
                     //Debug.Break();
                 } 
             }
-            //if grounded
-            // reset
-            //else
-            // wall hit 
-            //rotate
-
-            //This is for debug remove Keys.SH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            if (Keys.SH || (!Grounded))
-            {
-                rb.drag = 0f;
-            }
-            //    friction = Vector3.zero;
-            //} else 
-            //{
-            //    friction = rb.velocity*-0.95f;
-            //}
-            //vec += friction;
             return vec;
 
         }
