@@ -752,7 +752,6 @@ GameObject:
   - component: {fileID: 911209148}
   - component: {fileID: 911209147}
   - component: {fileID: 911209152}
-  - component: {fileID: 911209153}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -882,37 +881,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911209145}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5932adbcc890466a8ac9889c3df4e4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Skill1Trigger: 0
-  Skill2Trigger: 0
-  Skill1Text: {fileID: 0}
-  Skill1Img: {fileID: 0}
-  Skill2Text: {fileID: 0}
-  Skill2Img: {fileID: 0}
-  fireActive: 0
-  burned: 0
-  knockActive: 0
-  vampActive: 0
-  speedMultiplier: 0
-  classRegen: 0
-  classPower: 0
-  ClassObject: {fileID: 0}
---- !u!114 &911209153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911209145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e85c2a8470044aaf829044b91b047b8, type: 3}
+  m_Script: {fileID: 11500000, guid: ab69afd3dcf33466ba26b4409256c3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  hpNum: {fileID: 0}
+  hp: 100
+  speedMultiplier: 0
 --- !u!1 &947379107
 GameObject:
   m_ObjectHideFlags: 0

@@ -1327,7 +1327,6 @@ MonoBehaviour:
   slider: {fileID: 3888454626033508103}
   hpNum: {fileID: 4024967859900157581}
   hp: 100
-  hpChangeTick: 0
   speedMultiplier: 0
 --- !u!114 &789405301329346563
 MonoBehaviour:
