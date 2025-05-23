@@ -9,10 +9,18 @@ public class ClassicRyanShenanigans : MonoBehaviour
     private float timer;
     public GameObject tell;
 
+    private bool secret = false;
+
     // Update is called once per frame
     void Update()
     {
+        secretActivate();
         timer += Time.deltaTime;
+
+        if (secret)
+        {
+            timer = 10;
+        }
         if (timer > 1)
         {
             tell.GetComponent<Outline>().enabled = true;
@@ -52,10 +60,11 @@ public class ClassicRyanShenanigans : MonoBehaviour
         }
     }
 
-    public void secret()
+    public void secretActivate()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace)) {
-            
+        if (Input.GetKeyDown(KeyCode.Backspace) && Input.GetKey(KeyCode.P))
+        {
+            secret = true;
         }
     }
 }
