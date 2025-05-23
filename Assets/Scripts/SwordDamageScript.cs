@@ -113,8 +113,7 @@ namespace Assets.Scripts.CharacterControl
 
                 if (gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().vampActive)
                 {
-                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage((int)((velocity.magnitude * damage * damageMultiplier / 2) + 10));
-                    gameObject.transform.parent.parent.gameObject.GetComponent<Abilities>().vampActive = false;
+                    gameObject.transform.parent.parent.gameObject.GetComponent<PlayerHP2>().EnemyDamage(10);
                 }
 
                 //PV.RPC("EnemyDamage",RpcTarget.All,30);
